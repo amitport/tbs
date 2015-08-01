@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="/roboto-regular,roboto-medium,roboto-bold,roboto-italic/fonts.css" >
+    <style>
+        [ng-cloak] {
+            display: none !important;
+        }
+    </style>
+</head>
+<body layout layout-fill ng-cloak>
+
+<ng-view layout layout-fill></ng-view>
+
+<% if (env === 'production') { %>
+    <script src="main.min.js"></script>
+<% }  else { %>
+    <md-whiteframe draggable class="md-whiteframe-z3" style="position: absolute; bottom: 15px; left: 15px;" layout="column" layout-padding>
+        <io-monitor></io-monitor>
+    </md-whiteframe>
+
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+        System.import('index');
+    </script>
+<% } %>
+</body>
+</html>
