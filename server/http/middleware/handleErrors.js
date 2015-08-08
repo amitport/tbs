@@ -1,4 +1,4 @@
-import errorHandler from 'errorHandler';
+import errorHandler from 'errorhandler';
 errorHandler.title = 'TBS';
 
 export default function (app) {
