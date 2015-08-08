@@ -1,3 +1,6 @@
+// make sure angular material loads first
+import 'angular-material/angular-material.css!';
+
 import angular from 'angular';
 import 'angular-material';
 import 'angular-route';
