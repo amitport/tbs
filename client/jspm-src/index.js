@@ -1,6 +1,3 @@
-import 'jquery-ui/themes/base/base.css!'
-import 'jquery-ui';
-
 import angular from 'angular';
 import 'angular-material';
 import 'angular-route';
@@ -24,9 +21,9 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games
         controller: roomController
       });
   }])
-  .run(['$rootScope', 'io', function($rootScope, io){
-    io.connect($rootScope);
-  }])
+  //.run(['$rootScope', 'io', function($rootScope, io){
+  //  io.connect($rootScope);
+  //}])
   .directive('draggable', function () {
     return {
       restrict: 'A',
