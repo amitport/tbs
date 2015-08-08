@@ -3,13 +3,10 @@
   "private": true,
   "license": "AGPL",
   "scripts": {
-    "postinstall": "cd server && npm i && cd ../client && jspm i",
+    "postinstall": "cd server && npm i",
     "start": "cd server && node bin/start.js"
   },
   "engines": {
     "node": "^0.12.7"
-  },
-  "dependencies": {
-    "jspm": "^0.16.0-beta.3"
   }
 }
