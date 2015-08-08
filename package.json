@@ -1,0 +1,12 @@
+{
+  "name": "tbs",
+  "private": true,
+  "license": "AGPL",
+  "scripts": {
+    "postinstall": "cd server && npm i && cd ../client && jspm i",
+    "start": "cd server && node bin/start.js"
+  },
+  "engines": {
+    "node": "^0.12.7"
+  }
+}

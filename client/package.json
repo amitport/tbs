@@ -1,4 +1,7 @@
 {
+  "name": "tbs-client",
+  "private": true,
+  "license": "AGPL",
   "jspm": {
     "directories": {
       "baseURL": "jspm-src"
