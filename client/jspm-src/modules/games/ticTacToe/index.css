@@ -1,0 +1,23 @@
+.ticTacToe-cell {
+  border: 0 solid #cecece;
+  width: 100% !important;
+  position: relative;
+}
+
+.ticTacToe-board {
+  border: 1px solid #e6e6e6;
+}
+
+@keyframes ticTacToe-dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ticTacToe-path {
+  stroke-dasharray: 392;
+}
+.ticTacToe-path.ng-enter {
+  stroke-dashoffset: 392;
+  animation: ticTacToe-dash 1.5s ease-out forwards;
+}

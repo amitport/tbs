@@ -4,3 +4,29 @@
 
   transition: border-color cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
 }
+
+.fade-inout {
+  height: 36px;
+  min-height: 36px;
+  opacity: 1;
+}
+
+.fade-inout.ng-hide-add.ng-hide-add-active,
+.fade-inout.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all ease-out 0.3s;
+  transition: all ease-out  0.3s;
+}
+
+.fade-inout.ng-hide {
+  opacity: 0;
+  height: 0;
+  min-height: 0;
+}
+
+.ongoing-session {
+  -webkit-transition: opacity cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  transition: opacity cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+}
+.faded {
+  opacity: 0.3;
+}

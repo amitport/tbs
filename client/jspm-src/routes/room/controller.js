@@ -2,23 +2,31 @@ import './index.css!';
 
 
 import Player from './player';
+import Room from './room';
 
 export default ['$scope', '$routeParams', '$mdDialog', '$location', 'io',
   function ($scope, $routeParams, $mdDialog, $location, io) {
     $scope.roomId = $routeParams.roomId;
 
-    io.connect($scope);
+    io.connect($scope)
+      .on('room:update', function (room) {
+        $scope.room.update(room);
+        $scope.session = $scope.room.session;
+      });
 
     io.emit('room:join', $scope.roomId).then(function (msg) {
-      $scope.room = msg.room;
-      $scope.gameId = msg.gameId;
+      $scope.room = new Room(msg.room, msg.room.gameId, msg.ownIdx, $scope.roomId, io);
+      $scope.session = $scope.room.session;
 
-      const players = Player.deserializeAll(msg.room.players, msg.ownIdx);
-      $scope.own = players.own;
-      $scope.opp = players.opp;
+      $scope.own = $scope.room.players.own;
+      $scope.opp = $scope.room.players.opp;
     }, function (err) {
       console.error(err);
     });
+
+    $scope.ready = function () {
+      io.emit('room:ready', $scope.roomId);
+    };
 
     $scope.$watch('room.status', function (newVal) {
       if (newVal === 'WAITING_FOR_SECOND_PLAYER') {

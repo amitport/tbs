@@ -6,10 +6,12 @@ import 'angular-material';
 import 'angular-route';
 
 import './modules/io/index';
+import './modules/games/index';
+
 import lobbyController from './routes/lobby/controller';
 import roomController from './routes/room/controller';
 
-const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io'])
+const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games'])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -21,6 +23,9 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io'])
         templateUrl: 'routes/room/index.html',
         controller: roomController
       });
+  }])
+  .run(['$rootScope', 'io', function($rootScope, io){
+    io.connect($rootScope);
   }])
   .directive('draggable', function () {
     return {

@@ -1,0 +1,15 @@
+
+
+<md-whiteframe class="md-whiteframe-z1 ticTacToe-board" layout="column" layout-padding layout-align="center center">
+  <span ng-repeat="row in session.board track by $index" ng-init="rowIndex = $index" layout="row">
+    <cell ng-repeat="col in row track by $index" x="{{rowIndex}}" y="{{$index}}"></cell>
+  </span>
+  <svg ng-if="session.result && session.result !== 'tie'" class="ticTacToe-path" style="position: absolute; left: 0; bottom: 0; width: 200px; height: 164px;">
+    <line ng-attr-x1="{{39 + 61*session.result.c1}}" ng-attr-y1="{{33 + 50*session.result.r1}}" ng-attr-x2="{{39 + 61*session.result.c2}}" ng-attr-y2="{{33 + 50*session.result.r2}}"
+          style="stroke:  {{session.currentPlayer.color}}; stroke-width: 2px; opacity: 0.7;"/>
+  </svg>
+  <svg ng-if="session.result && session.result !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 200px; height: 164px;">
+    <line ng-attr-x1="{{39 + 61*session.result.c2}}" ng-attr-y1="{{33 + 50*session.result.r2}}" ng-attr-x2="{{39 + 61*session.result.c1}}" ng-attr-y2="{{33 + 50*session.result.r1}}"
+          style="stroke: {{session.currentPlayer.color}}; stroke-width: 2px; opacity: 0.7;"/>
+  </svg>
+</md-whiteframe>

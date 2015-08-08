@@ -4,7 +4,10 @@ import Promise from 'bluebird';
 function asPromised(fn) {
   const promiseWrappedHandler = Promise.method(fn);
   return function (msg, cb) {
-    return promiseWrappedHandler.call(this, msg).asCallback(cb);
+    return promiseWrappedHandler.call(this, msg).catch(function (err) {
+      console.error('io call error for msg=' + msg + ':\n\t' + (err.stack ? err.stack : err));
+      return Promise.reject(err instanceof Error ? err.message : err);
+    }).asCallback(cb);
   };
 }
 

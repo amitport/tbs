@@ -4,6 +4,8 @@ const Colors = ['rgb(100, 100, 193)', 'rgb(234, 123, 123)'];
 
 class Player {
   constructor(raw, idx) {
+    this.ready = raw.ready;
+    this.idx = idx;
     this.color = Colors[idx];
   }
   static deserializeAll(rawPlayers, ownIdx) {
