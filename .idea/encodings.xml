@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/ticTacToe/players/human.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/ticTacToe/rules/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/routes/play-local/controller.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/game/sessionFactory.js" charset="UTF-8" />
   </component>
