@@ -1,16 +1,21 @@
 import './index.css!';
 
+import Board from './rules/board';
+
+
+import Cell from './rules/cell';
 export default function (roomId, io) {
   return {
     templateUrl: 'modules/games/ticTacToe/board.html',
     deserializeSession: function (raw, players) {
       const res = {
-        board: raw.board,
+        board: Board.deserialize(raw.board),
         currentPlayer: players[raw.currentPlayerIdx],
-        markCell: function (x, y) {
-          io.emit('session:action', {roomId, actionId: 'markCell', x, y});
+        markCell: function (payload) {
+          io.emit('session:action', {roomId, actionId: 'markCell', x: payload.x, y: payload.y});
         }
       };
+      console.log(res.board[0][0] !== Cell.EMPTY);
       if (raw.result) {
         if (raw.result === 'tie') {
           res.result = 'tie';

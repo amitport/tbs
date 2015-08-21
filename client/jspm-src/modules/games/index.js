@@ -10,3 +10,7 @@ const app = angular.module('tbs.games', ['tbs.io']);
 
 ticTacToe(app);
 fourInALine(app);
+
+import SessionFactory from './lib/sessionFactory';
+
+app.constant('SessionFactory', SessionFactory);

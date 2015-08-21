@@ -1,12 +1,13 @@
 import './index.css!';
 
-
-import Player from './player';
 import Room from './room';
+import Cell from '../../modules/games/ticTacToe/rules/cell';
 
 export default ['$scope', '$routeParams', '$mdDialog', '$location', 'io',
   function ($scope, $routeParams, $mdDialog, $location, io) {
     $scope.roomId = $routeParams.roomId;
+
+    $scope.Cell = Cell;
 
     io.connect($scope)
       .on('room:update', function (room) {

@@ -7,4 +7,8 @@ export default ['$scope', '$location', 'io',
         $location.path(`rooms/${roomId}`);
       });
     };
+
+    this.playVsAi = function (gameTypeId) {
+      $location.path(`play-local/${gameTypeId}`);
+    }
   }];

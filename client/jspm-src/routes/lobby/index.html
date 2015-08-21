@@ -1,8 +1,24 @@
 <md-content layout="column" layout-align="center center" flex>
-  <md-button ng-click="lobby.createRoom('ticTacToe')">
-    Tic Tac Toe
-  </md-button>
-  <md-button ng-click="lobby.createRoom('fourInALine')">
-    Four In a Line
-  </md-button>
+  <div>
+    <md-whiteframe class="md-whiteframe-z1" layout layout-padding layout-align="center center" flex>
+      <span class="md-title">Tic Tac Toe</span>
+      <span flex>
+        <md-button ng-click="lobby.createRoom('ticTacToe')">
+          Human
+        </md-button>
+        <md-button ng-click="lobby.playVsAi('ticTacToe')">
+          AI
+        </md-button>
+      </span>
+    </md-whiteframe>
+    &nbsp;
+    <md-whiteframe class="md-whiteframe-z1" layout layout-padding layout-align="center center" flex>
+      <span class="md-title">Four In a Line</span>
+      <span flex>
+        <md-button ng-click="lobby.createRoom('fourInALine')">
+          Human
+        </md-button>
+      </span>
+    </md-whiteframe>
+  </div>
 </md-content>

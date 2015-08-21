@@ -1,7 +1,7 @@
+import ticTacToe from '../ticTacToe/rules/index';
 
 const gameTypes = {
-  'ticTacToe': require('../../client/jspm-src/modules/games/ticTacToe/rules/index'),
-  'fourInALine': require('../../client/jspm-src/modules/games/fourInALine/rules/index')
+  ticTacToe
 };
 
 const SessionFactory = {
@@ -12,7 +12,7 @@ const SessionFactory = {
 
     const GameType = gameTypes[gameTypeId];
 
-    return new GameType(gameEndedCb)
+    return new GameType(gameEndedCb, true)
   }
 };
 

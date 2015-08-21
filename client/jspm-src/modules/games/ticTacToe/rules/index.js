@@ -1,29 +1,23 @@
-import Session from '../../session';
-import HumanPlayer from '../../humanPlayer';
+import Session from '../../lib/session';
+import HumanPlayer from '../players/human';
+
+import BasicAiPlayer from '../players/basicAi';
 
 import Cell from './cell';
 import Board from './board';
 
-class TicTacToeHumanPlayer extends HumanPlayer {
-  constructor(idx, mark) {
-    super(idx);
-    this.mark = mark
-  }
-  serialize() {
-    return {mark: this.mark.key};
-  }
-}
-
 class TicTacToe extends Session {
-  constructor(gameEndedCb) {
-    super([new TicTacToeHumanPlayer(0, Cell.X), new TicTacToeHumanPlayer(1, Cell.O)], gameEndedCb);
+  constructor(gameEndedCb, ai) {
+    super([new HumanPlayer(0, Cell.X), ai ? new BasicAiPlayer(1, Cell.O) : new HumanPlayer(1, Cell.O)], gameEndedCb);
+
+    if (ai) this.players[1].setSession(this);
   }
 
   init() {
     delete this.result;
     this.totalMoves = 0;
     this.board = new Board();
-    this.currentPlayer = this.players[Math.floor(Math.random() + 0.5)];
+    this.currentPlayer = this.players[0];//Math.floor(Math.random() + 0.5)];
     this.currentPlayer.makeMove();
   }
 

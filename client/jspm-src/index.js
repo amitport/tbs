@@ -10,6 +10,7 @@ import './modules/games/index';
 
 import lobbyController from './routes/lobby/controller';
 import roomController from './routes/room/controller';
+import playLocalController from './routes/play-local/controller';
 
 const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games'])
   .config(['$routeProvider', function ($routeProvider) {
@@ -22,6 +23,10 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games
       .when('/rooms/:roomId', {
         templateUrl: 'routes/room/index.html',
         controller: roomController
+      })
+      .when('/play-local/:gameTypeId', {
+        templateUrl: 'routes/room/index.html',
+        controller: playLocalController
       });
   }])
   //.run(['$rootScope', 'io', function($rootScope, io){
