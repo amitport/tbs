@@ -4,7 +4,10 @@ import Board from './rules/board';
 
 
 import Cell from './rules/cell';
-export default function (roomId, io) {
+
+export default function (roomId, io, scope) {
+  scope.Cell = Cell;
+
   return {
     templateUrl: 'games/ticTacToe/board.html',
     deserializeSession: function (raw, players) {

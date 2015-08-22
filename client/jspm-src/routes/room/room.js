@@ -2,8 +2,8 @@ import gameTypes from '../../modules/games/types';
 import Player from './player';
 
 export default class Room {
-  constructor(raw, gameTypeId, ownIdx, id, io) {
-    this.gameType = gameTypes[gameTypeId](id, io);
+  constructor(raw, gameTypeId, ownIdx, id, io, scope) {
+    this.gameType = gameTypes[gameTypeId](id, io, scope);
 
     this.players = Player.deserializeAll(raw.players, ownIdx);
 

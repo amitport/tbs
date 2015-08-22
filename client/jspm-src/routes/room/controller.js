@@ -1,13 +1,10 @@
 import './index.css!';
 
 import Room from './room';
-import Cell from '../../games/ticTacToe/rules/cell';
 
 export default ['$scope', '$routeParams', '$mdDialog', '$location', 'io',
   function ($scope, $routeParams, $mdDialog, $location, io) {
     $scope.roomId = $routeParams.roomId;
-
-    $scope.Cell = Cell;
 
     io.connect($scope)
       .on('room:update', function (room) {
@@ -16,7 +13,7 @@ export default ['$scope', '$routeParams', '$mdDialog', '$location', 'io',
       });
 
     io.emit('room:join', $scope.roomId).then(function (msg) {
-      $scope.room = new Room(msg.room, msg.room.gameId, msg.ownIdx, $scope.roomId, io);
+      $scope.room = new Room(msg.room, msg.room.gameId, msg.ownIdx, $scope.roomId, io, $scope);
       $scope.session = $scope.room.session;
 
       $scope.own = $scope.room.players.own;
