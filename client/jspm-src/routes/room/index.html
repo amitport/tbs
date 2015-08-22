@@ -5,14 +5,14 @@
             flex="100">
   <div ng-show="!room.status">Loading…</div>
   <md-content ng-show="room.status === 'IN_PROGRESS'" style="position: relative; overflow: visible;" layout="column" layout-align="center center">
-    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%; height: 100px;" ng-show="session && !session.result && session.currentPlayer === opp"
+    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%; height: 100px;" ng-show="session && !session.isEnded() && session.currentPlayer === opp"
          layout="column" layout-align="center center">
       <md-icon style="height: 100px; width: 100px;" ng-style="{color: opp.color}" md-svg-src="routes/room/arrow_up.svg">
       </md-icon>
     </div>
-    <div class="ongoing-session" ng-class="{faded: session.result}" ng-include="room.gameType.templateUrl"></div>
+    <div class="ongoing-session" ng-class="{faded: session.isEnded()}" ng-include="room.gameType.templateUrl"></div>
     <div class="fade-inout" style="position: absolute; bottom: -70px; width: 100%; height: 100px"
-         ng-show="session && !session.result && session.currentPlayer === own"
+         ng-show="session && !session.isEnded() && session.currentPlayer === own"
          layout="column" layout-align="center center">
       <md-icon style="height: 100px; width: 100px;" ng-style="{color: own.color}" md-svg-src="routes/room/arrow_down.svg">
       </md-icon>

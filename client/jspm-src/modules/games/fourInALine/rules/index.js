@@ -18,8 +18,7 @@ class FourInALine extends Session {
     super([new FourInALineHumanPlayer(0, 'b'), new FourInALineHumanPlayer(1, 'r')], gameEndedCb);
   }
 
-  init() {
-    delete this.result;
+  initialize() {
     this.totalMoves = 0;
     this.board = [
       ['_', '_', '_', '_', '_', '_', '_'],

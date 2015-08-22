@@ -51,7 +51,7 @@ export default {
     }
 
     if (room.players[0].ready && room.players[1].ready) {
-      room.session.init();
+      room.session.recycle();
     }
 
     room.players.forEach(function (player) {

@@ -13,8 +13,7 @@ class TicTacToe extends Session {
     if (ai) this.players[1].setSession(this);
   }
 
-  init() {
-    delete this.result;
+  initialize() {
     this.totalMoves = 0;
     this.board = new Board();
     this.currentPlayer = this.players[0];//Math.floor(Math.random() + 0.5)];
@@ -56,10 +55,10 @@ class TicTacToe extends Session {
     const {x, y} = msg;
     this.board[x][y] = this.currentPlayer.mark;
     this.totalMoves++;
-    this.result = this.isOver();
+    const result = this.isOver();
 
-    if (this.result) {
-      this.gameEndedCb(this.result);
+    if (result) {
+      this.gameEndedCb(this.result = result);
     } else {
       this.currentPlayer = this.currentPlayer.next;
       this.currentPlayer.makeMove();

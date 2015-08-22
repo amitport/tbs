@@ -14,6 +14,9 @@ export default function (roomId, io) {
         },
         markCol: function (c) {
           io.emit('session:action', {roomId, actionId: 'markCol', c});
+        },
+        isEnded: function () {
+          return this.hasOwnProperty('result');
         }
       };
       if (raw.result) {

@@ -58,7 +58,7 @@ export default ['$scope', '$routeParams', 'SessionFactory',
     $scope.opp = $scope.session.players[1];
 
     $scope.ready = function() {
-      $scope.session.init();
+      $scope.session.recycle();
       $scope.session.players[0].ready = true;
     };
   }];

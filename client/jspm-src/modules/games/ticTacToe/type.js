@@ -13,9 +13,11 @@ export default function (roomId, io) {
         currentPlayer: players[raw.currentPlayerIdx],
         markCell: function (payload) {
           io.emit('session:action', {roomId, actionId: 'markCell', x: payload.x, y: payload.y});
+        },
+        isEnded: function () {
+          return this.hasOwnProperty('result');
         }
       };
-      console.log(res.board[0][0] !== Cell.EMPTY);
       if (raw.result) {
         if (raw.result === 'tie') {
           res.result = 'tie';
@@ -46,7 +48,6 @@ export default function (roomId, io) {
           }
         }
       }
-
 
       return res;
     }

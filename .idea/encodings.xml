@@ -4,12 +4,21 @@
     <file url="file://$PROJECT_DIR$/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/fourInALine/board.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/fourInALine/rules/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/fourInALine/type.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/lib/session.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/lib/sessionFactory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/ticTacToe/cell.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/ticTacToe/players/human.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/ticTacToe/rules/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/ticTacToe/type.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/routes/play-local/controller.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/package.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/games/session.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/games/ticTacToe/session.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/server/game/sessionFactory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server/io/msgHandlers/room.js" charset="UTF-8" />
   </component>
 </project>
