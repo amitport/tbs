@@ -1,7 +1,7 @@
 
 const gameTypes = {
-  'ticTacToe': require('../../games/ticTacToe/rules/index'),
-  'fourInALine': require('../../games/fourInALine/rules/index')
+  'ticTacToe': require('../../client/jspm-src/games/ticTacToe/rules/index'),
+  'fourInALine': require('../../client/jspm-src/games/fourInALine/rules/index')
 };
 
 const SessionFactory = {

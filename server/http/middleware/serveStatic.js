@@ -7,5 +7,4 @@ export default function (app) {
   }
   // for now we always allow access to development files
   app.use(express.static(config.get('paths.client') + '/jspm-src'));
-  app.use('/games', express.static(config.get('paths.games')));
 }
