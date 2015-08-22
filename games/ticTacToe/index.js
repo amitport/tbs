@@ -5,15 +5,15 @@ let markColors = {
 };
 let markIcons = {
   '_': null,
-  'X': 'modules/games/ticTacToe/X.svg',
-  'O': 'modules/games/ticTacToe/O.svg'
+  'X': 'games/ticTacToe/X.svg',
+  'O': 'games/ticTacToe/O.svg'
 };
 
 export default function (app) {
   app.directive('cell', function() {
     return {
       scope: true,
-      templateUrl: 'modules/games/ticTacToe/cell.html',
+      templateUrl: 'games/ticTacToe/cell.html',
       link: function(scope, iElement, iAttrs) {
 
         const x = scope.x = iAttrs.x;

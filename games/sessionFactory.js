@@ -1,4 +1,4 @@
-import ticTacToe from '../ticTacToe/rules/index';
+import ticTacToe from './ticTacToe/rules/index';
 
 const gameTypes = {
   ticTacToe

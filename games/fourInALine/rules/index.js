@@ -1,5 +1,5 @@
-import Session from '../../lib/session';
-import HumanPlayer from '../../lib/humanPlayer';
+import Session from '../../session';
+import HumanPlayer from '../../humanPlayer';
 
 
 class FourInALineHumanPlayer extends HumanPlayer {

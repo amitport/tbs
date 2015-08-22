@@ -1,4 +1,4 @@
-import Session from '../../lib/session';
+import Session from '../../session';
 import HumanPlayer from '../players/human';
 
 import BasicAiPlayer from '../players/basicAi';

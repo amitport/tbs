@@ -2,15 +2,15 @@ import './index.css!';
 
 export default function (roomId, io) {
   return {
-    templateUrl: 'modules/games/fourInALine/board.html',
+    templateUrl: 'games/fourInALine/board.html',
     deserializeSession: function (raw, players) {
       const res = {
         board: raw.board,
         currentPlayer: players[raw.currentPlayerIdx],
         markToFill: {
-          '_': 'modules/games/fourInALine/circle-fill.svg',
-          'r': 'modules/games/fourInALine/circle-fill-red.svg',
-          'b': 'modules/games/fourInALine/circle-fill-blue.svg'
+          '_': 'games/fourInALine/circle-fill.svg',
+          'r': 'games/fourInALine/circle-fill-red.svg',
+          'b': 'games/fourInALine/circle-fill-blue.svg'
         },
         markCol: function (c) {
           io.emit('session:action', {roomId, actionId: 'markCol', c});

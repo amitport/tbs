@@ -1,7 +1,7 @@
 import './index.css!';
 
 import Room from './room';
-import Cell from '../../modules/games/ticTacToe/rules/cell';
+import Cell from '../../games/ticTacToe/rules/cell';
 
 export default ['$scope', '$routeParams', '$mdDialog', '$location', 'io',
   function ($scope, $routeParams, $mdDialog, $location, io) {

@@ -18,7 +18,8 @@ export default {
     log.silly(message);
   }),
   paths: {
-    client: __dirname + '/../../client'
+    client: __dirname + '/../../client',
+    games: __dirname + '/../../games'
   },
   port: process.env.PORT || 9000
 };

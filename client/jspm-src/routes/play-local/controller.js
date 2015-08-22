@@ -1,6 +1,6 @@
 import '../room/index.css!';
 
-import Cell from '../../modules/games/ticTacToe/rules/cell';
+import Cell from '../../games/ticTacToe/rules/cell';
 
 export default ['$scope', '$routeParams', 'SessionFactory',
   function ($scope, $routeParams, SessionFactory) {
@@ -50,7 +50,7 @@ export default ['$scope', '$routeParams', 'SessionFactory',
     $scope.room = {
       status: 'IN_PROGRESS',
       gameType: {
-        templateUrl: 'modules/games/ticTacToe/board.html'
+        templateUrl: 'games/ticTacToe/board.html'
       },
       stat: [0, 0]
     };

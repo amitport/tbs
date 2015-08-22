@@ -6,7 +6,7 @@ import Board from './rules/board';
 import Cell from './rules/cell';
 export default function (roomId, io) {
   return {
-    templateUrl: 'modules/games/ticTacToe/board.html',
+    templateUrl: 'games/ticTacToe/board.html',
     deserializeSession: function (raw, players) {
       const res = {
         board: Board.deserialize(raw.board),
