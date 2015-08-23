@@ -1,4 +1,4 @@
-import SessionFactory from '../../game/sessionFactory';
+import SessionFactory from '../../../client/jspm-src/games/sessionFactory';
 
 import Room from '../../game/room';
 

@@ -37,7 +37,7 @@ export default ['$scope', '$routeParams', 'SessionFactory',
           $scope.session.result = {c1: 0, r1: 2, c2: 2, r2: 0};
         }
       }
-    });
+    }, true);
 
     $scope.session.players[0].ready = true;
     $scope.session.players[1].ready = true;

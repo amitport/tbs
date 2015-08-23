@@ -3,18 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/.gitignore" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/fourInALine/board.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/fourInALine/rules/index.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/fourInALine/type.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/session.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/session.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/games/sessionFactory.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/ticTacToe/cell.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/ticTacToe/index.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/ticTacToe/players/human.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/ticTacToe/rules/index.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/ticTacToe/session.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/ticTacToe/type.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/types.js" charset="UTF-8" />
