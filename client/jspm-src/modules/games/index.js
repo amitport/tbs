@@ -2,15 +2,8 @@ import angular from 'angular';
 
 import '../io/index';
 
-
-import ticTacToe from '../../games/ticTacToe/client/index';
-import fourInALine from '../../games/fourInALine/client/index';
+import GameClientRepo from '../../games/gameClientRepo';
 
 const app = angular.module('tbs.games', ['tbs.io']);
 
-ticTacToe(app);
-fourInALine(app);
-
-import SessionFactory from '../../games/sessionFactory';
-
-app.constant('SessionFactory', SessionFactory);
+app.constant('gameClientRepo', new GameClientRepo(app));

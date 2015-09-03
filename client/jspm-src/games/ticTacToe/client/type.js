@@ -4,7 +4,7 @@ import Board from '../master/board';
 
 
 import Cell from '../master/cell';
-import manager from './manager';
+import client from './index';
 
 const clientPath = 'games/ticTacToe/client/';
 
@@ -25,7 +25,7 @@ export default function (roomId, io, scope) {
         }
       };
       if (raw.result) {
-        manager.onGameEnd(raw.result, res);
+        client.prototype.onGameEnd(raw.result, res);
       }
 
       return res;

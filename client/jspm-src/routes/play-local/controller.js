@@ -1,17 +1,12 @@
 import '../room/index.css!';
 
 import Cell from '../../games/ticTacToe/master/cell';
-import GameViewManagersRepo from '../../modules/games/gameViewManagersRepo';
 
 const clientPath = 'games/ticTacToe/client/';
 
-export default ['$scope', '$routeParams', 'SessionFactory',
-  function ($scope, $routeParams, SessionFactory) {
-    const gameViewManager = GameViewManagersRepo.get($routeParams.gameTypeId);
-
-    $scope.session = SessionFactory.create($routeParams.gameTypeId, function(result) {
-      gameViewManager.onGameEnd(result, $scope.session);
-
+export default ['$scope', '$routeParams', 'gameClientRepo',
+  function ($scope, $routeParams, gameClientRepo) {
+    $scope.session = gameClientRepo.get($routeParams.gameTypeId).createLocalSession(function(result) {
       $scope.session.players[0].ready = false;
 
       if (result !== 'tie') {
