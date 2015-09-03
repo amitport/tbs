@@ -1,5 +1,5 @@
-import ticTacToe from './ticTacToe/rules/index';
-import fourInALine from './fourInALine/rules/index';
+import ticTacToe from './ticTacToe/master/index';
+import fourInALine from './fourInALine/master/index';
 
 const gameTypes = {
   ticTacToe,

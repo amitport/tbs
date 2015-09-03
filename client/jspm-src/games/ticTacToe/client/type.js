@@ -1,16 +1,18 @@
 import './index.css!';
 
-import Board from './rules/board';
+import Board from '../master/board';
 
 
-import Cell from './rules/cell';
+import Cell from '../master/cell';
 import manager from './manager';
+
+const clientPath = 'games/ticTacToe/client/';
 
 export default function (roomId, io, scope) {
   scope.Cell = Cell;
 
   return {
-    templateUrl: 'games/ticTacToe/board.html',
+    templateUrl: `${clientPath}board.html`,
     deserializeSession: function (raw, players) {
       const res = {
         board: Board.deserialize(raw.board),

@@ -1,4 +1,4 @@
-import ticTacToe from '../../games/ticTacToe/manager';
+import ticTacToe from '../../games/ticTacToe/client/manager';
 
 const GameViewManagers = {
   ticTacToe

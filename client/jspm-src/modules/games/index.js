@@ -3,8 +3,8 @@ import angular from 'angular';
 import '../io/index';
 
 
-import ticTacToe from '../../games/ticTacToe/index';
-import fourInALine from '../../games/fourInALine/index';
+import ticTacToe from '../../games/ticTacToe/client/index';
+import fourInALine from '../../games/fourInALine/client/index';
 
 const app = angular.module('tbs.games', ['tbs.io']);
 

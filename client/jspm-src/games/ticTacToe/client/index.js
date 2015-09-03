@@ -1,3 +1,6 @@
+
+const clientPath = 'games/ticTacToe/client/';
+
 let markColors = {
   '_': null,
   'X': 'rgb(100, 100, 193)',
@@ -5,15 +8,15 @@ let markColors = {
 };
 let markIcons = {
   '_': null,
-  'X': 'games/ticTacToe/X.svg',
-  'O': 'games/ticTacToe/O.svg'
+  'X': `${clientPath}X.svg`,
+  'O': `${clientPath}O.svg`
 };
 
 export default function (app) {
   app.directive('cell', function() {
     return {
       scope: true,
-      templateUrl: 'games/ticTacToe/cell.html',
+      templateUrl: `${clientPath}cell.html`,
       link: function(scope, iElement, iAttrs) {
 
         const x = scope.x = iAttrs.x;

@@ -1,5 +1,5 @@
 
-import HumanPlayer from '../../humanPlayer';
+import HumanPlayer from '../../../humanPlayer';
 
 export default class TicTacToeHumanPlayer extends HumanPlayer {
   constructor(idx, mark) {

@@ -1,7 +1,7 @@
 import Session from '../../session';
-import HumanPlayer from '../players/human';
+import HumanPlayer from './ai/human';
 
-import BasicAiPlayer from '../players/basicAi';
+import BasicAiPlayer from './ai/basicAi';
 
 import Cell from './cell';
 import Board from './board';

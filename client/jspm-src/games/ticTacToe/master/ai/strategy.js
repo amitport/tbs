@@ -1,5 +1,5 @@
 
-import Cell from '../rules/cell';
+import Cell from '../cell';
 
 /**
  * count potentially winning lines

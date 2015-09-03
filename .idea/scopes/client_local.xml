@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="client-local" pattern="file[tbs]:client/jspm-src//*&amp;&amp;!file[tbs]:client/jspm-src/jspm_packages//*||file[tbs]:client/server-views//*" />
+</component>

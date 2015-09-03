@@ -1,16 +1,18 @@
 import './index.css!';
 
+const clientPath = 'games/fourInALine/client/';
+
 export default function (roomId, io) {
   return {
-    templateUrl: 'games/fourInALine/board.html',
+    templateUrl: `${clientPath}board.html`,
     deserializeSession: function (raw, players) {
       const res = {
         board: raw.board,
         currentPlayer: players[raw.currentPlayerIdx],
         markToFill: {
-          '_': 'games/fourInALine/circle-fill.svg',
-          'r': 'games/fourInALine/circle-fill-red.svg',
-          'b': 'games/fourInALine/circle-fill-blue.svg'
+          '_': `${clientPath}circle-fill.svg`,
+          'r': `${clientPath}circle-fill-red.svg`,
+          'b': `${clientPath}circle-fill-blue.svg`
         },
         markCol: function (c) {
           io.emit('session:action', {roomId, actionId: 'markCol', c});

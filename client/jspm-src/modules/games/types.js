@@ -1,5 +1,5 @@
-import ticTacToe from '../../games/ticTacToe/type';
-import fourInALine from '../../games/fourInALine/type';
+import ticTacToe from '../../games/ticTacToe/client/type';
+import fourInALine from '../../games/fourInALine/client/type';
 
 export default {
   'ticTacToe': ticTacToe,

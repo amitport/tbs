@@ -1,7 +1,9 @@
 import '../room/index.css!';
 
-import Cell from '../../games/ticTacToe/rules/cell';
+import Cell from '../../games/ticTacToe/master/cell';
 import GameViewManagersRepo from '../../modules/games/gameViewManagersRepo';
+
+const clientPath = 'games/ticTacToe/client/';
 
 export default ['$scope', '$routeParams', 'SessionFactory',
   function ($scope, $routeParams, SessionFactory) {
@@ -28,7 +30,7 @@ export default ['$scope', '$routeParams', 'SessionFactory',
     $scope.room = {
       status: 'IN_PROGRESS',
       gameType: {
-        templateUrl: 'games/ticTacToe/board.html'
+        templateUrl: `${clientPath}board.html`
       },
       stat: [0, 0]
     };

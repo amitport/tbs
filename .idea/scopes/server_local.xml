@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="server-local" pattern="file[tbs]:server//*&amp;&amp;!file[tbs]:server/node_modules//*" />
+</component>
