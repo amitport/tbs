@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/.gitignore" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/.gitignore" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/games/sessionFactory.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/index.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/index.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/modules/games/types.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/routes/play-local/controller.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/routes/room/controller.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/jspm-src/routes/room/room.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/client/package.json" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/server/.gitignore" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/server/config/default.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/server/game/sessionFactory.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/server/http/middleware/serveStatic.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/server/io/msgHandlers/room.js" charset="UTF-8" />
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
