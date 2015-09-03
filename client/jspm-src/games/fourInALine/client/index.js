@@ -35,7 +35,7 @@ export default class FourInALineGameClient extends AbstractGameClient {
             r1: raw.result.r1,
             c2: raw.result.c2,
             r2: raw.result.r2,
-            color: raw.result.color === 'b' ? 'rgb(100, 100, 193)' : 'rgb(234, 123, 123)'
+            color: raw.result.color === 'b' ? AbstractGameClient.playerColors[0] : AbstractGameClient.playerColors[1]
           }
         }
         return res;

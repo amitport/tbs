@@ -1,4 +1,4 @@
-export default class AbstractGameClient {
+class AbstractGameClient {
   constructor(Master) {
     this.Master = Master;
   }
@@ -14,3 +14,7 @@ export default class AbstractGameClient {
 
   onGameEnd() {}
 }
+
+AbstractGameClient.playerColors = ['rgb(100, 100, 193)', 'rgb(234, 123, 123)'];
+
+export default AbstractGameClient;
