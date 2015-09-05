@@ -1,5 +1,6 @@
 import Master from '../master/index';
 import AbstractGameClient from '../../abstract/client/index';
+import abstractGameConfig from '../../abstract/client/config';
 
 import './index.css!';
 
@@ -35,7 +36,7 @@ export default class FourInALineGameClient extends AbstractGameClient {
             r1: raw.result.r1,
             c2: raw.result.c2,
             r2: raw.result.r2,
-            color: raw.result.color === 'b' ? AbstractGameClient.playerColors[0] : AbstractGameClient.playerColors[1]
+            color: raw.result.color === 'b' ? abstractGameConfig.playerColors[0] : abstractGameConfig.playerColors[1]
           }
         }
         return res;

@@ -1,15 +1,17 @@
 import Session from '../../session';
-import HumanPlayer from '../../humanPlayer';
+import Player from '../../abstract/master/player';
 
 
-class FourInALineHumanPlayer extends HumanPlayer {
+class FourInALineHumanPlayer extends Player {
   constructor(idx, mark) {
     super(idx);
     this.mark = mark
   }
 
   serialize() {
-    return {};
+    const serialized = super.serialize();
+    serialized.mark = mark;
+    return serialized;
   }
 }
 

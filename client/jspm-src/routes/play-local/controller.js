@@ -1,6 +1,6 @@
 import '../room/index.css!';
 
-import AbstractGameClient from '../../games/abstract/client/index';
+//import abstractGameConfig from '../../games/abstract/client/config';
 
 import Cell from '../../games/ticTacToe/master/cell';
 
@@ -14,13 +14,13 @@ export default ['$scope', '$routeParams', 'gameClientRepo',
       if (result !== 'tie') {
         $scope.room.stat[$scope.session.currentPlayer.idx]++;
       }
-    }, true);
+    });
 
     $scope.session.players[0].ready = true;
     $scope.session.players[1].ready = true;
 
-    $scope.session.players[0].color = AbstractGameClient.playerColors[0];
-    $scope.session.players[1].color = AbstractGameClient.playerColors[1];
+    //$scope.session.players[0].color = abstractGameConfig.playerColors[0];
+    //$scope.session.players[1].color = abstractGameConfig.playerColors[1];
 
     $scope.Cell = Cell;
 

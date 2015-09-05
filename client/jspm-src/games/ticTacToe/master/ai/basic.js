@@ -1,4 +1,5 @@
 import {calcScores} from './strategy';
+import TicTacToeHumanPlayer from '../player';
 
 function scoreComparator(a, b) {
   for (let priority = 0; priority < 4; priority++) {
@@ -9,19 +10,9 @@ function scoreComparator(a, b) {
   return 0;
 }
 
-export default class BasicAiPlayer {
+export default class BasicAiPlayer extends TicTacToeHumanPlayer {
   constructor(idx, mark) {
-    this.idx = idx;
-    this.mark = mark;
-
-  }
-
-  serialize() {
-    return {mark: this.mark.key};
-  }
-
-  toString() {
-    return `<player ${this.mark.key}>`;
+    super(idx, mark);
   }
 
   setSession(session) {

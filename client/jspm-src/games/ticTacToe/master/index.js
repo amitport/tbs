@@ -1,14 +1,14 @@
 import Session from '../../session';
-import HumanPlayer from './ai/human';
+import Player from './player';
 
-import BasicAiPlayer from './ai/basicAi';
+import BasicAi from './ai/basic';
 
 import Cell from './cell';
 import Board from './board';
 
 class TicTacToe extends Session {
   constructor(gameEndedCb, ai) {
-    super([new HumanPlayer(0, Cell.X), ai ? new BasicAiPlayer(1, Cell.O) : new HumanPlayer(1, Cell.O)], gameEndedCb);
+    super([new Player(0, Cell.X), ai ? new BasicAi(1, Cell.O) : new Player(1, Cell.O)], gameEndedCb);
 
     if (ai) this.players[1].setSession(this);
   }
