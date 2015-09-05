@@ -1,6 +1,6 @@
 
-import TicTacToeGameClient from '../../games/ticTacToe/client/index';
-import FourInALineGameClient from '../../games/fourInALine/client/index';
+import TicTacToeGameClient from './ticTacToe/client/index';
+import FourInALineGameClient from './fourInALine/client/index';
 
 export default class GameClientRepo {
   constructor(app) {
