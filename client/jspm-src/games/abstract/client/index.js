@@ -2,24 +2,27 @@ import config from './config';
 
 
 class AbstractGameClient {
-  constructor(Master) {
+  constructor(Master, templateUrl) {
     this.Master = Master;
+    this.templateUrl = templateUrl;
   }
 
   createLocalSession(gameEndedCb) {
     const session = new this.Master((result) =>{
       this.onGameEnd(result, session);
 
+      session.players[0].ready = false;
+
       gameEndedCb(result);
     }, true);
+
+    session.players[0].ready = true;
+    session.players[1].ready = true;
 
     session.players[0].color = config.playerColors[0];
     session.players[1].color = config.playerColors[1];
 
-    //session.players = Player.deserializePlayers(session.players, 0);
-    //session.players[0].next = session.players[1];
-    //session.players[1].next = session.players[0];
-    //session.currentPlayer = session.players[session.currentPlayer.idx];
+    session.templateUrl = this.templateUrl;
 
     return session;
   }

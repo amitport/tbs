@@ -8,13 +8,12 @@ const clientPath = 'games/fourInALine/client/';
 
 export default class FourInALineGameClient extends AbstractGameClient {
   constructor() {
-    super(Master);
+    super(Master, `${clientPath}board.html`);
   }
 
   applyGameType(roomId, io) {
     return {
-      templateUrl: `${clientPath}board.html`,
-      deserializeSession: function (raw, players) {
+      deserializeSession: (raw, players) => {
         const res = {
           board: raw.board,
           currentPlayer: players[raw.currentPlayerIdx],
@@ -28,7 +27,8 @@ export default class FourInALineGameClient extends AbstractGameClient {
           },
           isEnded: function () {
             return this.hasOwnProperty('result');
-          }
+          },
+          templateUrl: this.templateUrl
         };
         if (raw.result) {
           res.result = (raw.result === 'tie') ? 'tie' : {

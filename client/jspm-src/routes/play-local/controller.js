@@ -1,34 +1,20 @@
 import '../room/index.css!';
 
-//import abstractGameConfig from '../../games/abstract/client/config';
-
 import Cell from '../../games/ticTacToe/master/cell';
 
 const clientPath = 'games/ticTacToe/client/';
 
 export default ['$scope', '$routeParams', 'gameClientRepo',
   function ($scope, $routeParams, gameClientRepo) {
-    $scope.session = gameClientRepo.get($routeParams.gameTypeId).createLocalSession(function(result) {
-      $scope.session.players[0].ready = false;
-
+    const gameClient = gameClientRepo.get($routeParams.gameTypeId);
+    $scope.session = gameClient.createLocalSession(function(result) {
       if (result !== 'tie') {
         $scope.room.stat[$scope.session.currentPlayer.idx]++;
       }
     });
 
-    $scope.session.players[0].ready = true;
-    $scope.session.players[1].ready = true;
-
-    //$scope.session.players[0].color = abstractGameConfig.playerColors[0];
-    //$scope.session.players[1].color = abstractGameConfig.playerColors[1];
-
-    $scope.Cell = Cell;
-
     $scope.room = {
       status: 'IN_PROGRESS',
-      gameType: {
-        templateUrl: `${clientPath}board.html`
-      },
       stat: [0, 0]
     };
     $scope.own = $scope.session.players[0];

@@ -7,9 +7,9 @@ import AbstractGameClient from '../../abstract/client/index';
 import Board from '../master/board';
 import Cell from '../master/cell';
 
-export default class TicTacToeGameClient extends AbstractGameClient {
+class TicTacToeGameClient extends AbstractGameClient {
   constructor(app) {
-    super(Master);
+    super(Master, `${config.path}board.html`);
     app.directive('cell', function() {
       return {
         scope: true,
@@ -71,11 +71,14 @@ export default class TicTacToeGameClient extends AbstractGameClient {
     }
   }
 
-  applyGameType(roomId, io, scope) {
-    scope.Cell = Cell;
+  createLocalSession(gameEndedCb) {
+    const session = super.createLocalSession(gameEndedCb);
+    session.Cell = Cell;
+    return session;
+  }
 
+  applyGameType(roomId, io) {
     return {
-      templateUrl: `${config.path}board.html`,
       deserializeSession: (raw, players) => {
         const res = {
           board: Board.deserialize(raw.board),
@@ -85,7 +88,9 @@ export default class TicTacToeGameClient extends AbstractGameClient {
           },
           isEnded: function () {
             return this.hasOwnProperty('result');
-          }
+          },
+          Cell: Cell,
+          templateUrl: this.templateUrl
         };
         if (raw.result) {
           this.onGameEnd(raw.result, res);
@@ -96,3 +101,5 @@ export default class TicTacToeGameClient extends AbstractGameClient {
     }
   }
 }
+
+export default TicTacToeGameClient;
