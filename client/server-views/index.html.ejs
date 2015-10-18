@@ -12,6 +12,7 @@
 
 <ng-view layout layout-fill></ng-view>
 
+<script src="jspm_packages/system.js"></script>
 <% if (env === 'production') { %>
     <script src="main.min.js"></script>
 <% }  else { %>
@@ -19,7 +20,6 @@
         <!--<io-monitor></io-monitor>-->
     <!--</md-whiteframe>-->
 
-    <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
         System.import('index');
