@@ -20,7 +20,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "clean-css": "npm:clean-css@3.3.9",
     "core-js": "npm:core-js@1.2.1",
-    "css": "github:systemjs/plugin-css@0.1.13",
+    "css": "github:systemjs/plugin-css@0.1.18",
     "jquery-ui": "github:components/jqueryui@1.11.4",
     "socket.io-client": "github:socketio/socket.io-client@1.3.6",
     "github:angular/bower-angular-animate@1.4.4": {
