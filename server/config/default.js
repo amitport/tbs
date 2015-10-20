@@ -12,7 +12,7 @@ const log = new winston.Logger({
 require('winston/node_modules/colors').enabled = true; // workaround for https://github.com/winstonjs/winston/issues/616 TODO revisit this
 
 export default {
-  robots: 'Disallow: /', // disallow everything
+  robotsDisallow: "/", // disallow everything
   log: log,
   httpLogStream: split().on('data', function (message) {
     log.silly(message);
