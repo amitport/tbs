@@ -1,6 +1,6 @@
 
 
-<md-whiteframe class="md-whiteframe-z1 ticTacToe-board" layout="column" layout-padding layout-align="center center">
+<md-whiteframe class="md-whiteframe-3dp ticTacToe-board" layout="column" layout-padding layout-align="center center">
   <span ng-repeat="row in session.board track by $index" ng-init="rowIndex = $index" layout="row">
     <cell ng-repeat="col in row track by $index" x="{{rowIndex}}" y="{{$index}}"></cell>
   </span>
