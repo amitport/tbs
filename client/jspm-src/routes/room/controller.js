@@ -30,16 +30,7 @@ export default ['$scope', '$routeParams', '$mdDialog', '$location', 'gameClientR
       if (newVal === 'WAITING_FOR_SECOND_PLAYER') {
         $mdDialog.show(
           {
-            template: '<md-dialog flex>' +
-            ' <md-dialog-content>' +
-            '   <h2 class="md-title">Tell a friend to join</h2>' +
-            '   <md-input-container>' +
-            '     <label>Address</label>' +
-            '     <input disabled ng-model="address">' +
-            '   </md-input-container>' +
-            //'    <clipboard content="{{address}}"></clipboard>' +
-            '  </md-dialog-content>' +
-            '</md-dialog>',
+            templateUrl: 'routes/room/waitForOppDialog.html',
             locals: {
               address: $location.absUrl()
             },

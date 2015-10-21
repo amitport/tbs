@@ -14,13 +14,13 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.4.7",
-    "angular-material": "github:angular/bower-material@0.11.4",
+    "angular-material": "github:angular/bower-material@1.0.0-rc1-master-325d83e",
     "angular-route": "github:angular/bower-angular-route@1.4.7",
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "clean-css": "npm:clean-css@3.4.6",
     "core-js": "npm:core-js@1.2.2",
-    "css": "github:systemjs/plugin-css@0.1.18",
+    "css": "github:systemjs/plugin-css@0.1.19",
     "socket.io-client": "github:socketio/socket.io-client@1.3.7",
     "github:angular/bower-angular-animate@1.4.7": {
       "angular": "github:angular/bower-angular@1.4.7"
@@ -31,11 +31,11 @@ System.config({
     "github:angular/bower-angular-route@1.4.7": {
       "angular": "github:angular/bower-angular@1.4.7"
     },
-    "github:angular/bower-material@0.11.4": {
+    "github:angular/bower-material@1.0.0-rc1-master-325d83e": {
       "angular": "github:angular/bower-angular@1.4.7",
       "angular-animate": "github:angular/bower-angular-animate@1.4.7",
       "angular-aria": "github:angular/bower-angular-aria@1.4.7",
-      "css": "github:systemjs/plugin-css@0.1.18"
+      "css": "github:systemjs/plugin-css@0.1.19"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

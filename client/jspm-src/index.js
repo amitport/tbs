@@ -13,7 +13,9 @@ import roomController from './routes/room/controller';
 import playLocalController from './routes/play-local/controller';
 
 const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games'])
-  .config(['$routeProvider', function ($routeProvider) {
+  .config(['$routeProvider', '$mdThemingProvider', function ($routeProvider, $mdThemingProvider) {
+    $mdThemingProvider.theme('default');
+
     $routeProvider
       .when('/', {
         templateUrl: 'routes/lobby/index.html',
