@@ -1,33 +1,33 @@
 <md-content class="game-view"
-            ng-style="{'border-bottom-color': own.color, 'border-top-color': opp.color}"
+            ng-style="{'border-bottom-color': room.players.own.color, 'border-top-color': room.players.opp.color}"
             layout="column"
             layout-align="center center"
             flex="100">
   <div ng-show="!room.status">Loading…</div>
   <md-content ng-show="room.status === 'IN_PROGRESS'" style="position: relative; overflow: visible;" layout="column" layout-align="center center">
-    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%; height: 100px;" ng-show="session && !session.isEnded() && session.currentPlayer === opp"
+    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%; height: 100px;" ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.players.opp"
          layout="column" layout-align="center center">
-      <md-icon style="height: 100px; width: 100px;" ng-style="{color: opp.color}" md-svg-src="routes/room/arrow_up.svg">
+      <md-icon style="height: 100px; width: 100px;" ng-style="{color: room.players.opp.color}" md-svg-src="routes/room/arrow_up.svg">
       </md-icon>
     </div>
-    <div class="ongoing-session" ng-class="{faded: session.isEnded()}" ng-include="session.templateUrl"></div>
+    <div class="ongoing-session" ng-class="{faded: room.session.isEnded()}" ng-include="room.session.templateUrl"></div>
     <div class="fade-inout" style="position: absolute; bottom: -70px; width: 100%; height: 100px"
-         ng-show="session && !session.isEnded() && session.currentPlayer === own"
+         ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.players.own"
          layout="column" layout-align="center center">
-      <md-icon style="height: 100px; width: 100px;" ng-style="{color: own.color}" md-svg-src="routes/room/arrow_down.svg">
+      <md-icon style="height: 100px; width: 100px;" ng-style="{color: room.players.own.color}" md-svg-src="routes/room/arrow_down.svg">
       </md-icon>
     </div>
   </md-content>
-  <md-button class="fade-inout" ng-click="ready()" ng-show="!own.ready">
+  <md-button class="fade-inout" ng-click="ready()" ng-show="!room.players.own.ready">
     <md-icon md-svg-icon="routes/room/replay.svg"></md-icon>
   </md-button>
-  <div class="fade-inout" ng-show="own.ready && !opp.ready">
+  <div class="fade-inout" ng-show="room.players.own.ready && !room.players.opp.ready">
     Waiting for the second player...
   </div>
 
   <div ng-show="room.status === 'IN_PROGRESS'" class="md-display-1" style="position: absolute; height: 20px; width: 100%; bottom: 35px" layout="row" layout-align="center center">
-    <span style="margin-right: 10px" ng-style="{color: own.color}">{{room.stat[own.idx]}}</span>
+    <span style="margin-right: 10px" ng-style="{color: room.players.own.color}">{{room.stat[room.players.own.idx]}}</span>
     <span style="width: 10px">&middot;</span>
-    <span style="margin-left: 10px" ng-style="{color: opp.color}">{{room.stat[opp.idx]}}</span>
+    <span style="margin-left: 10px" ng-style="{color: room.players.opp.color}">{{room.stat[room.players.opp.idx]}}</span>
   </div>
 </md-content>

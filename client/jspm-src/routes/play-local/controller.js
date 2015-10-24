@@ -7,21 +7,24 @@ const clientPath = 'games/ticTacToe/client/';
 export default ['$scope', '$routeParams', 'gameClientRepo',
   function ($scope, $routeParams, gameClientRepo) {
     const gameClient = gameClientRepo.get($routeParams.gameTypeId);
-    $scope.session = gameClient.createLocalSession(function(result) {
-      if (result !== 'tie') {
-        $scope.room.stat[$scope.session.currentPlayer.idx]++;
-      }
-    });
-
     $scope.room = {
       status: 'IN_PROGRESS',
       stat: [0, 0]
     };
-    $scope.own = $scope.session.players[0];
-    $scope.opp = $scope.session.players[1];
+    $scope.room.session = gameClient.createLocalSession(function(result) {
+      if (result !== 'tie') {
+        $scope.room.stat[$scope.room.session.currentPlayer.idx]++;
+      }
+    });
+
+
+    $scope.room.players = {
+      own: $scope.room.session.players[0],
+      opp: $scope.room.session.players[1]
+    };
 
     $scope.ready = function() {
-      $scope.session.recycle();
-      $scope.session.players[0].ready = true;
+      $scope.room.session.recycle();
+      $scope.room.session.players[0].ready = true;
     };
   }];

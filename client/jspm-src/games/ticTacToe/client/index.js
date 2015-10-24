@@ -31,7 +31,7 @@ class TicTacToeGameClient extends AbstractGameClient {
             }
           }
 
-          scope.$watch(`session.board[${iAttrs.x}][${iAttrs.y}]`, function(newValue) {
+          scope.$watch(`room.session.board[${iAttrs.x}][${iAttrs.y}]`, function(newValue) {
             scope.markColor = config.markColors[newValue];
             scope.markIcon = config.markIcons[newValue];
           });

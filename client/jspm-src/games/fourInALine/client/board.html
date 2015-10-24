@@ -1,19 +1,19 @@
 <md-whiteframe style="position: relative;" class="md-whiteframe-3dp" layout="row" layout-align="center center">
 
-  <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="session.markCol(y)" ng-disabled="session.isEnded() || session.board[0][y] !== '_' || session.currentPlayer !== own">
+  <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="room.session.markCol(y)" ng-disabled="room.session.isEnded() || room.session.board[0][y] !== '_' || room.session.currentPlayer !== room.players.own">
     <div layout="column" layout-align="space-around center">
       <div class="fourInALine-cell" layout-align="center center" ng-repeat="x in [0, 1, 2, 3, 4, 5] track by $index">
-        <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="{{session.markToFill[session.board[x][y]]}}"></md-icon>
+        <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="{{room.session.markToFill[room.session.board[x][y]]}}"></md-icon>
         <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="games/fourInALine/client/circle.svg"></md-icon>
       </div>
     </div>
   </md-button>
-  <svg ng-if="session.isEnded() && session.result !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 609px; height: 400px;">
-    <line ng-attr-x1="{{44 + 87*session.result.c1}}" ng-attr-y1="{{32 + 67*session.result.r1}}" ng-attr-x2="{{44 + 87*session.result.c2}}" ng-attr-y2="{{32 + 67*session.result.r2}}"
-          style="stroke: {{session.result.color}}; stroke-width: 4px; opacity: 0.7;"/>
+  <svg ng-if="room.session.isEnded() && room.session.result !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 609px; height: 400px;">
+    <line ng-attr-x1="{{44 + 87*room.session.result.c1}}" ng-attr-y1="{{32 + 67*room.session.result.r1}}" ng-attr-x2="{{44 + 87*room.session.result.c2}}" ng-attr-y2="{{32 + 67*room.session.result.r2}}"
+          style="stroke: {{room.session.result.color}}; stroke-width: 4px; opacity: 0.7;"/>
   </svg>
-  <svg ng-if="session.isEnded() && session.result !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 609px; height: 400px;">
-    <line ng-attr-x1="{{44 + 87*session.result.c2}}" ng-attr-y1="{{32 + 67*session.result.r2}}" ng-attr-x2="{{44 + 87*session.result.c1}}" ng-attr-y2="{{32 + 67*session.result.r1}}"
-          style="stroke: {{session.result.color}}; stroke-width: 4px; opacity: 0.7;"/>
+  <svg ng-if="room.session.isEnded() && room.session.result !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 609px; height: 400px;">
+    <line ng-attr-x1="{{44 + 87*room.session.result.c2}}" ng-attr-y1="{{32 + 67*room.session.result.r2}}" ng-attr-x2="{{44 + 87*room.session.result.c1}}" ng-attr-y2="{{32 + 67*room.session.result.r1}}"
+          style="stroke: {{room.session.result.color}}; stroke-width: 4px; opacity: 0.7;"/>
   </svg>
 </md-whiteframe>
