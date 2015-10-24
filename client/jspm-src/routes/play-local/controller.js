@@ -19,11 +19,10 @@ export default ['$scope', '$routeParams', 'gameClientRepo',
       /*gameClient.applyGameType(
         ({type, payload}) => {session[type](payload);}
       )*/ null
-      , true
+      , true,
+      function() {
+        $scope.room.session.recycle();
+        $scope.room.session.players[0].ready = true;
+      }
     );
-
-    $scope.ready = function() {
-      $scope.room.session.recycle();
-      $scope.room.session.players[0].ready = true;
-    };
   }];

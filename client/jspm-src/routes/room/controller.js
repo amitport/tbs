@@ -15,15 +15,13 @@ export default ['$scope', '$routeParams', '$mdDialog', '$location', 'gameClientR
       $scope.room = new Room(msg.room, msg.ownIdx,
         gameClientRepo.get(msg.room.gameId).applyGameType(
           ({type, payload}) => {io.emit('session:action', {roomId: $scope.roomId, actionId: type, payload});}
-        )
+        ), false, function () {
+          io.emit('room:ready', $scope.roomId);
+        }
       );
     }, function (err) {
       console.error(err);
     });
-
-    $scope.ready = function () {
-      io.emit('room:ready', $scope.roomId);
-    };
 
     $scope.$watch('room.status', function (newVal) {
       if (newVal === 'WAITING_FOR_SECOND_PLAYER') {

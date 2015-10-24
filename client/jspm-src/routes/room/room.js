@@ -1,9 +1,10 @@
 import Player from './player';
 
 export default class Room {
-  constructor(raw, ownIdx, gameType, skipDeserialization) {//gameTypeId, ownIdx, id, io, scope, gameClientRepo) {
+  constructor(raw, ownIdx, gameType, skipDeserialization, ready) {//gameTypeId, ownIdx, id, io, scope, gameClientRepo) {
     this.gameType = gameType;//gameClientRepo.get(gameTypeId).applyGameType(id, io, scope);
     this.skipDeserialization = skipDeserialization;
+    this.ready = ready;
 
     this.players = (this.skipDeserialization) ? raw.players : Player.deserializeAll(raw.players, ownIdx);
     this.update(raw);

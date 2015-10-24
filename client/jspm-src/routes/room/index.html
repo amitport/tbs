@@ -18,7 +18,7 @@
       </md-icon>
     </div>
   </md-content>
-  <md-button class="fade-inout" ng-click="ready()" ng-show="!room.players.own.ready">
+  <md-button class="fade-inout" ng-click="room.ready()" ng-show="!room.players.own.ready">
     <md-icon md-svg-icon="routes/room/replay.svg"></md-icon>
   </md-button>
   <div class="fade-inout" ng-show="room.players.own.ready && !room.players.opp.ready">
