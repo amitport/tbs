@@ -11,7 +11,7 @@ export default class FourInALineGameClient extends AbstractGameClient {
     super(Master, `${clientPath}board.html`);
   }
 
-  applyGameType(roomId, io) {
+  applyGameType(dispatch) {
     return {
       deserializeSession: (raw, players) => {
         const res = {
@@ -23,7 +23,7 @@ export default class FourInALineGameClient extends AbstractGameClient {
             'b': `${clientPath}circle-fill-blue.svg`
           },
           markCol: function (c) {
-            io.emit('session:action', {roomId, actionId: 'markCol', c});
+            dispatch({type: 'markCol', payload: {c}});
           },
           isEnded: function () {
             return this.hasOwnProperty('result');

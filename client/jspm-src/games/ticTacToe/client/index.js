@@ -77,14 +77,14 @@ class TicTacToeGameClient extends AbstractGameClient {
     return session;
   }
 
-  applyGameType(roomId, io) {
+  applyGameType(dispatch) {
     return {
       deserializeSession: (raw, players) => {
         const res = {
           board: Board.deserialize(raw.board),
           currentPlayer: players[raw.currentPlayerIdx],
           markCell: function (payload) {
-            io.emit('session:action', {roomId, actionId: 'markCell', x: payload.x, y: payload.y});
+            dispatch({type: 'markCell', payload});
           },
           isEnded: function () {
             return this.hasOwnProperty('result');

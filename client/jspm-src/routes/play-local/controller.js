@@ -1,27 +1,26 @@
 import '../room/index.css!';
-
-import Cell from '../../games/ticTacToe/master/cell';
-
-const clientPath = 'games/ticTacToe/client/';
+import Room from '../room/room';
 
 export default ['$scope', '$routeParams', 'gameClientRepo',
   function ($scope, $routeParams, gameClientRepo) {
     const gameClient = gameClientRepo.get($routeParams.gameTypeId);
-    $scope.room = {
-      status: 'IN_PROGRESS',
-      stat: [0, 0]
-    };
-    $scope.room.session = gameClient.createLocalSession(function(result) {
+    const session = gameClient.createLocalSession(function(result) {
       if (result !== 'tie') {
         $scope.room.stat[$scope.room.session.currentPlayer.idx]++;
       }
     });
-
-
-    $scope.room.players = {
-      own: $scope.room.session.players[0],
-      opp: $scope.room.session.players[1]
+    const rawRoom = {
+      status: 'IN_PROGRESS',
+      stat: [0, 0],
+      session,
+      players: session.players
     };
+    $scope.room = new Room(rawRoom, /*0*/ null,
+      /*gameClient.applyGameType(
+        ({type, payload}) => {session[type](payload);}
+      )*/ null
+      , true
+    );
 
     $scope.ready = function() {
       $scope.room.session.recycle();

@@ -22,6 +22,9 @@ class AbstractGameClient {
     session.players[0].color = config.playerColors[0];
     session.players[1].color = config.playerColors[1];
 
+    session.players.own = session.players[0];
+    session.players.opp = session.players[1];
+
     session.templateUrl = this.templateUrl;
 
     return session;
