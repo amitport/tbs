@@ -8,39 +8,26 @@ const clientPath = 'games/fourInALine/client/';
 
 export default class FourInALineGameClient extends AbstractGameClient {
   constructor() {
-    super(Master, `${clientPath}board.html`);
+    super(Master, `${clientPath}board.html`, ['markCol']);
   }
 
-  applyGameType(dispatch) {
-    return {
-      deserializeSession: (raw, players) => {
-        const res = {
-          board: raw.board,
-          currentPlayer: players[raw.currentPlayerIdx],
-          markToFill: {
-            '_': `${clientPath}circle-fill.svg`,
-            'r': `${clientPath}circle-fill-red.svg`,
-            'b': `${clientPath}circle-fill-blue.svg`
-          },
-          markCol: function (c) {
-            dispatch({type: 'markCol', payload: {c}});
-          },
-          isEnded: function () {
-            return this.hasOwnProperty('result');
-          },
-          templateUrl: this.templateUrl
-        };
-        if (raw.result) {
-          res.result = (raw.result === 'tie') ? 'tie' : {
-            c1: raw.result.c1,
-            r1: raw.result.r1,
-            c2: raw.result.c2,
-            r2: raw.result.r2,
-            color: raw.result.color === 'b' ? abstractGameConfig.playerColors[0] : abstractGameConfig.playerColors[1]
-          }
-        }
-        return res;
-      }
+  createSession(initialState, dispatch) {
+    const session = super.createSession(initialState, dispatch);
+    session.markToFill = {
+      '_': `${clientPath}circle-fill.svg`,
+      'r': `${clientPath}circle-fill-red.svg`,
+      'b': `${clientPath}circle-fill-blue.svg`
+    };
+    return session;
+  }
+
+  updateGameResult(result, session) {
+    session.result = (result === 'tie') ? 'tie' : {
+      c1: result.c1,
+      r1: result.r1,
+      c2: result.c2,
+      r2: result.r2,
+      color: result.color === 'b' ? abstractGameConfig.playerColors[0] : abstractGameConfig.playerColors[1]
     }
   }
 }

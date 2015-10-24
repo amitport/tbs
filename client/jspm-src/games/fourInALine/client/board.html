@@ -1,6 +1,6 @@
 <md-whiteframe style="position: relative;" class="md-whiteframe-3dp" layout="row" layout-align="center center">
 
-  <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="room.session.markCol(y)" ng-disabled="room.session.isEnded() || room.session.board[0][y] !== '_' || room.session.currentPlayer !== room.players.own">
+  <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="room.session.markCol({c: y})" ng-disabled="room.session.isEnded() || room.session.board[0][y] !== '_' || room.session.currentPlayer !== room.players.own">
     <div layout="column" layout-align="space-around center">
       <div class="fourInALine-cell" layout-align="center center" ng-repeat="x in [0, 1, 2, 3, 4, 5] track by $index">
         <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="{{room.session.markToFill[room.session.board[x][y]]}}"></md-icon>

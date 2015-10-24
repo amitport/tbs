@@ -12,10 +12,10 @@ export default ['$scope', '$routeParams', '$mdDialog', '$location', 'gameClientR
       });
 
     io.emit('room:join', $scope.roomId).then(function (msg) {
+      var gameClient = gameClientRepo.get(msg.room.gameId);
       $scope.room = new Room(msg.room, msg.ownIdx,
-        gameClientRepo.get(msg.room.gameId).applyGameType(
-          ({type, payload}) => {io.emit('session:action', {roomId: $scope.roomId, actionId: type, payload});}
-        ), false, function () {
+        gameClient.createSessionProxy({}, $scope.roomId, io), gameClient, false,
+        function () {
           io.emit('room:ready', $scope.roomId);
         }
       );

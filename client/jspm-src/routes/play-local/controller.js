@@ -4,7 +4,9 @@ import Room from '../room/room';
 export default ['$scope', '$routeParams', 'gameClientRepo',
   function ($scope, $routeParams, gameClientRepo) {
     const gameClient = gameClientRepo.get($routeParams.gameTypeId);
-    const session = gameClient.createLocalSession(function(result) {
+    var session = gameClient.createLocalSession(function(result) {
+      session.players[0].ready = false;
+
       if (result !== 'tie') {
         $scope.room.stat[$scope.room.session.currentPlayer.idx]++;
       }
@@ -15,11 +17,8 @@ export default ['$scope', '$routeParams', 'gameClientRepo',
       session,
       players: session.players
     };
-    $scope.room = new Room(rawRoom, /*0*/ null,
-      /*gameClient.applyGameType(
-        ({type, payload}) => {session[type](payload);}
-      )*/ null
-      , true,
+    $scope.room = new Room(rawRoom, 0,
+      null, null, true,
       function() {
         $scope.room.session.recycle();
         $scope.room.session.players[0].ready = true;

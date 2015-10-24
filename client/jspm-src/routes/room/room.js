@@ -1,12 +1,15 @@
-import Player from './player';
 
 export default class Room {
-  constructor(raw, ownIdx, gameType, skipDeserialization, ready) {//gameTypeId, ownIdx, id, io, scope, gameClientRepo) {
-    this.gameType = gameType;//gameClientRepo.get(gameTypeId).applyGameType(id, io, scope);
+  constructor(raw, ownIdx, session, gameClient, skipDeserialization, ready) {
+    this.session = session;
+    this.gameClient = gameClient;
     this.skipDeserialization = skipDeserialization;
     this.ready = ready;
 
-    this.players = (this.skipDeserialization) ? raw.players : Player.deserializeAll(raw.players, ownIdx);
+    this.players = (this.skipDeserialization) ? raw.players : this.session.players;
+    this.players.own = this.players[ownIdx];
+    this.players.opp = this.players[(ownIdx + 1) % 2];
+
     this.update(raw);
   }
 
@@ -14,7 +17,11 @@ export default class Room {
     this.status = raw.status;
     this.stat = raw.stat;
     if (raw.session != null) {
-      this.session = (this.skipDeserialization) ? raw.session : this.gameType.deserializeSession(raw.session, this.players);
+      if (this.skipDeserialization) {
+        this.session = raw.session;
+      } else {
+        this.gameClient.updateSessionState(this.session, raw.session);
+      }
     }
 
     this.players[0].ready = raw.players[0].ready;

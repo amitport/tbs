@@ -9,7 +9,7 @@ import Cell from '../master/cell';
 
 class TicTacToeGameClient extends AbstractGameClient {
   constructor(app) {
-    super(Master, `${config.path}board.html`);
+    super(Master, `${config.path}board.html`, ['markCell']);
     app.directive('cell', function() {
       return {
         scope: true,
@@ -40,7 +40,7 @@ class TicTacToeGameClient extends AbstractGameClient {
     });
   }
 
-  onGameEnd(result, session) {
+  updateGameResult(result, session) {
     if (result === 'tie') {
       session.result = 'tie';
     } else {
@@ -71,33 +71,17 @@ class TicTacToeGameClient extends AbstractGameClient {
     }
   }
 
-  createLocalSession(gameEndedCb) {
-    const session = super.createLocalSession(gameEndedCb);
+  createSession(initialState, dispatch) {
+    const session = super.createSession(initialState, dispatch);
     session.Cell = Cell;
     return session;
   }
 
-  applyGameType(dispatch) {
-    return {
-      deserializeSession: (raw, players) => {
-        const res = {
-          board: Board.deserialize(raw.board),
-          currentPlayer: players[raw.currentPlayerIdx],
-          markCell: function (payload) {
-            dispatch({type: 'markCell', payload});
-          },
-          isEnded: function () {
-            return this.hasOwnProperty('result');
-          },
-          Cell: Cell,
-          templateUrl: this.templateUrl
-        };
-        if (raw.result) {
-          this.onGameEnd(raw.result, res);
-        }
+  updateSessionState(session, state) {
+    super.updateSessionState(session, state);
 
-        return res;
-      }
+    if (state.board) {
+      session.board = Board.deserialize(state.board);
     }
   }
 }
