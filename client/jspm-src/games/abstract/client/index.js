@@ -23,14 +23,21 @@ class AbstractGameClient {
       masterSession[type](payload);
       this.updateSessionState(session, masterSession.serialize());
     });
+
+    session.players.own = session.players[0];
+    session.players.opp = session.players[1];
+
     session.recycle = () => {
       masterSession.recycle();
       this.updateSessionState(session, masterSession.serialize());
     };
     return session;
   }
-  createSessionProxy(currentState, roomId, io) {
-    return this.createSession(currentState, ({type, payload}) => io.emit('session:action', {roomId: roomId, actionId: type, payload}));
+  createSessionProxy(currentState, ownIdx, roomId, io) {
+    const session = this.createSession(currentState, ({type, payload}) => io.emit('session:action', {roomId: roomId, actionId: type, payload}));
+    session.players.own = session.players[ownIdx];
+    session.players.opp = session.players[(ownIdx + 1) % 2];
+    return session;
   }
   createSession(initialState, dispatch) {
     const session = this.bindToActions(dispatch);
@@ -51,9 +58,6 @@ class AbstractGameClient {
       }
     ];
 
-    session.players.own = session.players[0];
-    session.players.opp = session.players[1];
-
     this.updateSessionState(session, initialState);
     return session;
   }
@@ -71,7 +75,7 @@ class AbstractGameClient {
     }
   }
 
-  // abstract TODO rename this te deserialize result
+  // abstract
   updateGameResult() {}
 }
 

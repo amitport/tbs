@@ -1,14 +1,12 @@
 
 export default class Room {
-  constructor(raw, ownIdx, session, gameClient, skipDeserialization, ready) {
+  constructor(raw, session, gameClient, skipDeserialization, ready) {
     this.session = session;
     this.gameClient = gameClient;
     this.skipDeserialization = skipDeserialization;
     this.ready = ready;
 
     this.players = (this.skipDeserialization) ? raw.players : this.session.players;
-    this.players.own = this.players[ownIdx];
-    this.players.opp = this.players[(ownIdx + 1) % 2];
 
     this.update(raw);
   }

@@ -17,7 +17,7 @@ export default ['$scope', '$routeParams', 'gameClientRepo',
       session,
       players: session.players
     };
-    $scope.room = new Room(rawRoom, 0,
+    $scope.room = new Room(rawRoom,
       null, null, true,
       function() {
         $scope.room.session.recycle();
