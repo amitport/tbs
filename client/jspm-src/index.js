@@ -24,11 +24,13 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games
       })
       .when('/rooms/:roomId', {
         templateUrl: 'routes/room/index.html',
-        controller: roomController
+        controller: roomController,
+        controllerAs: 'room'
       })
       .when('/play-local/:gameTypeId', {
         templateUrl: 'routes/room/index.html',
-        controller: playLocalController
+        controller: playLocalController,
+        controllerAs: 'room'
       });
   }])
   //.run(['$rootScope', 'io', function($rootScope, io){
