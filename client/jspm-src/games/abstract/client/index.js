@@ -12,8 +12,6 @@ class AbstractGameClient {
 
   createLocalSession(gameEndedCb) {
     var masterSession = new this.Master((result) => {
-      //this.onGameEnd(result, masterSession);
-
       this.updateSessionState(session, masterSession.serialize());
 
       gameEndedCb(result);
@@ -47,12 +45,10 @@ class AbstractGameClient {
 
     session.players = [
       {
-        ready: true,
         color: config.playerColors[0],
         idx: 0
       },
       {
-        ready: true,
         color: config.playerColors[1],
         idx: 1
       }

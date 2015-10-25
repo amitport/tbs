@@ -4,21 +4,14 @@ import Room from './room';
 
 export default ['$scope', '$routeParams', '$mdDialog', '$location', 'gameClientRepo', 'io',
   function ($scope, $routeParams, $mdDialog, $location, gameClientRepo, io) {
-    $scope.roomId = $routeParams.roomId;
-
     io.connect($scope)
       .on('room:update', function (room) {
         $scope.room.update(room);
       });
 
-    io.emit('room:join', $scope.roomId).then(function (msg) {
+    io.emit('room:join', $routeParams.roomId).then(function (msg) {
       var gameClient = gameClientRepo.get(msg.room.gameId);
-      $scope.room = new Room(msg.room,
-        gameClient.createSessionProxy({}, msg.ownIdx, $scope.roomId, io), gameClient, false,
-        function () {
-          io.emit('room:ready', $scope.roomId);
-        }
-      );
+      $scope.room = new Room(msg.room, msg.ownIdx, gameClient, io, $routeParams.roomId);
     }, function (err) {
       console.error(err);
     });
