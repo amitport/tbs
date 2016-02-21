@@ -10,6 +10,6 @@
     "sfx": "cd client && npm run sfx"
   },
   "engines": {
-    "node": "^4.2.1"
+    "node": "^5.6.0"
   }
 }

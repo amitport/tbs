@@ -1,7 +1,7 @@
 import winston from 'winston';
 import split from 'split';
 
-const log = new winston.Logger({
+export const log = new winston.Logger({
   transports: [
     new winston.transports.Console({
       level: process.env.LOG_LEVEL || 'debug',
@@ -9,16 +9,12 @@ const log = new winston.Logger({
     })
   ]
 });
-require('winston/node_modules/colors').enabled = true; // workaround for https://github.com/winstonjs/winston/issues/616 TODO revisit this
+export const httpLogStream = split().on('data', function (message) {
+  log.silly(message);
+});
 
-export default {
-  robotsDisallow: "/", // disallow everything
-  log: log,
-  httpLogStream: split().on('data', function (message) {
-    log.silly(message);
-  }),
-  paths: {
-    client: __dirname + '/../../client'
-  },
-  port: process.env.PORT || 9000
+export const robotsDisallow = "/"; // disallow everything
+export const paths = {
+  client: __dirname + '/../../client'
 };
+export const port = process.env.PORT || 9000;

@@ -9,13 +9,13 @@ import usefulHttpBuilder from 'useful-http';
 
 export default function http() {
   return usefulHttpBuilder()
-    .configureSecurity()
+    .configureSecurity({})
     .handleRobots({disallow: config.get('robotsDisallow')})
     .log({stream: config.get('httpLogStream')})
     // TODO serve-favicon middleware
     .compress()
     .serveFonts()
-    .renderIndex({serverPagesDir: clientRelative('server-views')})
+    .renderIndex({clientRoutes: [], serverPagesDir: clientRelative('server-views')})
     .parseBody()
     // TODO API routes
     .serveStatic({dirs:
