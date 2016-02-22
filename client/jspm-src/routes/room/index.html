@@ -4,17 +4,19 @@
             layout-align="center center"
             flex="100">
   <div ng-show="!room.status">Loading…</div>
-  <md-content ng-show="room.status === 'IN_PROGRESS'" style="position: relative; overflow: visible;" layout="column" layout-align="center center">
-    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%; height: 100px;" ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.session.players.opp"
+  <md-content ng-show="room.status === 'IN_PROGRESS'"
+              style="position: relative; overflow: visible;" layout="column" layout-align="center center">
+    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%;" ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.session.players.opp"
          layout="column" layout-align="center center">
       <md-icon style="height: 100px; width: 100px;" ng-style="{color: room.session.players.opp.color}" md-svg-src="routes/room/arrow_up.svg">
       </md-icon>
     </div>
     <div class="ongoing-session" ng-class="{faded: room.session.isEnded()}" ng-include="room.session.templateUrl"></div>
-    <div class="fade-inout" style="position: absolute; bottom: -70px; width: 100%; height: 100px"
+    <div class="fade-inout" style="position: absolute; bottom: -70px; width: 100%;"
          ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.session.players.own"
          layout="column" layout-align="center center">
-      <md-icon style="height: 100px; width: 100px;" ng-style="{color: room.session.players.own.color}" md-svg-src="routes/room/arrow_down.svg">
+      <md-icon style="height: 100px; width: 100px;"
+               ng-style="{color: room.session.players.own.color}" md-svg-src="routes/room/arrow_down.svg">
       </md-icon>
     </div>
   </md-content>
