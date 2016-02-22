@@ -1,7 +1,7 @@
 
 
 <md-whiteframe class="md-whiteframe-3dp ticTacToe-board" layout="column" layout-padding layout-align="center center">
-  <span ng-repeat="row in room.session.board track by $index" ng-init="rowIndex = $index" layout="row">
+  <span ng-repeat="row in room.session.board.arr track by $index" ng-init="rowIndex = $index" layout="row">
     <cell ng-repeat="col in row track by $index" x="{{rowIndex}}" y="{{$index}}"></cell>
   </span>
   <svg ng-if="room.session.isEnded() && room.session.result !== 'tie'" class="ticTacToe-path" style="position: absolute; left: 0; bottom: 0; width: 200px; height: 164px;">

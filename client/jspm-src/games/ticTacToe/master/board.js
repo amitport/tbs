@@ -1,20 +1,18 @@
 import Cell from './cell';
 
-export default class Board extends Array {
+export default class Board {
   constructor(raw = [[Cell.EMPTY, Cell.EMPTY, Cell.EMPTY],
                       [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY],
                       [Cell.EMPTY, Cell.EMPTY, Cell.EMPTY]]) {
-    super();
-    this.push.apply(this, raw);
+    this.arr = raw;
 
     Object.freeze(this);
   }
-
   getEmptyCells() {
     const res = [];
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
-        if (this[x][y] === Cell.EMPTY)
+        if (this.arr[x][y] === Cell.EMPTY)
           res.push([x, y])
       }
     }
@@ -22,12 +20,12 @@ export default class Board extends Array {
   }
 
   clone() {
-    return this.map(function (row) {
+    return this.arr.map(function (row) {
       return row.slice(0);
     });
   }
   serialize() {
-    return this.map(function (row) {
+    return this.arr.map(function (row) {
       return row.map(function (cell) {
         return cell.key;
       });

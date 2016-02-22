@@ -25,23 +25,23 @@ class TicTacToe extends Session {
       const i1 = (i0 + 1) % 3;
       const i2 = (i0 + 2) % 3;
 
-      const c0 = this.board[i0][i0];
+      const c0 = this.board.arr[i0][i0];
       if (c0 !== Cell.EMPTY) {
-        if (c0 === this.board[i0][i1] && c0 === this.board[i0][i2]) {
+        if (c0 === this.board.arr[i0][i1] && c0 === this.board.arr[i0][i2]) {
           return 'r' + i0;
         }
-        if (c0 === this.board[i1][i0] && c0 === this.board[i2][i0]) {
+        if (c0 === this.board.arr[i1][i0] && c0 === this.board.arr[i2][i0]) {
           return 'c' + i0;
         }
       }
     }
 
-    const c0 = this.board[1][1];
+    const c0 = this.board.arr[1][1];
     if (c0 !== Cell.EMPTY) {
-      if (c0 === this.board[0][0] && c0 === this.board[2][2]) {
+      if (c0 === this.board.arr[0][0] && c0 === this.board.arr[2][2]) {
         return 'd0';
       }
-      if (c0 === this.board[2][0] && c0 === this.board[0][2]) {
+      if (c0 === this.board.arr[2][0] && c0 === this.board.arr[0][2]) {
         return 'd1';
       }
     }
@@ -53,7 +53,7 @@ class TicTacToe extends Session {
 
   markCell(msg) {
     const {x, y} = msg;
-    this.board[x][y] = this.currentPlayer.mark;
+    this.board.arr[x][y] = this.currentPlayer.mark;
     this.totalMoves++;
     const result = this.isOver();
 
