@@ -7,6 +7,9 @@ import User from '../../../models/user';
 import {encodeUser, encodeAuth} from '../../../tokens';
 import renderView from '../../render-view';
 
+import sendEmailConfirmation from './send-email-confirmation';
+
+
 // use in-memory cache for random tokens (TODO move to DB when moving to cluster)
 // keep email tokens for an hour check every 10 minutes for deleting expired tokens
 const emailTokenStore = new NodeCache({stdTTL: 3600, checkperiod: 600});
@@ -24,42 +27,11 @@ export async function signInWithEmail(ctx) {
   }
 
   const cbUrl = `${ctx.origin}/et/${emailToken}`;
-  ctx.body = cbUrl;
-//  sparkPost.transmissions.send({
-//    transmissionBody: {
-//      content: {
-//        from: {
-//          name: "cutlog",
-//          email: "sandbox@sparkpostbox.com"
-//        },
-//        subject: 'e-mail sign-in',
-//        reply_to: 'Amit Portnoy <amit.portnoy@gmail.com>',
-//        text: `
-//Sign-in to cutlog with the following link:
-//
-//${cbUrl}
-//`,
-//        html: `
-//<div>Sign-in to cutlog with the following link:
-//<br><br>
-//<a href="${cbUrl}">${cbUrl}</a>
-//</div>
-//`
-//      },
-//      recipients: [{address: {email}}]
-//    }
-//  }, function (err, res) {
-//    if (err) {
-//      console.log('Whoops! Something went wrong');
-//      console.error(err);
-//    } else {
-//      console.log(res.body);
-//    }
-//  });
-//
-//  // next if anyone calls /et/<emailToken> before exp it will be redirected to originalPath
-//  console.log('passwordless sent: ' + emailToken);
-//  ctx.status = 202; //(Accepted)
+
+  await sendEmailConfirmation(email, cbUrl)
+  // next if anyone calls /et/<emailToken> before exp it will be redirected to originalPath
+
+  ctx.status = 202; //(Accepted)
 };
 
 export async function emailCb(ctx) {

@@ -13,7 +13,6 @@ export default ['$scope', '$location', '$window', 'io',
     }
 
     this.testGoogle = function() {
-      console.log('here')
       const width = 452;
       const height = 633;
       $window.open(
