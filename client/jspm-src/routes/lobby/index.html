@@ -1,12 +1,16 @@
 <md-content layout="column" layout-align="center center" flex>
   <div>
+    <md-whiteframe class="md-whiteframe-2dp">
+        <md-button ng-click="$ctrl.testGoogle()">testGoogle</md-button>
+    </md-whiteframe>
+
     <md-whiteframe class="md-whiteframe-2dp" layout layout-padding layout-align="center center" flex>
       <span class="md-title">Tic Tac Toe</span>
       <span flex>
-        <md-button ng-click="lobby.createRoom('ticTacToe')">
+        <md-button ng-click="$ctrl.createRoom('ticTacToe')">
           Human
         </md-button>
-        <md-button ng-click="lobby.playVsAi('ticTacToe')">
+        <md-button ng-click="$ctrl.playVsAi('ticTacToe')">
           AI
         </md-button>
       </span>
@@ -15,7 +19,7 @@
     <md-whiteframe class="md-whiteframe-2dp" layout layout-padding layout-align="center center" flex>
       <span class="md-title">Four In a Line</span>
       <span flex>
-        <md-button ng-click="lobby.createRoom('fourInALine')">
+        <md-button ng-click="$ctrl.createRoom('fourInALine')">
           Human
         </md-button>
       </span>

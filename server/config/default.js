@@ -1,5 +1,4 @@
 import winston from 'winston';
-import split from 'split';
 
 export const log = new winston.Logger({
   transports: [
@@ -9,12 +8,12 @@ export const log = new winston.Logger({
     })
   ]
 });
-export const httpLogStream = split().on('data', function (message) {
-  log.silly(message);
-});
 
-export const robotsDisallow = "/"; // disallow everything
 export const paths = {
   client: __dirname + '/../../client'
 };
-export const port = process.env.PORT || 9000;
+export const port = process.env.PORT || 3000;
+
+export const db = {
+  "mongo-uri": `mongodb://localhost/${process.env.npm_package_name ? `${process.env.npm_package_name}-` : ''}dev`
+};

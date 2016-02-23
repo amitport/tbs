@@ -1,0 +1,14 @@
+{
+  "name": "tbs-server-models",
+  "private": true,
+  "license": "AGPL",
+  "engines": {
+    "node": "^5.6.0"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "mongoose": "^4.4.4",
+    "mongoose-beautiful-unique-validation": "^2.0.3",
+    "mongoose-validators": "^0.1.0"
+  }
+}

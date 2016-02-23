@@ -12,6 +12,9 @@
 
 <ng-view layout layout-fill></ng-view>
 
+<% if (typeof __flash !== 'undefined') { %>
+<script>__flash = <%- __flash %>;</script>
+<% } %>
 
 <% if (env === 'production') { %>
     <script src="main.min.js"></script>

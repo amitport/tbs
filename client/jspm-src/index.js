@@ -19,7 +19,7 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games
     $routeProvider
       .when('/', {
         templateUrl: 'routes/lobby/index.html',
-        controllerAs: 'lobby',
+        controllerAs: '$ctrl',
         controller: lobbyController
       })
       .when('/rooms/:roomId', {

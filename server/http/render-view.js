@@ -1,6 +1,6 @@
 import cons from 'co-views';
 
-import clientRelative from './clientRelative';
+import clientRelative from './client-relative';
 
 const render = cons(clientRelative('server-views'));
 
