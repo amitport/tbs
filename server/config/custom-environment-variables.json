@@ -1,0 +1,16 @@
+{
+	"db": {
+		"mongo-uri": "MONGOLAB_URI"
+	},
+	"env": "NODE_ENV",
+	"port": "PORT",
+  "auth": {
+    "tokens": {
+      "secret": "AUTH_TOKENS_SECRET"
+    },
+    "google": {
+      "id": "GOOGLE_CLIENT_ID",
+      "secret": "GOOGLE_CLIENT_SECRET"
+    }
+  }
+}
