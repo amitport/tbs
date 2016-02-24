@@ -26,7 +26,7 @@ export async function googleCb(ctx) {
   }));
 
   if (googleTokensResponse.statusCode != 200) {
-    log.error('unexpected return status from google ' + googleTokensResponse.status)
+    log.error('unexpected return statusCode from google ' + googleTokensResponse.statusCode)
     ctx.throw(500);
   }
 
