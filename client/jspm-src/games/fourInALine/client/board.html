@@ -1,4 +1,4 @@
-<md-whiteframe style="position: relative;" class="md-whiteframe-3dp" layout="row" layout-align="center center">
+<md-whiteframe style="position: relative;" class="fourInALine md-whiteframe-3dp" layout="row" layout-align="center center">
 
   <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="room.session.markCol({c: y})" ng-disabled="room.session.isEnded() || room.session.board[0][y] !== '_' || room.session.currentPlayer !== room.session.players.own">
     <div layout="column" layout-align="space-around center">

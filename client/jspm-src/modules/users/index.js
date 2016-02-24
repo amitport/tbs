@@ -64,7 +64,8 @@ module.config(['$translateProvider', function ($translateProvider) {
       OPEN_USER_MENU: 'פתיחת תפריט משתמש'
     })
     .registerAvailableLanguageKeys(['en', 'he'])
-    .determinePreferredLanguage();
+    .determinePreferredLanguage()
+    .useSanitizeValueStrategy(null);
 }]);
 
 export default module.name;
