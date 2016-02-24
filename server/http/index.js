@@ -10,6 +10,7 @@ import authApiRoutes from './routes/auth-api';
 import serveStatic from './serve-static';
 
 const app = new Koa();
+app.proxy = true; // for deploying on heroku
 
 app.use(spaRoutes);
 app.use(usersApiRoutes);
