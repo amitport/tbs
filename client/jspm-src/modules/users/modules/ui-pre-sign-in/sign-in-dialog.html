@@ -1,0 +1,16 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4 class="md-title">{{ 'SIGN_IN' | translate }}</h4>
+            <span flex="" class="flex"></span>
+            <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                <md-icon aria-label="Close dialog" aria-hidden="true">
+                    close
+                </md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content">
+        <sign-in></sign-in>
+    </md-dialog-content>
+</md-dialog>

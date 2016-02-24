@@ -1,0 +1,30 @@
+<md-menu  layout layout-align="center center" ng-show="$ctrl.user.isSignedIn">
+    <!--ng-if="$ctrl.isAuthenticated()"-->
+    <md-button ng-click="$mdOpenMenu($event)" dir="rtl">
+        <md-tooltip>
+{{'OPEN_USER_MENU' | translate}}
+        </md-tooltip>
+        <md-icon>arrow_drop_down</md-icon>
+        <md-icon md-menu-origin>account_circle</md-icon>
+    </md-button>
+    <md-menu-content>
+        <md-menu-item>
+            <md-button ng-click="$ctrl.gotoUserProfile()" class="md-button">{{'USER_PROFILE' | translate}}</md-button>
+
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+            <md-button ng-click="$ctrl.user.signOut()">{{'SIGN_OUT' | translate}}</md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>
+<md-button ng-if="$ctrl.shouldDisplayLabel" ng-click="$ctrl.signIn($event)" ng-hide="$ctrl.user.isSignedIn">
+    <md-icon>person</md-icon>
+    {{ 'SIGN_IN' | translate }}
+</md-button>
+<md-button class="md-icon-button" ng-if="!$ctrl.shouldDisplayLabel" ng-click="$ctrl.signIn($event)" ng-hide="$ctrl.user.isSignedIn">
+    <md-tooltip>
+        {{ 'SIGN_IN' | translate }}
+    </md-tooltip>
+    <md-icon>person</md-icon>
+</md-button>

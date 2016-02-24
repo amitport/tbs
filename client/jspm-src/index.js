@@ -7,15 +7,18 @@ import 'angular-route';
 
 import './modules/io/index';
 import './modules/games/index';
+import usersModule from './modules/users/index';
 
 import lobbyController from './routes/lobby/controller';
 import roomController from './routes/room/controller';
 import playLocalController from './routes/play-local/controller';
 
-const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games'])
-  .config(['$routeProvider', '$mdThemingProvider', function ($routeProvider, $mdThemingProvider) {
+const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games', usersModule])
+  .config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
+    function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('default');
 
+    $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider
       .when('/', {
         templateUrl: 'routes/lobby/index.html',

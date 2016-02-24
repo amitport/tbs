@@ -6,7 +6,7 @@
     "node": "^5.6.0"
   },
   "scripts": {
-    "postinstall": "cd http && npm i",
+    "postinstall": "cd http && npm i && cd ../models && npm i",
     "start": "node bin/start.js"
   },
   "devDependencies": {},

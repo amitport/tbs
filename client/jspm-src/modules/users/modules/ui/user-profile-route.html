@@ -1,0 +1,11 @@
+<table dir="ltr" ng-show="$ctrl.user.isSignedIn">
+    <tr>
+        <th>user | json</th>
+    </tr>
+    <tr>
+        <td><pre>{{$ctrl.user | json}}</pre></td>
+    </tr>
+</table>
+<br>
+
+<users-list ng-if="$ctrl.user.role === 'admin'" user="$ctrl.user"></users-list>

@@ -1,0 +1,58 @@
+<div ng-switch="$ctrl.state">
+    <div class="sign-in-state" ng-switch-when="emailSent" layout="column" layout-align="start center">
+        <img width="300" height="217" src="modules/users/images/paper-planes-1023097_640.png"
+             class="md-card-image" alt="paper airplane">
+        <div style="padding: 24px 16px 16px;" layout="column">
+            <span class="md-headline">{{'EMAIL_SENT_TITLE' | translate}}</span>
+            <span class="md-subhead">{{'EMAIL_SENT_SUB' | translate}}.</span>
+        </div>
+    </div>
+    <div class="sign-in-state" ng-switch-when="selection" layout="column">
+        <md-whiteframe class="md-whiteframe-2dp" style="margin: 8px; border-radius: 3px;">
+
+            <form name="$ctrl.emailSignInForm" layout="row" layout-align="start center" layout-padding>
+                <div layout="column"><span style="font-size:14px">{{'AUTHENTICATE_REQUEST_PREFIX' | translate}}
+        {{'EMAIL_LONG' | translate}}
+                </span>
+                    <md-input-container md-no-float class="md-block">
+                        <md-icon>email</md-icon>
+                        <input name="email" style="min-width: 230px;" ng-model="$ctrl.email" type="email" required
+                               ng-keyup="$event.keyCode == 13 && $ctrl.signInWithEmail()"
+                               placeholder="{{'EMAIL' | translate}}">
+                        <div ng-messages="$ctrl.emailSignInForm.email.$error">
+                            <div ng-message="required">{{'REQUIRED_FIELD' | translate}}</div>
+                            <div ng-message="email">{{'INVALID_EMAIL_FIELD' | translate}}</div>
+                            <div ng-message="server">{{'SERVER_ERR_FIELD' | translate}}</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-button style="font-weight: normal" ng-click="$ctrl.signInWithEmail()">{{'CONTINUE' |
+                    translate}}
+                </md-button>
+            </form>
+        </md-whiteframe>
+
+        <md-button ng-click="$ctrl.signInWithAuthProvider('google')" class="md-raised">
+          <span layout="row" layout-align="start center">
+              <span style="width:15px;"></span>
+            <img src="modules/users/images/Google_-G-_Logo.svg" width="18" height="18">
+            <span flex style="margin:0 24px; text-align: start; font-weight: normal; text-transform: none;">
+            {{'AUTHENTICATE_REQUEST_PREFIX' | translate}}
+{{'GOOGLE' | translate}}
+            </span>
+          </span>
+        </md-button>
+        <md-button ng-disabled="true" class="md-raised">
+          <span layout="row" layout-align="start center">
+              <span style="width:14px;"></span>
+            <img src="modules/users/images/Facebook_-F-_Logo.svg" width="18" height="18">
+            <span flex style="margin:0 24px; text-align: start; font-weight: normal; text-transform: none;">
+                {{'AUTHENTICATE_REQUEST_PREFIX' | translate}}
+{{'FACEBOOK' | translate}}
+</span>
+          <small class="md-caption">({{'NOT_SUPPORTED' | translate}})</small>
+          </span>
+        </md-button>
+
+    </div>
+</div>

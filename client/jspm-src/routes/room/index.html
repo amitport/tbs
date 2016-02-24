@@ -2,7 +2,7 @@
             ng-style="{'border-bottom-color': room.session.players.own.color, 'border-top-color': room.session.players.opp.color}"
             layout="column"
             layout-align="center center"
-            flex="100">
+            flex>
   <div ng-show="!room.status">Loading…</div>
   <md-content ng-show="room.status === 'IN_PROGRESS'"
               style="position: relative; overflow: visible;" layout="column" layout-align="center center">

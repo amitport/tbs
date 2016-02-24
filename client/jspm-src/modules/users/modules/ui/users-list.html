@@ -1,0 +1,13 @@
+<table dir="ltr">
+    <thead>
+    <tr><th>username</th><th>role</th></tr>
+    </thead>
+    <tbody>
+
+    <tr ng-repeat="u in $ctrl.users track by u._id">
+        <td>{{u.username}}</td>
+        <td>{{u.role}}</td>
+        <td><md-button ng-click="$ctrl.user.override = {_id: u._id, role: u.role}">override</md-button></td>
+    </tr>
+    </tbody>
+</table>

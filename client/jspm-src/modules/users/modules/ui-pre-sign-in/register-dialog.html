@@ -1,0 +1,36 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4 class="md-title">{{ 'REGISTER' | translate }}</h4>
+            <span flex="" class="flex"></span>
+            <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                <md-icon aria-label="Close dialog" aria-hidden="true">
+                    close
+                </md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content">
+        <form name="$ctrl.registrationForm" layout="row" layout-align="start center">
+            <div layout="column">
+                <md-input-container md-no-float class="md-block" style="width: 230px;">
+                    <label>{{'SELECT_USERENAME_REQUEST' | translate}}</label>
+                    <input name="username" ng-model="username" type="text"
+                           md-maxlength="12" required ng-pattern="/^[a-z]+(( |-)[a-z]+)*(( |-)?[0-9]{1,2})?$/i"
+                           ng-keyup="$event.keyCode == 13 && $ctrl.register(username)"
+                           >
+                    <div ng-messages="$ctrl.registrationForm.username.$error">
+                        <div ng-message="required">{{'REQUIRED_FIELD' | translate}}</div>
+                        <div ng-message="md-maxlength">{{'MAX_LENGTH_12' | translate}}</div>
+                        <div ng-message="pattern">{{'USERNAME_PATTERN' | translate}}</div>
+                        <div ng-message="conflict">{{'USERNAME_CONFLICT' | translate}}</div>
+                        <div ng-message="server">{{'SERVER_ERR_FIELD' | translate}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <md-button style="font-weight: normal" ng-click="$ctrl.register(username)">{{'FINISH' |
+                translate}}
+            </md-button>
+        </form>
+    </md-dialog-content>
+</md-dialog>
