@@ -12,7 +12,6 @@ const post = Bluebird.promisify(request.post);
 const log = config.get('log');
 
 export async function googleCb(ctx) {
-  log.debug("ctx.origin + ctx.path = " + ctx.origin + ctx.path)
   // Exchange authorization code for access token.
   const googleTokensResponse = (await post({
     url: 'https://www.googleapis.com/oauth2/v4/token',
