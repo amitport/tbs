@@ -11,7 +11,9 @@ export default class Room {
       status: this.status,
       stat: this.stat,
       gameId: this.gameId,
-      members: [{ready: this.members[0].ready}, {ready: this.members[1].ready}],
+      members: [
+        {ready: this.members[0].ready, username: this.members[0].username},
+        {ready: this.members[1].ready, username: this.members[1].username}],
 
       session: this.hasOwnProperty('session') ? this.session.serialize() : null
     };

@@ -4,15 +4,15 @@ import Room from '../../game/room';
 
 import roomsRepo from '../../game/roomsRepo';
 
-export function create(gameId) {
+export function create({gameId, username}) {
   return roomsRepo.add(new Room({
     status: 'WAITING_FOR_SECOND_PLAYER',
     gameId: gameId,
-    members: [{socket: this, ready: true}, {ready: true}]
+    members: [{socket: this, ready: true, username}, {ready: true}]
   }));
 }
 
-export function join(roomId) {
+export function join({roomId, username}) {
   const room = roomsRepo.get(roomId);
 
   if (room.status === 'IN_PROGRESS' &&
@@ -23,6 +23,7 @@ export function join(roomId) {
 
   if (room.status === 'WAITING_FOR_SECOND_PLAYER' && room.members[0].socket !== this) {
     room.members[1].socket = this;
+    room.members[1].username = username;
     room.status = 'IN_PROGRESS';
 
     room.session = SessionFactory.create(room.gameId, function (result) {

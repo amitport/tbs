@@ -1,6 +1,6 @@
 <span class="ticTacToe-cell" ng-style="borderStyle" layout layout-align="center center">
   <md-button class="md-icon-button" aria-label="cell" ng-click="room.session.markCell({x: x, y: y})"
      ng-disabled="room.session.isEnded() || room.session.board.arr[x][y] !== room.session.Cell.EMPTY || room.session.currentPlayer !== room.session.players.own">
-    <md-icon ng-style="{'color': markColor}" md-svg-icon="{{markIcon}}"></md-icon>
+    <md-icon ng-style="{'color': markColor}">{{markIcon}}</md-icon>
   </md-button>
 </span>

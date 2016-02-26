@@ -11,8 +11,8 @@ export default {
   },
   markIcons: {
     '_': null,
-    'X': `${path}X.svg`,
-    'O': `${path}O.svg`
+    'X': 'close',
+    'O': 'panorama_fish_eye'
   }
 
 }

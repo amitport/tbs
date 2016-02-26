@@ -1,27 +1,28 @@
+
 <md-content class="game-view"
             ng-style="{'border-bottom-color': room.session.players.own.color, 'border-top-color': room.session.players.opp.color}"
             layout="column"
             layout-align="center center"
             flex>
+  <div layout="column" layout-align="start start" style="position: absolute; top: 0; left: 0;" layout-padding>
+    <md-whiteframe
+      ng-repeat="member in room.members track by $index"
+      class="md-whiteframe-2dp" layout layout-padding layout-align="end center"
+      style="width: 130px; margin-bottom: 8px; border-left-style: solid; border-left-color: {{::room.session.players[$index].color}};"
+      ng-style="{'border-left-width': room.session.currentPlayer.idx === $index ? '4px' : '1px'}"
+      >
+    <div>
+      {{member.username || ((room.session.players.own.idx === $index) ? 'you' : '&lt;anonymous&gt;')}}
+    </div>
+    </md-whiteframe>
+  </div>
   <div ng-show="!room.status">Loading…</div>
   <md-content ng-show="room.status === 'IN_PROGRESS'"
               style="position: relative; overflow: visible;" layout="column" layout-align="center center">
-    <div class="fade-inout" style="position: absolute; top: -70px; width: 100%;" ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.session.players.opp"
-         layout="column" layout-align="center center">
-      <md-icon style="height: 100px; width: 100px;" ng-style="{color: room.session.players.opp.color}" md-svg-src="routes/room/arrow_up.svg">
-      </md-icon>
-    </div>
     <div class="ongoing-session" ng-class="{faded: room.session.isEnded()}" ng-include="room.session.templateUrl"></div>
-    <div class="fade-inout" style="position: absolute; bottom: -70px; width: 100%;"
-         ng-show="room.session && !room.session.isEnded() && room.session.currentPlayer === room.session.players.own"
-         layout="column" layout-align="center center">
-      <md-icon style="height: 100px; width: 100px;"
-               ng-style="{color: room.session.players.own.color}" md-svg-src="routes/room/arrow_down.svg">
-      </md-icon>
-    </div>
   </md-content>
   <md-button class="fade-inout" ng-click="room.ready()" ng-show="!room.members.own.ready">
-    <md-icon md-svg-icon="routes/room/replay.svg"></md-icon>
+    <md-icon>replay</md-icon>
   </md-button>
   <div class="fade-inout" ng-show="room.members.own.ready && !room.members.opp.ready">
     Waiting for the second player...

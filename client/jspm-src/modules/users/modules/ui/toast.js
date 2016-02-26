@@ -21,9 +21,11 @@ module.factory('ui.toast', ['$mdToast', '$window', function ($mdToast, $window) 
   }
 }]);
 
-module.run(['$rootScope', 'ui.toast', function ($rootScope, toast) {
+module.run(['$rootScope', 'ui.toast', '$timeout', function ($rootScope, toast, $timeout) {
   $rootScope.$on('auth.sign-in', (event, username) => {
-    toast.show(`{{'SIGNED_IN_AS' | translate}} <strong style="color: #F4F459;">${username}</strong>`);
+    $timeout(() => {// TODO remove this timeout after angular material get their many issues, e.g., toast stuck when using user override
+      toast.show(`{{'SIGNED_IN_AS' | translate}} <strong style="color: #F4F459;">${username}</strong>`);
+    })
   });
 
   $rootScope.$on('auth.sign-out', () => {
