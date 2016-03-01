@@ -7,8 +7,8 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "babel-polyfill": "6.5.0",
-    "babel-preset-stage-1": "6.5.0",
+    "babel-polyfill": "^6.6.1",
+    "babel-preset-stage-1": "^6.5.0",
     "base64-url": "^1.2.1",
     "bs58": "^3.0.0",
     "co-views": "^2.1.0",
@@ -18,9 +18,9 @@
     "koa-mount": "https://github.com/coderhaoxin/koa-mount.git#next",
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
-    "node-cache": "^3.1.0",
+    "node-cache": "^3.2.0",
     "request": "^2.69.0",
     "sparkpost": "^1.1.0",
-    "validator": "^5.0.0"
+    "validator": "^5.1.0"
   }
 }
