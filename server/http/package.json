@@ -7,8 +7,8 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "babel-polyfill": "^6.5.0",
-    "babel-preset-stage-1": "^6.5.0",
+    "babel-polyfill": "6.5.0",
+    "babel-preset-stage-1": "6.5.0",
     "base64-url": "^1.2.1",
     "bs58": "^3.0.0",
     "co-views": "^2.1.0",
