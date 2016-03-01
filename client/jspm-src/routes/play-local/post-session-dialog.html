@@ -1,0 +1,18 @@
+<md-dialog>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h4 class="md-title">Game Ended</h4>
+    </div>
+  </md-toolbar>
+  <md-dialog-content class="md-dialog-content md-display-1" layout="row" layout-fill layout-align="center center">
+      <span style="margin-right: 10px" ng-style="{color: $ctrl.own.color}">{{$ctrl.stat[$ctrl.own.idx]}}</span>
+      <span style="width: 10px">&middot;</span>
+      <span style="margin-left: 10px" ng-style="{color: $ctrl.opp.color}">{{$ctrl.stat[$ctrl.opp.idx]}}</span>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button class="md-raised" ng-click="$ctrl.playAgain()">
+      <md-icon>replay</md-icon>
+      Play again
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

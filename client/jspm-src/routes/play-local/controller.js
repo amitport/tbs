@@ -1,10 +1,30 @@
 import '../room/index.css!';
+import template from './post-session-dialog.html!text';
 
 export default class Room {
-  constructor($routeParams, gameClientRepo, user) {
+  constructor($routeParams, $mdDialog, $timeout, gameClientRepo, user) {
     const gameClient = gameClientRepo.get($routeParams.gameTypeId);
+    let session, members, stat;
+    session = this.session = gameClient.createLocalSession((result) => {
+      $timeout(() => {
+      $mdDialog.show(
+          {
+            template,
+            controllerAs: '$ctrl',
+            controller: ['$mdDialog', function ($mdDialog) {
+              this.own = session.players.own;
+              this.opp = session.players.opp;
+              this.stat = stat;
 
-    this.session = gameClient.createLocalSession((result) => {
+              this.playAgain = () => {
+                session.recycle();
+                members[0].ready = true;
+                $mdDialog.hide();
+              };
+            }]
+          }
+        );
+      }, 600);
       this.members[0].ready = false;
 
       if (result !== 'tie') {
@@ -12,9 +32,9 @@ export default class Room {
       }
     });
 
-    this.stat = [0, 0];
+    stat = this.stat = [0, 0];
     user.signInPromise.finally(() => {
-      this.members = [{ready: true, username: user.username || 'you'}, {ready: true, username: '<ai>'}];
+      members = this.members = [{ready: true, username: user.username || 'you'}, {ready: true, username: '<ai>'}];
       this.members.own = this.members[0];
       this.members.opp = this.members[1];
       this.status = 'IN_PROGRESS';
@@ -27,4 +47,4 @@ export default class Room {
   }
 }
 
-Room.$inject = ['$routeParams', 'gameClientRepo', 'ap.user'];
+Room.$inject = ['$routeParams', '$mdDialog', '$timeout', 'gameClientRepo', 'ap.user'];

@@ -21,16 +21,7 @@
               style="position: relative; overflow: visible;" layout="column" layout-align="center center">
     <div class="ongoing-session" ng-class="{faded: room.session.isEnded()}" ng-include="room.session.templateUrl"></div>
   </md-content>
-  <md-button class="fade-inout" ng-click="room.ready()" ng-show="!room.members.own.ready">
-    <md-icon>replay</md-icon>
-  </md-button>
   <div class="fade-inout" ng-show="room.members.own.ready && !room.members.opp.ready">
     Waiting for the second player...
-  </div>
-
-  <div ng-show="room.status === 'IN_PROGRESS'" class="md-display-1" style="position: absolute; height: 20px; width: 100%; bottom: 35px" layout="row" layout-align="center center">
-    <span style="margin-right: 10px" ng-style="{color: room.session.players.own.color}">{{room.stat[room.session.players.own.idx]}}</span>
-    <span style="width: 10px">&middot;</span>
-    <span style="margin-left: 10px" ng-style="{color: room.session.players.opp.color}">{{room.stat[room.session.players.opp.idx]}}</span>
   </div>
 </md-content>
