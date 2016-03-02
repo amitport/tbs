@@ -12,7 +12,7 @@
       ng-style="{'border-left-width': room.session.currentPlayer.idx === $index ? '4px' : '1px'}"
       >
     <div>
-      {{member.username || ((room.session.players.own.idx === $index) ? 'you' : '&lt;anonymous&gt;')}}
+      {{member.username || ((room.session.players.own.idx === $index) ? 'you' : '?')}}
     </div>
     </md-whiteframe>
   </div>

@@ -3,7 +3,7 @@ export default ['$scope', '$location', '$window', 'io', 'ap.user',
     io.connect($scope);
 
     this.createRoom = function (gameId) {
-      io.emit('room:create', {gameId, username: user.username || '<Anonymous>'}).then(function (roomId) {
+      io.emit('room:create', {gameId, username: user.username || '{Anonymous}'}).then(function (roomId) {
         $location.path(`rooms/${roomId}`);
       });
     };

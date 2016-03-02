@@ -13,7 +13,7 @@ export default class Room {
 
     user.signInPromise.finally(() => {
       console.log(user)
-      io.emit('room:join', {roomId: this.roomId, username: user.username || '<Anonymous>'}).then((msg) => {
+      io.emit('room:join', {roomId: this.roomId, username: user.username || '{Anonymous}'}).then((msg) => {
         this.gameClient = gameClientRepo.get(msg.room.gameId);
 
         this.session = this.gameClient.createSessionProxy({}, msg.ownIdx, this.roomId, io);
