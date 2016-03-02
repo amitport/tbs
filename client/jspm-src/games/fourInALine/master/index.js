@@ -3,9 +3,9 @@ import Player from '../../abstract/master/player';
 
 
 class FourInALineHumanPlayer extends Player {
-  constructor(idx, mark) {
+  constructor(idx) {
     super(idx);
-    this.mark = mark
+    this.mark = ['b', 'r'][idx];
   }
 
   serialize() {
@@ -16,9 +16,13 @@ class FourInALineHumanPlayer extends Player {
 }
 
 class FourInALine extends Session {
-  constructor(gameEndedCb) {
-    super([new FourInALineHumanPlayer(0, 'b'), new FourInALineHumanPlayer(1, 'r')], gameEndedCb);
-  }
+  static playerTypes = {
+    Human: FourInALineHumanPlayer
+  };
+
+  //constructor(gameEndedCb) {
+  //  super([new FourInALineHumanPlayer(0), new FourInALineHumanPlayer(1)], gameEndedCb);
+  //}
 
   initialize() {
     this.totalMoves = 0;

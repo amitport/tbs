@@ -1,6 +1,6 @@
 export default class Session {
-  constructor(players, gameEndedCb) {
-    this.players = players;
+  constructor(playerTypes, gameEndedCb) {
+    this.players = [new playerTypes[0](0, this), new playerTypes[1](1, this)];
     this.gameEndedCb = gameEndedCb;
 
     // only support 2 player cyclic turn strategy for now

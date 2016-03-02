@@ -1,5 +1,5 @@
 import Session from '../../abstract/master/session';
-import Player from './player';
+import HumanPlayer from './player';
 
 import BasicAi from './ai/basic';
 
@@ -7,11 +7,10 @@ import Cell from './cell';
 import Board from './board';
 
 class TicTacToe extends Session {
-  constructor(gameEndedCb, ai) {
-    super([new Player(0, Cell.X), ai ? new BasicAi(1, Cell.O) : new Player(1, Cell.O)], gameEndedCb);
-
-    if (ai) this.players[1].setSession(this);
-  }
+  static playerTypes = {
+    Human: HumanPlayer,
+    AI: BasicAi
+  };
 
   initialize() {
     this.totalMoves = 0;

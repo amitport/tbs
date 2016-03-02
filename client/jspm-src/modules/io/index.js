@@ -75,9 +75,3 @@ angular.module('tbs.io', [])
       }
     };
   }]);
-  //.directive('ioMonitor', ['io', function (io) {
-  //  return {
-  //    restrict: 'E',
-  //    template: '<div>io.isConnected: {{io.isConnected()}}</div>'
-  //  };
-  //}]);

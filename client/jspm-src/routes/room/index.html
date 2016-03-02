@@ -16,12 +16,7 @@
     </div>
     </md-whiteframe>
   </div>
-  <div ng-show="!room.status">Loading…</div>
-  <md-content ng-show="room.status === 'IN_PROGRESS'"
-              style="position: relative; overflow: visible;" layout="column" layout-align="center center">
+  <md-content style="position: relative; overflow: visible;" layout="column" layout-align="center center">
     <div class="ongoing-session" ng-class="{faded: room.session.isEnded()}" ng-include="room.session.templateUrl"></div>
   </md-content>
-  <div class="fade-inout" ng-show="room.members.own.ready && !room.members.opp.ready">
-    Waiting for the second player...
-  </div>
 </md-content>

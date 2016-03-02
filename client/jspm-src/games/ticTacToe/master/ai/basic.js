@@ -11,11 +11,9 @@ function scoreComparator(a, b) {
 }
 
 export default class BasicAiPlayer extends TicTacToeHumanPlayer {
-  constructor(idx, mark) {
-    super(idx, mark);
-  }
+  constructor(idx, session) {
+    super(idx, session);
 
-  setSession(session) {
     this.session = session;
   }
 

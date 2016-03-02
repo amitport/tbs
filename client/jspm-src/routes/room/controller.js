@@ -1,12 +1,14 @@
 import './index.css!';
 import template from '../play-local/post-session-dialog.html!text';
 
+import waitForOppDialogTemplate from './wait-for-opp-dialog.html!text';
+
 export default class Room {
   constructor($scope, $routeParams, $mdDialog, $location, $log, $timeout, gameClientRepo, io, user) {
     io.connect($scope)
       .on('room:update', this.update.bind(this));
 
-    this.roomId = $routeParams.roomId;
+    const roomId = this.roomId = $routeParams.roomId;
     this.io = io;
 
     user.signInPromise.finally(() => {
@@ -18,6 +20,7 @@ export default class Room {
         this.members = msg.room.members;
         this.members.opp = this.members[(msg.ownIdx + 1) % 2];
         this.members.own = this.members[msg.ownIdx];
+        this.members.own.idx = msg.ownIdx;
 
         this.update(msg.room);
       }, function (err) {
@@ -25,22 +28,52 @@ export default class Room {
       });
     });
 
-    $scope.$watch('room.status', function (newVal) {
-      if (newVal === 'WAITING_FOR_SECOND_PLAYER') {
-        $mdDialog.show(
+    let preGameDialog = false;
+    $scope.$watch('room.members[1].type', (newVal) => {
+      if (newVal === 'AI') {
+        io.emit('room:setAiOpponent',
           {
-            templateUrl: 'routes/room/waitForOppDialog.html',
-            locals: {
-              address: $location.absUrl()
-            },
-            controller: ['$scope', 'address', function ($scope, address) {
-              $scope.address = address;
-            }]
-          });
-      } else if (newVal === 'IN_PROGRESS') {
-        $mdDialog.hide();
+            roomId
+          }
+        );
       }
     });
+    $scope.$watch('room.members', (newVal) => {
+      if (newVal != null) {
+        if (!preGameDialog && newVal.some((member) => !member.ready)) {
+          preGameDialog = $timeout(()=>{}, 600)
+            .then(() => {return $mdDialog.show(
+              {
+                template: waitForOppDialogTemplate,
+                controllerAs: '$ctrl',
+                bindToController: true,
+                locals: {
+                  address: $location.absUrl(),
+                  members: this.members,
+                  stat: this.stat,
+                  session: this.session,
+                  hasAi: this.gameClient.hasAi
+                },
+                controller: [function () {
+                  if (!this.hasAi) {
+                    this.members[1].type = 'Human';
+                  }
+                  this.setReady = (ready) => {
+                    io.emit('room:ready',
+                      {
+                        roomId,
+                        isReady: ready
+                      }
+                    );
+                  };
+                }]
+              })
+            }).finally(() => {preGameDialog = false;});
+        } else if (newVal.every((member) => member.ready)) {
+          $mdDialog.hide();
+        }
+      }
+    }, true);
     $scope.$on('$destroy', function () {
       $mdDialog.hide();
     });
@@ -50,7 +83,6 @@ export default class Room {
   }
 
   update(raw) {
-    this.status = raw.status;
     const stat = this.stat = raw.stat;
 
     for (let i = 0, len = this.members.length; i < len; i++) {
@@ -58,35 +90,10 @@ export default class Room {
     }
 
     if (raw.session) this.gameClient.updateSessionState(this.session, raw.session);
-
-    const session = this.session;
-    const members = this.members;
-    const ready = this.ready.bind(this);
-
-    if (!this.members.own.ready && !this.members.opp.ready) {
-      this.$timeout(() => {
-        this.$mdDialog.show(
-          {
-            template,
-            controllerAs: '$ctrl',
-            controller: ['$mdDialog', function ($mdDialog) {
-              this.own = session.players.own;
-              this.opp = session.players.opp;
-              this.stat = stat;
-
-              this.playAgain = () => {
-                ready();
-                $mdDialog.hide();
-              };
-            }]
-          }
-        );
-      }, 600);
-    }
   }
 
   ready() {
-    this.io.emit('room:ready', this.roomId);
+    this.io.emit('room:ready', {roomId: this.roomId});
   }
 }
 

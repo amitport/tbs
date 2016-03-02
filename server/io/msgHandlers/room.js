@@ -1,4 +1,4 @@
-import SessionFactory from '../../../client/jspm-src/games/sessionFactory';
+import gameTypesRepo from '../../../client/jspm-src/games/gameTypesRepo';
 
 import Room from '../../game/room';
 
@@ -6,27 +6,44 @@ import roomsRepo from '../../game/roomsRepo';
 
 export function create({gameId, username}) {
   return roomsRepo.add(new Room({
-    status: 'WAITING_FOR_SECOND_PLAYER',
     gameId: gameId,
-    members: [{socket: this, ready: true, username}, {ready: true}]
+    members: [{socket: this, ready: false, username}, {ready: false}]
   }));
+}
+export function setAiOpponent({roomId}) {
+  const room = roomsRepo.get(roomId);
+
+  if (room.members[0].socket !== this) {
+    throw Error('must be a member of this room');
+  }
+
+  const GameType = gameTypesRepo.get(room.gameId);
+  room.session = new GameType([GameType.playerTypes.Human, GameType.playerTypes.AI], function (result) {
+    if (result !== 'tie') {
+      room.stat[room.session.currentPlayer.idx]++;
+    }
+    room.members[0].ready = false;
+  });
+  room.members[1].username = '{AI}';
+  room.members[1].ready = true;
+
+  room.members[0].socket.emit('room:update', room.serialize());
 }
 
 export function join({roomId, username}) {
   const room = roomsRepo.get(roomId);
 
-  if (room.status === 'IN_PROGRESS' &&
-    room.members[0].socket !== this &&
-    room.members[1].socket !== this) {
-    throw 'room full';
+  if (room.members[0].socket !== this &&
+    room.members[1].hasOwnProperty('socket') && room.members[1].socket !== this) {
+    throw Error('room full');
   }
 
-  if (room.status === 'WAITING_FOR_SECOND_PLAYER' && room.members[0].socket !== this) {
+  if (room.members[0].socket !== this && !room.members[1].hasOwnProperty('socket')) {
     room.members[1].socket = this;
     room.members[1].username = username;
-    room.status = 'IN_PROGRESS';
 
-    room.session = SessionFactory.create(room.gameId, function (result) {
+    const GameType = gameTypesRepo.get(room.gameId);
+    room.session = new GameType([GameType.playerTypes.Human, GameType.playerTypes.Human], function (result) {
       if (result !== 'tie') {
         room.stat[room.session.currentPlayer.idx]++;
       }
@@ -40,21 +57,23 @@ export function join({roomId, username}) {
   return {room: room.serialize(), ownIdx: (room.members[0].socket === this) ? 0 : 1};
 }
 
-export function ready(roomId) {
+export function ready({roomId, isReady}) {
   const room = roomsRepo.get(roomId);
 
   if (this === room.members[0].socket) {
-    room.members[0].ready = true;
+    room.members[0].ready = (isReady != null) ? isReady : true;
   }
   if (this === room.members[1].socket) {
-    room.members[1].ready = true;
+    room.members[1].ready = (isReady != null) ? isReady : true;
   }
 
   if (room.members[0].ready && room.members[1].ready) {
     room.session.recycle();
   }
 
-  room.members.forEach(function (player) {
-    player.socket.emit('room:update', room.serialize());
+  room.members.forEach(function (member) {
+    if (member.hasOwnProperty('socket')) {
+      member.socket.emit('room:update', room.serialize());
+    }
   });
 }

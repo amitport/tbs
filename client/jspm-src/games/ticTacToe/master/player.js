@@ -1,10 +1,10 @@
-
+import Cell from './cell';
 import Player from '../../abstract/master/player';
 
 export default class TicTacToeHumanPlayer extends Player {
-  constructor(idx, mark) {
+  constructor(idx) {
     super(idx);
-    this.mark = mark
+    this.mark = [Cell.X, Cell.O][idx];
   }
   serialize() {
     const serialized = super.serialize();

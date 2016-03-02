@@ -35,19 +35,7 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games
         controller: playLocalController,
         controllerAs: 'room'
       });
-  }])
-  //.run(['$rootScope', 'io', function($rootScope, io){
-  //  io.connect($rootScope);
-  //}])
-  .directive('draggable', function () {
-    return {
-      restrict: 'A',
-      link: function (scope, element) {
-        element.css('cursor', 'pointer');
-        element.draggable();
-      }
-    }
-  });
+  }]);
 
 angular.element(document).ready(function () {
   angular.bootstrap(document, ['tbs'], {strictDi: true});

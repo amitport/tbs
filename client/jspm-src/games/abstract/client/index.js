@@ -3,6 +3,8 @@ import config from './config';
 
 class AbstractGameClient {
   constructor(Master, templateUrl, actionTypes) {
+    this.hasAi = Master.playerTypes.hasOwnProperty('AI');
+
     this.Master = Master;
     this.templateUrl = templateUrl;
     this.bindToActions = (dispatch) => actionTypes.reduce((boundActions, type) =>
@@ -11,11 +13,12 @@ class AbstractGameClient {
   }
 
   createLocalSession(gameEndedCb) {
-    var masterSession = new this.Master((result) => {
+    var masterSession = new this.Master([this.Master.playerTypes.Human, this.Master.playerTypes.AI],
+    (result) => {
       this.updateSessionState(session, masterSession.serialize());
 
       gameEndedCb(result);
-    }, true);
+    });
 
     var session = this.createSession(masterSession.serialize(), ({type, payload}) => {
       masterSession[type](payload);
