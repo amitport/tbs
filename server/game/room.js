@@ -15,4 +15,28 @@ export default class Room {
       session: this.hasOwnProperty('session') ? this.session.serialize() : null
     };
   }
+
+  broadcastUpdate() {
+    const serializedRoom = this.serialize();
+    this.members[0].socket.emit('room:update', serializedRoom);
+    if (this.members[1].hasOwnProperty('socket')) {
+      this.members[1].socket.emit('room:update', serializedRoom);
+    }
+  }
+
+  static rooms = [];
+
+  static create({gameId, creator}) {
+    return this.rooms.push(new Room({
+        gameId: gameId,
+        members: [{socket: creator.socket, username: creator.username, ready: false}, {ready: false}]
+      })) - 1;
+  }
+  static get(id) {
+    if (!this.rooms.hasOwnProperty(id)) {
+      throw 'room not found';
+    }
+
+    return this.rooms[id];
+  }
 }

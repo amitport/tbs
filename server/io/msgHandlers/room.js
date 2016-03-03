@@ -2,16 +2,16 @@ import gameTypesRepo from '../../../client/jspm-src/games/gameTypesRepo';
 
 import Room from '../../game/room';
 
-import roomsRepo from '../../game/roomsRepo';
-
 export function create({gameId, username}) {
-  return roomsRepo.add(new Room({
-    gameId: gameId,
-    members: [{socket: this, ready: false, username}, {ready: false}]
-  }));
+  // todo verify creator
+
+  return Room.create({gameId,
+    creator: {socket: this, username}
+  });
 }
+
 export function setAiOpponent({roomId}) {
-  const room = roomsRepo.get(roomId);
+  const room = Room.get(roomId);
 
   if (room.members[0].socket !== this) {
     throw Error('must be a member of this room');
@@ -31,7 +31,7 @@ export function setAiOpponent({roomId}) {
 }
 
 export function join({roomId, username}) {
-  const room = roomsRepo.get(roomId);
+  const room = Room.get(roomId);
 
   if (room.members[0].socket !== this &&
     room.members[1].hasOwnProperty('socket') && room.members[1].socket !== this) {
@@ -58,7 +58,7 @@ export function join({roomId, username}) {
 }
 
 export function ready({roomId, isReady}) {
-  const room = roomsRepo.get(roomId);
+  const room = Room.get(roomId);
 
   if (this === room.members[0].socket) {
     room.members[0].ready = (isReady != null) ? isReady : true;

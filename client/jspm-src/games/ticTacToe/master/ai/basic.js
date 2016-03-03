@@ -40,7 +40,6 @@ export default class BasicAiPlayer extends TicTacToeHumanPlayer {
     }
     let selectedMove = moves[Math.floor(Math.random() * numOfBestMoves)].cell;
 
-    let moveParams = {x: selectedMove[0], y: selectedMove[1]};
-    this.session.markCell.call(this.session, moveParams);
+    this.session.markCell({x: selectedMove[0], y: selectedMove[1]});
   }
 }
