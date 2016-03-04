@@ -3,7 +3,7 @@
   "private": true,
   "license": "AGPL",
   "engines": {
-    "node": "^5.6.0"
+    "node": "^5.7.1"
   },
   "scripts": {
     "postinstall": "cd http && npm i && cd ../models && npm i",

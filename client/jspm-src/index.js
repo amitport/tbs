@@ -5,6 +5,8 @@ import angular from 'angular';
 import 'angular-material';
 import 'angular-route';
 
+import 'angular-auto-focus';
+
 import './modules/io/index';
 import './modules/games/index';
 import usersModule from './modules/users/index';
@@ -13,7 +15,7 @@ import lobbyController from './routes/lobby/controller';
 import roomController from './routes/room/controller';
 import playLocalController from './routes/play-local/controller';
 
-const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'tbs.io', 'tbs.games', usersModule])
+const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs.io', 'tbs.games', usersModule])
   .config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
     function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('default');

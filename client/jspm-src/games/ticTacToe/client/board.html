@@ -4,17 +4,17 @@
   <span ng-repeat="row in room.session.board.arr track by $index" ng-init="rowIndex = $index" layout="row">
     <cell ng-repeat="col in row track by $index" x="{{rowIndex}}" y="{{$index}}"></cell>
   </span>
-  <svg ng-if="room.session.isEnded() && room.session.result !== 'tie'"
+  <svg ng-if="room.session.result && room.session.result !== 'tie'"
        class="ticTacToe-path"
        style="position: absolute; left: 0; bottom: 0; width: 160px; height: 124px;">
     <line ng-attr-x1="{{27 + 53*room.session.result.c1}}" ng-attr-y1="{{21 + 41*room.session.result.r1}}"
           ng-attr-x2="{{27 + 53*room.session.result.c2}}" ng-attr-y2="{{21 + 41*room.session.result.r2}}"
           style="stroke:  {{room.session.currentPlayer.color}}; stroke-width: 2px; opacity: 0.7;"/>
   </svg>
-  <svg ng-if="room.session.isEnded() && room.session.result !== 'tie'" class="ticTacToe-path"
+  <svg ng-if="room.session.result && room.session.result !== 'tie'" class="ticTacToe-path"
       style="position: absolute; left: 0; bottom: 0; width: 160px; height: 124px;">
     <line ng-attr-x1="{{27 + 53*room.session.result.c2}}" ng-attr-y1="{{21 + 41*room.session.result.r2}}"
           ng-attr-x2="{{27 + 53*room.session.result.c1}}" ng-attr-y2="{{21 + 41*room.session.result.r1}}"
-          style="stroke: {{session.currentPlayer.color}}; stroke-width: 2px; opacity: 0.7;"/>
+          style="stroke: {{room.session.currentPlayer.color}}; stroke-width: 2px; opacity: 0.7;"/>
   </svg>
 </md-whiteframe>

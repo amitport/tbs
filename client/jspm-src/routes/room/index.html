@@ -1,22 +1,57 @@
+<section layout="row" flex>
+  <md-sidenav style="box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14);"
+              md-is-locked-open="true">
+    <md-content layout="column" layout-padding>
+          <div layout="row" flex="nogrow" class="md-whiteframe-2dp" layout-padding layout-fill layout-align="space-between center" ng-repeat="member in room.members track by $index"
+               style="border-left-style: solid; margin-bottom: 8px; height: 78px;"
+               ng-style="{'border-left-color': room.session.players[$index].color, 'border-left-width': room.session.currentPlayer.idx === $index ? '6px' : '2px'}">
+            <div ng-show="member.username">
+              {{member.username}}<span ng-show="$index === room.members.own.idx"> (you)</span><br>
+              <small ng-show="room.stat[$index] !== 0">won {{room.stat[$index]}} games</small>
+            </div>
+            <md-input-container flex ng-hide="member.username">
+              <label>2<sup>nd</sup> player's Type</label>
+              <md-select ng-model="member.type" ng-disabled="!room.hasAi">
+                <md-option value="AI">
+                  AI
+                </md-option>
+                <md-option value="Human">
+                  Human
+                </md-option>
+              </md-select>
+            </md-input-container>
 
-<md-content class="game-view"
-            ng-style="{'border-bottom-color': room.session.players.own.color, 'border-top-color': room.session.players.opp.color}"
-            layout="column"
-            layout-align="center center"
-            flex>
-  <div layout="column" layout-align="start start" style="position: absolute; top: 0; left: 0;" layout-padding>
-    <md-whiteframe
-      ng-repeat="member in room.members track by $index"
-      class="md-whiteframe-2dp" layout layout-padding layout-align="end center"
-      style="width: 130px; margin-bottom: 8px; border-left-style: solid; border-left-color: {{::room.session.players[$index].color}};"
-      ng-style="{'border-left-width': room.session.currentPlayer.idx === $index ? '4px' : '1px'}"
-      >
-    <div>
-      {{member.username || ((room.session.players.own.idx === $index) ? 'you' : '?')}}
-    </div>
-    </md-whiteframe>
-  </div>
-  <md-content style="position: relative; overflow: visible;" layout="column" layout-align="center center">
-    <div class="ongoing-session" ng-class="{faded: room.session.isEnded()}" ng-include="room.session.templateUrl"></div>
+            <!--<md-button auto-focus ng-if="room.status !== 'IN_PROGRESS' && $index === room.members.own.idx && !room.members.own.readyOnce" class="md-raised" style="margin:0" ng-click="room.playAgain()">-->
+              <!--<md-icon>replay</md-icon>-->
+              <!--Play again-->
+            <!--</md-button>-->
+            <md-switch ng-class="{'md-primary': $index === room.members.own.idx}" ng-model="member.ready"
+                       ng-disabled="$index !== room.members.own.idx"
+                       ng-change="room.ready(member.ready)">
+                       <!--ng-show="room.status !== 'IN_PROGRESS' && member.type === 'Human' && ($index !== room.members.own.idx || room.members.own.readyOnce)"-->
+              <div style="width:68px;text-align:end;">
+                <span ng-hide="member.ready">not</span> ready
+              </div>
+            </md-switch>
+          </div>
+          <div layout="column" layout-fill ng-show="room.members[1].type === 'Human' && !room.members[1].username">
+            <div>Tell a friend to join at this address:</div>
+            <md-input-container flex>
+              <input disabled ng-model="room.address">
+            </md-input-container>
+          </div>
+    </md-content>
+  </md-sidenav>
+
+  <md-content class="game-view"
+              style="overflow: hidden;"
+              ng-style="{'border-bottom-color': room.session.players.own.color, 'border-top-color': room.session.players.opp.color}"
+              layout="row"
+              layout-align="center center"
+              flex>
+    <md-content style="overflow: visible;" layout="column" layout-align="center center">
+      <div class="ongoing-session" ng-class="{faded: !room.members[0].ready || !room.members[1].ready}" ng-include="room.session.templateUrl"></div>
+    </md-content>
+    <div ng-if="!room.members[0].ready || !room.members[1].ready" style="position:absolute; background-color: #212121; width:100%; height: 100%; top:0; left:0; opacity: .48;"></div>
   </md-content>
-</md-content>
+</section>

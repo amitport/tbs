@@ -44,7 +44,6 @@ class AbstractGameClient {
     const session = this.bindToActions(dispatch);
 
     session.templateUrl = this.templateUrl;
-    session.isEnded = function () {return this.result;};
 
     session.players = [
       {

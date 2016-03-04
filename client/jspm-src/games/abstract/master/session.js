@@ -17,10 +17,4 @@ export default class Session {
     delete this.result;
     this.initialize();
   }
-
-  isEnded() {
-    console.log('this.has ' + this.hasOwnProperty('result'));
-    console.log('\tresult ' + this.result);
-    return this.hasOwnProperty('result');
-  }
 };
