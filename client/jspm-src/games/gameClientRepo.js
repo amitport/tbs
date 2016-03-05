@@ -5,8 +5,8 @@ import FourInALineGameClient from './fourInALine/client/index';
 export default class GameClientRepo {
   constructor(app) {
     this.gameClients = {
-      ticTacToe: new TicTacToeGameClient(app),
-      fourInALine: new FourInALineGameClient(app)
+      TicTacToe: new TicTacToeGameClient(app),
+      FourInALine: new FourInALineGameClient(app)
     };
   }
   get(gameTypeId) {

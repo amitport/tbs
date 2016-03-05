@@ -1,9 +1,9 @@
-import ticTacToe from './ticTacToe/master/index';
-import fourInALine from './fourInALine/master/index';
+import TicTacToe from './ticTacToe/master/index';
+import FourInALine from './fourInALine/master/index';
 
 const gameTypes = {
-  ticTacToe,
-  fourInALine
+  TicTacToe,
+  FourInALine
 };
 
 const gameTypesRepo = {

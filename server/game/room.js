@@ -1,6 +1,8 @@
+import gameTypesRepo from '../../client/jspm-src/games/gameTypesRepo';
+
 export default class Room {
   constructor(opt) {
-    this.gameTypeId = opt.gameTypeId;
+    this.gameType = gameTypesRepo.get(opt.gameTypeId);
     this.members = opt.members;
     this.stat = [0, 0];
   }
@@ -8,7 +10,7 @@ export default class Room {
   serialize() {
     return {
       stat: this.stat,
-      gameTypeId: this.gameTypeId,
+      gameTypeId: this.gameType.name,
       members: this.members.map((member) => {return {
         ready: member.ready, username: member.username, type: member.type};
       }),
