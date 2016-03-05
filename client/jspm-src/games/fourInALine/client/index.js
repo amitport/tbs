@@ -21,13 +21,12 @@ export default class FourInALineGameClient extends AbstractGameClient {
     return session;
   }
 
-  updateGameResult(result, session) {
-    session.result = (result === 'tie') ? 'tie' : {
-      c1: result.c1,
-      r1: result.r1,
-      c2: result.c2,
-      r2: result.r2,
-      color: result.color === 'b' ? abstractGameConfig.playerColors[0] : abstractGameConfig.playerColors[1]
+  updateSessionState(session, state) {
+    super.updateSessionState(session, state);
+
+    if (session.result) {
+      session.result.color = session.result.color === 'b' ?
+        abstractGameConfig.playerColors[0] : abstractGameConfig.playerColors[1];
     }
   }
 }

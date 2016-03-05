@@ -61,20 +61,13 @@ class AbstractGameClient {
   }
 
   updateSessionState(session, state) {
+    delete session.result;
+
     Object.assign(session, state);
     if (state.hasOwnProperty('currentPlayerIdx')) {
       session.currentPlayer = session.players[state.currentPlayerIdx]
     }
-
-    if (state.result) {
-      this.updateGameResult(state.result, session);
-    } else if (session.result) {
-      delete session.result;
-    }
   }
-
-  // abstract
-  updateGameResult() {}
 }
 
 export default AbstractGameClient;
