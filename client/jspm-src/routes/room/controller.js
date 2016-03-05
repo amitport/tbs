@@ -12,7 +12,7 @@ export default class Room {
     this.address = $location.absUrl();
     user.signInPromise.finally(() => {
       io.emit('room:join', {roomId: this.roomId, username: user.username || '{Anonymous}'}).then((msg) => {
-        this.gameClient = gameClientRepo.get(msg.room.gameId);
+        this.gameClient = gameClientRepo.get(msg.room.gameTypeId);
         this.session = this.gameClient.createSessionProxy({}, msg.ownIdx, this.roomId, io);
 
         this.members = msg.room.members;

@@ -2,10 +2,10 @@ import gameTypesRepo from '../../../client/jspm-src/games/gameTypesRepo';
 
 import Room from '../../game/room';
 
-export function create({gameId, username}) {
+export function create({gameTypeId, username}) {
   // todo verify creator
 
-  return Room.create({gameId,
+  return Room.create({gameTypeId,
     creator: {socket: this, username}
   });
 }
@@ -17,7 +17,7 @@ export function setAiOpponent({roomId}) {
     throw Error('must be a member of this room');
   }
 
-  const GameType = gameTypesRepo.get(room.gameId);
+  const GameType = gameTypesRepo.get(room.gameTypeId);
   room.session = new GameType([GameType.playerTypes.Human, GameType.playerTypes.AI], function (result) {
     if (result !== 'tie') {
       room.stat[room.session.currentPlayer.idx]++;
@@ -42,7 +42,7 @@ export function join({roomId, username}) {
     room.members[1].socket = this;
     room.members[1].username = username;
 
-    const GameType = gameTypesRepo.get(room.gameId);
+    const GameType = gameTypesRepo.get(room.gameTypeId);
     room.session = new GameType([GameType.playerTypes.Human, GameType.playerTypes.Human], function (result) {
       if (result !== 'tie') {
         room.stat[room.session.currentPlayer.idx]++;

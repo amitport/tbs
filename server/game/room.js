@@ -1,6 +1,6 @@
 export default class Room {
   constructor(opt) {
-    this.gameId = opt.gameId;
+    this.gameTypeId = opt.gameTypeId;
     this.members = opt.members;
     this.stat = [0, 0];
   }
@@ -8,7 +8,7 @@ export default class Room {
   serialize() {
     return {
       stat: this.stat,
-      gameId: this.gameId,
+      gameTypeId: this.gameTypeId,
       members: this.members.map((member) => {return {
         ready: member.ready, username: member.username, type: member.type};
       }),
@@ -26,9 +26,9 @@ export default class Room {
 
   static rooms = [];
 
-  static create({gameId, creator}) {
+  static create({gameTypeId, creator}) {
     return this.rooms.push(new Room({
-        gameId: gameId,
+        gameTypeId: gameTypeId,
         members: [{socket: creator.socket, username: creator.username, ready: false}, {ready: false}]
       })) - 1;
   }
