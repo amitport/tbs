@@ -37,7 +37,7 @@
       <div layout="column" layout-fill ng-show="$ctrl.players[1].type === 'human' && $ctrl.players[1].isOpen">
         <md-input-container md-no-float class="md-block">
           <label>Tell a friend to join at this address:</label>
-          <input readonly ng-model="$ctrl.address" tabindex="2">
+          <textarea readonly ng-model="$ctrl.address" md-select-on-focus tabindex="2"></textarea>
         </md-input-container>
       </div>
 
