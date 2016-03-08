@@ -34,10 +34,10 @@
           </div>
         </md-switch>
       </div>
-      <div layout="column" layout-fill ng-show="$ctrl.players[1].type === 'human' && $ctrl.players[1].isOpen">
+      <div layout="column" layout-fill ng-if="$ctrl.players[1].type === 'human' && $ctrl.players[1].isOpen">
         <md-input-container md-no-float class="md-block">
           <label>Tell a friend to join at this address:</label>
-          <textarea readonly ng-model="$ctrl.address" md-select-on-focus tabindex="2"></textarea>
+          <textarea style="word-break: break-all;" readonly ng-model="$ctrl.address" md-select-on-focus tabindex="2"></textarea>
         </md-input-container>
       </div>
 
