@@ -9,11 +9,11 @@ import Cell from '../cell';
 export function calcPotentialLines(board) {
   const markCounts = {
     rows:
-      [{[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}, {[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}, {[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}],
+      [{[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}],
     cols:
-      [{[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}, {[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}, {[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}],
+      [{[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}],
     diags:
-      [{[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}, {[Cell.EMPTY]: 0, [Cell.X]: 0, [Cell.O]: 0}]
+      [{[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}]
   };
 
   for (let x = 0; x < 3; x++) {
@@ -27,18 +27,18 @@ export function calcPotentialLines(board) {
     markCounts.diags[1][board[2 - x][x]]++;
   }
   const potentialLines = {
-    [Cell.X]: [0, 0, 0, 0],
-    [Cell.O]: [0, 0, 0, 0]
+    [Cell.X.key]: [0, 0, 0, 0],
+    [Cell.O.key]: [0, 0, 0, 0]
   };
 
   for (let lineType in markCounts) {
     for (let markCount of markCounts[lineType]) {
-      const xCount = markCount[Cell.X];
-      const oCount = markCount[Cell.O];
+      const xCount = markCount[Cell.X.key];
+      const oCount = markCount[Cell.O.key];
       // this line does not have both X and O meaning it is a potential line
       if (xCount === 0 || oCount === 0) {
-        potentialLines[Cell.X][xCount]++;
-        potentialLines[Cell.O][oCount]++;
+        potentialLines[Cell.X.key][xCount]++;
+        potentialLines[Cell.O.key][oCount]++;
       }
     }
   }
@@ -48,10 +48,10 @@ export function calcPotentialLines(board) {
 
 export function calcScores(board, mark) {
   const potentialLines = calcPotentialLines(board);
-
+  const opposite = (mark === 'X') ? 'O' : 'X';
   /**
    * [<own 3 in line (win)>, -<opp 2 in line (opp wins next)>, <own 2 in line (own win if not blocked)>, -<opp 1 in line (interfere>]
    */
-  return [potentialLines[mark][3], -potentialLines[mark.opposite][2],  potentialLines[mark][2], -potentialLines[mark.opposite][1]];
+  return [potentialLines[mark][3], -potentialLines[opposite][2],  potentialLines[mark][2], -potentialLines[opposite][1]];
 }
 

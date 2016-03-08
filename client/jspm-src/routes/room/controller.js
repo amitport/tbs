@@ -1,60 +1,62 @@
 import './index.css!';
+import * as gameTypes from '../../games/index';
 
 export default class Room {
-  static $inject = ['$scope', '$routeParams', '$location', '$log', 'gameClientRepo', 'io', 'ap.user'];
+  static $inject = ['$scope', '$routeParams', '$location', '$log', 'io', 'ap.user'];
 
-  constructor($scope, $routeParams, $location, $log, gameClientRepo, io, user) {
-    io.connect($scope)
-      .on('room:update', this.update.bind(this));
+  constructor($scope, $routeParams, $location, $log, io, user) {
+    const ioConnection = io.connect($scope);
 
     const roomId = this.roomId = $routeParams.roomId;
     this.io = io;
     this.address = $location.absUrl();
     user.signInPromise.finally(() => {
-      io.emit('room:join', {roomId: this.roomId, username: user.username || '{Anonymous}'}).then((msg) => {
-        this.gameClient = gameClientRepo.get(msg.room.gameTypeId);
-        this.session = this.gameClient.createSessionProxy({}, msg.ownIdx, this.roomId, io);
+      io.emit('room:join', {roomId: this.roomId, username: user.username || '{Anonymous}'})
+        .then((serializedRoom) => {
+          this.update(serializedRoom);
 
-        this.members = msg.room.members;
-        this.members.opp = this.members[(msg.ownIdx + 1) % 2];
-        this.members.own = this.members[msg.ownIdx];
-        this.members.own.idx = msg.ownIdx;
-        this.hasAi = this.gameClient.hasAi;
-        if (!this.hasAi) {
-          this.members[1].type = 'Human';
-        }
-
-        this.update(msg.room);
-      }, function (err) {
+          ioConnection.on('room:update', this.update.bind(this));
+        })
+      .catch(function (err) {
         $log.error(err);
       });
     });
 
-    $scope.$watch('room.members[1].type', (newVal) => {
-      if (newVal === 'AI') {
-        io.emit('room:setAiOpponent',
+    $scope.$watch('$ctrl.players[1].type', (newVal) => {
+      if (newVal === 'ai') {
+        io.emit('room:joinAi',
           {
             roomId
+          }
+        );
+      } else if (newVal === 'human' && this.ownIdx != 1) {
+        io.emit('room:setIsOpen',
+          {
+            roomId, playerIdx: 1, isOpen: true
           }
         );
       }
     });
   }
 
-  update(raw) {
-    this.stat = raw.stat;
+  update(serializedRoom) {
+    Object.assign(this, serializedRoom);
+    this.gameType = gameTypes[this.gameTypeId];
 
-    for (let i = 0, len = this.members.length; i < len; i++) {
-      Object.assign(this.members[i], raw.members[i]);
-    }
+    this.players[0].color = 'rgb(100, 100, 193)';
+    this.players[0].idx = 0;
+    this.players[1].color = 'rgb(234, 123, 123)';
+    this.players[1].idx = 1;
+    this.own = this.players[this.ownIdx];
+    this.opp = this.players[(this.ownIdx + 1) % 2];
 
-    if (raw.session) this.gameClient.updateSessionState(this.session, raw.session);
+    this.gameType.deserialize(this);
   }
 
-  ready(ready = true) {
-    this.io.emit('room:ready', {
+  setIsReady(isReady = true) {
+    this.io.emit('room:setIsReady', {
         roomId: this.roomId,
-        isReady: ready
+        isReady
       }
     );
   }

@@ -1,9 +1,6 @@
-import angular from 'angular';
+import module from './base';
 
-import '../io/index';
+import './ticTacToe/index';
+import './fourInALine/index';
 
-import GameClientRepo from '../../games/gameClientRepo';
-
-const app = angular.module('tbs.games', ['tbs.io']);
-
-app.constant('gameClientRepo', new GameClientRepo(app));
+export default module.name;

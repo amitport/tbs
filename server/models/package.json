@@ -7,7 +7,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "mongoose": "^4.4.5",
+    "mongoose": "^4.4.6",
     "mongoose-beautiful-unique-validation": "^2.0.3",
     "mongoose-validators": "^0.1.0"
   }

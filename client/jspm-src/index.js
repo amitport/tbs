@@ -8,14 +8,14 @@ import 'angular-route';
 import 'angular-auto-focus';
 
 import './modules/io/index';
-import './modules/games/index';
+import gamesModule from './modules/games/index';
 import usersModule from './modules/users/index';
 
 import lobbyController from './routes/lobby/controller';
 import roomController from './routes/room/controller';
 import playLocalController from './routes/play-local/controller';
 
-const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs.io', 'tbs.games', usersModule])
+const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs.io', gamesModule, usersModule])
   .config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
     function ($routeProvider, $locationProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('default');
@@ -30,12 +30,12 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs
       .when('/rooms/:roomId', {
         templateUrl: 'routes/room/index.html',
         controller: roomController,
-        controllerAs: 'room'
+        controllerAs: '$ctrl'
       })
       .when('/play-local/:gameTypeId', {
         templateUrl: 'routes/room/index.html',
         controller: playLocalController,
-        controllerAs: 'room'
+        controllerAs: '$ctrl'
       });
   }]);
 

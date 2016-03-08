@@ -2,56 +2,71 @@
   <md-sidenav style="box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14);"
               md-is-locked-open="true">
     <md-content layout="column" layout-padding>
-          <div layout="row" flex="nogrow" class="md-whiteframe-2dp" layout-padding layout-fill layout-align="space-between center" ng-repeat="member in room.members track by $index"
-               style="border-left-style: solid; margin-bottom: 8px; height: 78px;"
-               ng-style="{'border-left-color': room.session.players[$index].color, 'border-left-width': room.session.currentPlayer.idx === $index ? '6px' : '2px'}">
-            <div ng-show="member.username">
-              {{member.username}}<span ng-show="$index === room.members.own.idx"> (you)</span><br>
-              <small ng-show="room.stat[$index] !== 0">won {{room.stat[$index]}} games</small>
-            </div>
-            <md-input-container flex ng-hide="member.username">
-              <label>2<sup>nd</sup> player's Type</label>
-              <md-select ng-model="member.type" ng-disabled="!room.hasAi">
-                <md-option value="AI">
-                  AI
-                </md-option>
-                <md-option value="Human">
-                  Human
-                </md-option>
-              </md-select>
-            </md-input-container>
+      <div>{{$ctrl.gameTypeId}}</div>
+      <div layout="row" flex="nogrow" class="md-whiteframe-2dp" layout-padding layout-fill
+           layout-align="space-between center" ng-repeat="player in $ctrl.players track by $index"
+           style="border-left-style: solid; margin-bottom: 8px; height: 78px;"
+           ng-style="{'border-left-color': $ctrl.players[$index].color, 'border-left-width': $ctrl.game.currentPlayerIdx === $index ? '6px' : '2px'}">
+        <div ng-show="!player.isOpen && (player.type === 'human' || $ctrl.game.isInProgress || $ctrl.game.isEnded)">
+          {{player.name}}<span ng-show="$index === $ctrl.own.idx"> (you)</span><br>
+          <small ng-show="$ctrl.statistics.wins[$index] !== 0">won {{$ctrl.statistics.wins[$index]}} games</small>
+        </div>
+        <md-input-container flex
+                            ng-hide="!$ctrl.gameType.ai || (player.type === 'human' && !player.isOpen) || $ctrl.game.isInProgress || $ctrl.game.isEnded">
+          <label>2<sup>nd</sup> player's Type</label>
+          <md-select auto-focus tabindex="1" ng-model="player.type">
+            <md-option value="ai">
+              AI
+            </md-option>
+            <md-option value="human">
+              Human
+            </md-option>
+          </md-select>
+        </md-input-container>
 
-            <!--<md-button auto-focus ng-if="room.status !== 'IN_PROGRESS' && $index === room.members.own.idx && !room.members.own.readyOnce" class="md-raised" style="margin:0" ng-click="room.playAgain()">-->
-              <!--<md-icon>replay</md-icon>-->
-              <!--Play again-->
-            <!--</md-button>-->
-            <md-switch ng-class="{'md-primary': $index === room.members.own.idx}" ng-model="member.ready"
-                       ng-disabled="$index !== room.members.own.idx"
-                       ng-change="room.ready(member.ready)">
-                       <!--ng-show="room.status !== 'IN_PROGRESS' && member.type === 'Human' && ($index !== room.members.own.idx || room.members.own.readyOnce)"-->
-              <div style="width:68px;text-align:end;">
-                <span ng-hide="member.ready">not</span> ready
-              </div>
-            </md-switch>
+        <md-switch
+          ng-model="player.isReady"
+          ng-if="$index !== $ctrl.own.idx && player.type === 'human' && !player.isOpen && !$ctrl.game.isInProgress"
+          disabled
+          ng-change="$ctrl.setIsReady(player.isReady)">
+          <div style="width:68px;text-align:end;">
+            <span ng-hide="player.isReady">not</span> ready
           </div>
-          <div layout="column" layout-fill ng-show="room.members[1].type === 'Human' && !room.members[1].username">
-            <div>Tell a friend to join at this address:</div>
-            <md-input-container flex>
-              <input disabled ng-model="room.address">
-            </md-input-container>
-          </div>
+        </md-switch>
+      </div>
+      <div layout="column" layout-fill ng-show="$ctrl.players[1].type === 'human' && $ctrl.players[1].isOpen">
+        <md-input-container md-no-float class="md-block">
+          <label>Tell a friend to join at this address:</label>
+          <input readonly ng-model="$ctrl.address" tabindex="2">
+        </md-input-container>
+      </div>
+
+
+      <div layout="row" flex="nogrow" layout-padding layout-fill layout-align="end center">
+        <div ng-show="$ctrl.own.isReady">
+          waiting for other players...
+        </div>
+        <md-button auto-focus tabindex="3"
+                   class="md-raised" style="margin:0"
+                   ng-if="($ctrl.opp.type && (!$ctrl.opp.isOpen || $ctrl.opp.type === 'ai')) && !$ctrl.own.isReady  && $ctrl.own.type === 'human' && !$ctrl.own.isOpen && !$ctrl.game.isInProgress"
+
+                   ng-click="$ctrl.setIsReady(!$ctrl.own.isReady)">
+          <span ng-show="!$ctrl.game.isEnded">start game</span>
+          <span ng-show="$ctrl.game.isEnded">play again</span>
+        </md-button>
+      </div>
     </md-content>
   </md-sidenav>
 
   <md-content class="game-view"
               style="overflow: hidden;"
-              ng-style="{'border-bottom-color': room.session.players.own.color, 'border-top-color': room.session.players.opp.color}"
+              ng-style="{'border-bottom-color': $ctrl.own.color, 'border-top-color': $ctrl.opp.color}"
               layout="row"
               layout-align="center center"
               flex>
     <md-content style="overflow: visible;" layout="column" layout-align="center center">
-      <div class="ongoing-session" ng-class="{faded: !room.members[0].ready || !room.members[1].ready}" ng-include="room.session.templateUrl"></div>
+      <div class="ongoing-session" ng-class="{faded: !$ctrl.game.isInProgress}" ng-include="$ctrl.gameTypeId"></div>
     </md-content>
-    <div ng-if="!room.members[0].ready || !room.members[1].ready" style="position:absolute; background-color: #212121; width:100%; height: 100%; top:0; left:0; opacity: .48;"></div>
+    <div ng-if="!$ctrl.game.isInProgress" style="position:absolute; background-color: #212121; width:100%; height: 100%; top:0; left:0; opacity: .48;"></div>
   </md-content>
 </section>
