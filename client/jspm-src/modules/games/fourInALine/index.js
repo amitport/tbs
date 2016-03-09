@@ -21,7 +21,7 @@ module.component('fourInALine', {
   },
   controller: class FourInALine {
 
-    static markToFill = {
+    static mark2Fill = {
       '_': `${clientPath}circle-fill.svg`,
       'r': `${clientPath}circle-fill-red.svg`,
       'b': `${clientPath}circle-fill-blue.svg`
@@ -32,8 +32,8 @@ module.component('fourInALine', {
         'rgb(100, 100, 193)' : 'rgb(234, 123, 123)';
     }
 
-    markToFill(mark) {
-      return FourInALine.markToFill[mark];
+    mark2Fill(mark) {
+      return FourInALine.mark2Fill[mark];
     }
 
     markCol(payload) {
