@@ -3,30 +3,17 @@
     TBS
   </h1>
   <div layout="row" layout-align="center start" flex="noshrink">
-    <md-card>
+    <md-card ng-repeat="gameType in $ctrl.gameTypes track by $index">
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">Tic Tac Toe</span>
+          <span class="md-headline">{{gameType.name}}</span>
         </md-card-title-text>
         <md-card-title-media>
-          <div class="md-media-sm" style="background-color: beige; margin-left: 16px;"></div>
+          <div class="md-media-sm" style="background-color: {{gameType.color}}; margin-left: 16px;"></div>
         </md-card-title-media>
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="$ctrl.createRoom('TicTacToe')">Play</md-button>
-      </md-card-actions>
-    </md-card>
-    <md-card>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Four In a Line</span>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div class="md-media-sm" style="background-color: #408080; margin-left: 16px;"></div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="$ctrl.createRoom('FourInALine')">Play</md-button>
+        <md-button ng-click="$ctrl.createRoom(gameType.id)">Play</md-button>
       </md-card-actions>
     </md-card>
   </div>

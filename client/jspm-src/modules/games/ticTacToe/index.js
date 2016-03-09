@@ -50,7 +50,7 @@ module.component('winnerLine', {
   }
 });
 
-module.directive('cell', function () {
+module.directive('cell', ['playerColors', function (playerColors) {
   return {
     scope: true,
     template: cellTpl,
@@ -73,10 +73,10 @@ module.directive('cell', function () {
 
       scope.$watch(`$ctrl.game.board[${iAttrs.x}][${iAttrs.y}]`, function (newValue) {
 
-        scope.markColor = {X: 'rgb(100, 100, 193)', O: 'rgb(234, 123, 123)'}[newValue];
+        scope.markColor = {X: playerColors[0], O: playerColors[1]}[newValue];
         scope.markIcon = {X: 'close', O: 'panorama_fish_eye'}[newValue];
       });
     }
   };
-});
+}]);
 

@@ -1,4 +1,6 @@
 export const id = 'FourInALine';
+export const name = 'Four In a Line';
+export const color = '#408080';
 
 function emptyBoard() {
   return [
@@ -115,6 +117,8 @@ export const actions = {
 
 export default {
   id,
+  name,
+  color,
   initializeRoom,
   startGame,
   actions
