@@ -2,6 +2,8 @@ import module from '../base';
 import roomTpl from './index.html!text';
 import './index.css!';
 
+import * as gameTypes from '../../../games/index';
+
 module.component('room', {
   template: roomTpl,
   controller: class Room {
@@ -44,6 +46,7 @@ module.component('room', {
 
     update(serializedRoom) {
       Object.assign(this, serializedRoom);
+      this.gameType = gameTypes[this.gameTypeId];
 
       this.players[0].color = 'rgb(100, 100, 193)';
       this.players[0].idx = 0;
