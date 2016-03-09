@@ -14,10 +14,10 @@
   }
 }
 
-.ticTacToe-path {
+winner-line {
   stroke-dasharray: 392;
 }
-.ticTacToe-path.ng-enter {
+winner-line.ng-enter {
   stroke-dashoffset: 392;
   animation: ticTacToe-dash 1.5s ease-out forwards;
 }

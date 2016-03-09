@@ -1,21 +1,9 @@
-
-
 <md-whiteframe class="md-whiteframe-3dp ticTacToe-board" layout="column" layout-align="center center">
-  <!--{{$ctrl.game.board | json}}-->
   <span ng-repeat="row in $ctrl.game.board track by $index" ng-init="rowIndex = $index" layout="row">
     <cell ng-repeat="col in row track by $index" x="{{rowIndex}}" y="{{$index}}"></cell>
   </span>
-  <svg ng-if="$ctrl.game.outcome && $ctrl.game.outcome !== 'tie'"
-       class="ticTacToe-path"
-       style="position: absolute; left: 0; bottom: 0; width: 160px; height: 124px;">
-    <line ng-attr-x1="{{27 + 53*$ctrl.game.outcome.line.c1}}" ng-attr-y1="{{21 + 41*$ctrl.game.outcome.line.r1}}"
-          ng-attr-x2="{{27 + 53*$ctrl.game.outcome.line.c2}}" ng-attr-y2="{{21 + 41*$ctrl.game.outcome.line.r2}}"
-          style="stroke: {{$ctrl.players[$ctrl.game.currentPlayerIdx].color}}; stroke-width: 2px; opacity: 0.7;"/>
-  </svg>
-  <svg ng-if="$ctrl.game.outcome && $ctrl.game.outcome !== 'tie'" class="ticTacToe-path"
-      style="position: absolute; left: 0; bottom: 0; width: 160px; height: 124px;">
-    <line ng-attr-x1="{{27 + 53*$ctrl.game.outcome.line.c2}}" ng-attr-y1="{{21 + 41*$ctrl.game.outcome.line.r2}}"
-          ng-attr-x2="{{27 + 53*$ctrl.game.outcome.line.c1}}" ng-attr-y2="{{21 + 41*$ctrl.game.outcome.line.r1}}"
-          style="stroke: {{$ctrl.players[$ctrl.game.currentPlayerIdx].color}}; stroke-width: 2px; opacity: 0.7;"/>
-  </svg>
+  <winner-line ng-if="$ctrl.game.outcome && $ctrl.game.outcome !== 'tie'"
+               line="{{::$ctrl.game.outcome.line}}"
+               color="{{::$ctrl.players[$ctrl.game.currentPlayerIdx].color}}">
+  </winner-line>
 </md-whiteframe>
