@@ -32,24 +32,6 @@ export function startGame({game}) {
   game.board = emptyBoard();
 }
 
-const clientPath = 'modules/games/fourInALine/';
-export function deserialize(room) {
-  room.game.markToFill = {
-    '_': `${clientPath}circle-fill.svg`,
-    'r': `${clientPath}circle-fill-red.svg`,
-    'b': `${clientPath}circle-fill-blue.svg`
-  };
-
-  room.game.markCol = (payload) => {
-    room.io.emit('room:gameAction', {roomId: room.roomId, type: 'MARK_COL', payload});
-  };
-
-  if (room.game.isEnded && room.game.outcome !== 'tie') {
-    room.game.outcome.color = room.game.outcome.color === 'b' ?
-      'rgb(100, 100, 193)' : 'rgb(234, 123, 123)';
-  }
-}
-
 function searchForOutcome({currentPlayerIdx, board, totalMoves}, {r, c}) {
   let count = 1, color = board[r][c];
 
@@ -135,6 +117,5 @@ export default {
   id,
   initializeRoom,
   startGame,
-  deserialize,
   actions
 };

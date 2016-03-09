@@ -12,8 +12,8 @@ import gamesModule from './modules/games/index';
 import usersModule from './modules/users/index';
 
 import lobbyController from './routes/lobby/controller';
-import roomController from './routes/room/controller';
-import playLocalController from './routes/play-local/controller';
+//import roomController from './routes/room/controller';
+//import playLocalController from './routes/play-local/controller';
 
 const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs.io', gamesModule, usersModule])
   .config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
@@ -28,15 +28,13 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs
         controller: lobbyController
       })
       .when('/rooms/:roomId', {
-        templateUrl: 'routes/room/index.html',
-        controller: roomController,
-        controllerAs: '$ctrl'
-      })
-      .when('/play-local/:gameTypeId', {
-        templateUrl: 'routes/room/index.html',
-        controller: playLocalController,
-        controllerAs: '$ctrl'
+        template: '<room flex layout></room>'
       });
+      //.when('/play-local/:gameTypeId', {
+      //  templateUrl: 'routes/room/index.html',
+      //  controller: playLocalController,
+      //  controllerAs: '$ctrl'
+      //});
   }]);
 
 angular.element(document).ready(function () {

@@ -69,12 +69,6 @@ function end({statistics, game, outcome}) {
   }
 }
 
-export function deserialize(room) {
-  room.game.markCell = (payload) => {
-    room.io.emit('room:gameAction', {roomId: room.roomId, type: 'MARK_CELL', payload});
-  };
-}
-
 export const actions = {
   'MARK_CELL': function({statistics, game, players, action}) {
     const {x, y} = action.payload;
@@ -96,6 +90,5 @@ export default {
   ai,
   initializeRoom,
   startGame,
-  deserialize,
   actions
 };

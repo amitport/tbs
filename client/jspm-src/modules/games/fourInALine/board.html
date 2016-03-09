@@ -1,19 +1,19 @@
 <md-whiteframe style="position: relative;" class="fourInALine md-whiteframe-3dp" layout="row" layout-align="center center">
 
-  <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="$ctrl.game.markCol({c: y})" ng-disabled="$ctrl.game.board[0][y] !== '_' || $ctrl.game.currentPlayerIdx !== $ctrl.own.idx">
+  <md-button class="fourInALine-column" ng-repeat="y in [0, 1, 2, 3, 4, 5, 6] track by $index" ng-click="$ctrl.markCol({c: y})" ng-disabled="$ctrl.game.board[0][y] !== '_' || $ctrl.game.currentPlayerIdx !== $ctrl.own.idx">
     <div layout="column" layout-align="space-around center">
       <div class="fourInALine-cell" layout-align="center center" ng-repeat="x in [0, 1, 2, 3, 4, 5] track by $index">
-        <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="{{$ctrl.game.markToFill[$ctrl.game.board[x][y]]}}"></md-icon>
+        <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="{{$ctrl.markToFill($ctrl.game.board[x][y])}}"></md-icon>
         <md-icon class="fourInALine-cell-circle-fill" md-svg-icon="modules/games/fourInALine/circle.svg"></md-icon>
       </div>
     </div>
   </md-button>
   <svg ng-if="$ctrl.game.isEnded && $ctrl.game.outcome !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 609px; height: 400px;">
-    <line ng-attr-x1="{{44 + 87*$ctrl.game.outcome.line.c1}}" ng-attr-y1="{{32 + 67*$ctrl.game.outcome.line.r1}}" ng-attr-x2="{{44 + 87*$ctrl.game.outcome.line.c2}}" ng-attr-y2="{{32 + 67*$ctrl.game.outcome.line.r2}}"
-          style="stroke: {{$ctrl.game.outcome.color}}; stroke-width: 4px; opacity: 0.7;"/>
+    <line ng-attr-x1="{{::44 + 87*$ctrl.game.outcome.line.c1}}" ng-attr-y1="{{::32 + 67*$ctrl.game.outcome.line.r1}}" ng-attr-x2="{{::44 + 87*$ctrl.game.outcome.line.c2}}" ng-attr-y2="{{::32 + 67*$ctrl.game.outcome.line.r2}}"
+          style="stroke: {{::$ctrl.outcomeColor()}}; stroke-width: 4px; opacity: 0.7;"/>
   </svg>
   <svg ng-if="$ctrl.game.isEnded && $ctrl.game.outcome !== 'tie'" class="fourInALine-path" style="position: absolute; left: 0; bottom: 0; width: 609px; height: 400px;">
-    <line ng-attr-x1="{{44 + 87*$ctrl.game.outcome.line.c2}}" ng-attr-y1="{{32 + 67*$ctrl.game.outcome.line.r2}}" ng-attr-x2="{{44 + 87*$ctrl.game.outcome.line.c1}}" ng-attr-y2="{{32 + 67*$ctrl.game.outcome.line.r1}}"
-          style="stroke: {{$ctrl.game.outcome.color}}; stroke-width: 4px; opacity: 0.7;"/>
+    <line ng-attr-x1="{{::44 + 87*$ctrl.game.outcome.line.c2}}" ng-attr-y1="{{::32 + 67*$ctrl.game.outcome.line.r2}}" ng-attr-x2="{{::44 + 87*$ctrl.game.outcome.line.c1}}" ng-attr-y2="{{::32 + 67*$ctrl.game.outcome.line.r1}}"
+          style="stroke: {{::$ctrl.outcomeColor()}}; stroke-width: 4px; opacity: 0.7;"/>
   </svg>
 </md-whiteframe>

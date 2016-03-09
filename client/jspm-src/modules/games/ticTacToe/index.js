@@ -4,8 +4,6 @@ import cellTpl from './cell.html!text';
 
 import './index.css!';
 
-const clientPath = 'modules/games/ticTacToe/';
-
 import module from '../base';
 
 module.run(['$templateCache', function ($templateCache) {
@@ -19,8 +17,12 @@ module.component('ticTacToe', {
     players: '<',
     own: '<'
   },
+  require: {
+    room: '^room'
+  },
   controller: class {
-    $onInit() {
+    markCell(payload) {
+      this.room.gameAction({type: 'MARK_CELL', payload});
     }
   }
 });
@@ -31,7 +33,7 @@ module.component('winnerLine', {
     line: '@',
     color: '@'
   },
-  controller: class WinnerLineController {
+  controller: class WinnerLine {
     static line2points = {
       'c0': {c1: 0, r1: 0, c2: 0, r2: 2},
       'c1': {c1: 1, r1: 0, c2: 1, r2: 2},
@@ -43,7 +45,7 @@ module.component('winnerLine', {
       'd1': {c1: 0, r1: 2, c2: 2, r2: 0}
     };
     $onInit() {
-      this.points = WinnerLineController.line2points[this.line];
+      this.points = WinnerLine.line2points[this.line];
     }
   }
 });
