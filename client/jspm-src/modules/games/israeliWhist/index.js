@@ -4,7 +4,7 @@ import module from '../base';
 import Game from '../game';
 
 module.run(['$templateCache', function ($templateCache) {
-  $templateCache.put('IsraeliWhist', '<israeli-whist game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></israeli-whist>');
+  $templateCache.put('IsraeliWhist', '<israeli-whist layout layout-fill style="border: 4px solid yellow" game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></israeli-whist>');
 }]);
 
 module.component('israeliWhist', {
@@ -19,5 +19,16 @@ module.component('israeliWhist', {
   },
   controller: class IsraeliWhist extends Game {
 
+  }
+});
+
+
+import cardStackTpl from './card-stack.html!text';
+module.component('cardStack', {
+  template: cardStackTpl,
+  bindings: {
+    cards: '='
+  },
+  controller: class CardStack {
   }
 });

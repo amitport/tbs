@@ -29,6 +29,7 @@ module.component('room', {
       });
 
       $scope.$watch('$ctrl.players', (newPlayers, oldPlayers) => {
+        if (oldPlayers == null) return;
         for (let i = 0, len = this.players.length; i < len; i++) {
           if (i === this.ownIdx) continue;
 
@@ -72,10 +73,13 @@ module.component('room', {
     }
 
     canStart() {
-      return this.players && !this.own.isReady && !this.game.isInProgress && !this.waitingForPlayers();
+      return this.players && !this.own.isReady && !this.game.isInProgress && !this.waitingForPlayers() &&
+        this.players.every((player) => player.type);
     }
 
     calcBorderStyle() {
+      if (!this.hasOwnProperty('players')) return {};
+
       // todo make game border into something generic
       if (this.players.length === 2) {
         return {

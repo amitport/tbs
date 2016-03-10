@@ -8,5 +8,15 @@ export default class IsraeliWhist extends Game {
 
   static initializeRoom(room) {
     super.initializeRoom(room, 4);
+
+    room.game.deck = [];
+    for (var s = 0; s < 4; s++) {
+      for (var r = 0; r < 13; r++) {
+        room.game.deck.push({
+          rank: r,
+          suit: s
+        });
+      }
+    }
   }
 }
