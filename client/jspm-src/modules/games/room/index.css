@@ -1,6 +1,5 @@
 .game-view {
-  border-top: 4px solid rgba(0, 0, 0, 0);
-  border-bottom: 4px solid rgba(0, 0, 0, 0);
+  border: 4px solid rgba(0, 0, 0, 0);
 
   transition: border-color cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
 }

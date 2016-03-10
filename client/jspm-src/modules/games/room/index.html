@@ -34,9 +34,9 @@
           </div>
         </md-switch>
       </div>
-      <div layout="column" layout-fill ng-if="$ctrl.players[1].type === 'human' && $ctrl.players[1].isOpen">
+      <div layout="column" layout-fill ng-if="$ctrl.waitingForPlayers()">
         <md-input-container md-no-float class="md-block">
-          <label>Tell a friend to join at this address:</label>
+          <label>anyone can join at this address:</label>
           <textarea style="word-break: break-all;" readonly ng-model="$ctrl.address" md-select-on-focus tabindex="2"></textarea>
         </md-input-container>
       </div>
@@ -44,12 +44,11 @@
 
       <div layout="row" flex="nogrow" layout-padding layout-fill layout-align="end center">
         <div ng-show="$ctrl.own.isReady">
-          waiting for other players...
+          waiting for the other player<span ng-show="$ctrl.players.length > 2">s</span>...
         </div>
         <md-button auto-focus tabindex="3"
                    class="md-raised" style="margin:0"
-                   ng-if="($ctrl.opp.type && (!$ctrl.opp.isOpen || $ctrl.opp.type === 'ai')) && !$ctrl.own.isReady  && $ctrl.own.type === 'human' && !$ctrl.own.isOpen && !$ctrl.game.isInProgress"
-
+                   ng-if="$ctrl.canStart()"
                    ng-click="$ctrl.setIsReady(!$ctrl.own.isReady)">
           <span ng-show="!$ctrl.game.isEnded">start game</span>
           <span ng-show="$ctrl.game.isEnded">play again</span>
@@ -60,7 +59,7 @@
 
   <md-content class="game-view"
               style="overflow: hidden;"
-              ng-style="{'border-bottom-color': $ctrl.own.color, 'border-top-color': $ctrl.opp.color}"
+              ng-style="$ctrl.calcBorderStyle()"
               layout="row"
               layout-align="center center"
               flex>

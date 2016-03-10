@@ -28,33 +28,69 @@ module.component('room', {
           });
       });
 
-      $scope.$watch('$ctrl.players[1].type', (newVal) => {
-        if (newVal === 'ai') {
-          io.emit('room:joinAi',
-            {
-              roomId
+      $scope.$watch('$ctrl.players', (newPlayers, oldPlayers) => {
+        for (let i = 0, len = this.players.length; i < len; i++) {
+          if (i === this.ownIdx) continue;
+
+          const newPlayer = newPlayers[i];
+          const oldPlayer = oldPlayers[i];
+
+          if (newPlayer.type !== oldPlayer.type) {
+            if (newPlayer.type === 'ai') {
+              io.emit('room:joinAi',
+                {
+                  roomId
+                }
+              );
+            } else if (newPlayer.type === 'human') {
+              io.emit('room:setIsOpen',
+                {
+                  roomId, playerIdx: 1, isOpen: true
+                }
+              );
             }
-          );
-        } else if (newVal === 'human' && this.ownIdx != 1) {
-          io.emit('room:setIsOpen',
-            {
-              roomId, playerIdx: 1, isOpen: true
-            }
-          );
+            break;
+          }
         }
-      });
+      }, true);
+    }
+
+    waitingForPlayers() {
+      return this.players && this.players.some((player) => player.type === 'human' && player.isOpen);
     }
 
     update(serializedRoom) {
       Object.assign(this, serializedRoom);
       this.gameType = gameTypes[this.gameTypeName];
 
-      this.players[0].color = this.playerColors[0];
-      this.players[0].idx = 0;
-      this.players[1].color = this.playerColors[1];
-      this.players[1].idx = 1;
+      this.players.forEach((player, idx) => {
+        player.color = this.playerColors[idx];
+        player.idx = idx;
+      });
+
       this.own = this.players[this.ownIdx];
-      this.opp = this.players[(this.ownIdx + 1) % 2];
+    }
+
+    canStart() {
+      return this.players && !this.own.isReady && !this.game.isInProgress && !this.waitingForPlayers();
+    }
+
+    calcBorderStyle() {
+      // todo make game border into something generic
+      if (this.players.length === 2) {
+        return {
+          'border-bottom-color': this.players[this.ownIdx].color,
+          'border-top-color': this.players[(this.ownIdx + 1) % 4].color,
+        }
+      }
+      if (this.players.length === 4) {
+        return {
+          'border-bottom-color': this.players[this.ownIdx].color,
+          'border-left-color': this.players[(this.ownIdx + 1) % 4].color,
+          'border-top-color': this.players[(this.ownIdx + 2) % 4].color,
+          'border-right-color': this.players[(this.ownIdx + 3) % 4].color
+        }
+      }
     }
 
     gameAction({type, payload}) {
