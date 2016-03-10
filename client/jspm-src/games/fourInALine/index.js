@@ -94,7 +94,7 @@ function end({statistics, game, outcome}) {
 }
 
 export const actions = {
-  'MARK_COL': function ({statistics, game, players, action}) {
+  markCol: function ({statistics, game, players, action}) {
     const {c} = action.payload;
     for (var r = 5; r >= 0; r--) {
       if (game.board[r][c] === '_') {

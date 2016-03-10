@@ -36,7 +36,6 @@ export default class BasicAiPlayer {
       });
       board[cell[0]][cell[1]] = own.mark;
       const score = calcScores(board, own.mark);
-      console.log(`player ${ownIdx} scored ${cell} as ${score}`);
       return {
         cell,
         score
@@ -54,6 +53,6 @@ export default class BasicAiPlayer {
     }
     let selectedMove = moves[Math.floor(Math.random() * numOfBestMoves)].cell;
 
-    room.gameAction({type: 'MARK_CELL', payload: {x: selectedMove[0], y: selectedMove[1]}});
+    room.gameAction({type: 'markCell', payload: {x: selectedMove[0], y: selectedMove[1]}});
   }
 }

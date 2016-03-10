@@ -72,7 +72,7 @@ function end({statistics, game, outcome}) {
 }
 
 export const actions = {
-  'MARK_CELL': function({statistics, game, players, action}) {
+  markCell: function({statistics, game, players, action}) {
     const {x, y} = action.payload;
     game.board[x][y] = players[game.currentPlayerIdx].mark;
     game.totalMoves++;

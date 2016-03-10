@@ -5,6 +5,7 @@ import cellTpl from './cell.html!text';
 import './index.css!';
 
 import module from '../base';
+import Game from '../game';
 
 module.run(['$templateCache', function ($templateCache) {
   $templateCache.put('TicTacToe', '<tic-tac-toe game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></tic-tac-toe>');
@@ -20,11 +21,7 @@ module.component('ticTacToe', {
   require: {
     room: '^room'
   },
-  controller: class {
-    markCell(payload) {
-      this.room.gameAction({type: 'MARK_CELL', payload});
-    }
-  }
+  controller: class extends Game {}
 });
 
 module.component('winnerLine', {

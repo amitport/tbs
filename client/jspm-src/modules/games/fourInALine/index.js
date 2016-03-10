@@ -2,6 +2,7 @@ import boardTpl from './board.html!text';
 import './index.css!';
 
 import module from '../base';
+import Game from '../game';
 
 module.run(['$templateCache', function ($templateCache) {
   $templateCache.put('FourInALine', '<four-in-a-line game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></four-in-a-line>');
@@ -19,7 +20,7 @@ module.component('fourInALine', {
   require: {
     room: '^room'
   },
-  controller: class FourInALine {
+  controller: class FourInALine extends Game {
     static $inject = ['playerColors'];
     static mark2Fill = {
       '_': `${clientPath}circle-fill.svg`,
@@ -27,7 +28,7 @@ module.component('fourInALine', {
       'b': `${clientPath}circle-fill-blue.svg`
     };
 
-    constructor(playerColors) {this.playerColors = playerColors;}
+    constructor(playerColors) {super(); this.playerColors = playerColors;}
 
     outcomeColor() {
       return this.game.outcome.color === 'b' ?
@@ -37,9 +38,5 @@ module.component('fourInALine', {
     mark2Fill(mark) {
       return FourInALine.mark2Fill[mark];
     }
-
-    markCol(payload) {
-      this.room.gameAction({type: 'MARK_COL', payload});
-    };
   }
 });
