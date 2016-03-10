@@ -3,7 +3,7 @@
   "private": true,
   "license": "AGPL",
   "scripts": {
-    "sfx": "jspm bundle-sfx index jspm-sfx/main.min.js --minify --skip-source-maps"
+    "sfx": "jspm bundle-sfx index jspm-sfx/main.min.js --minify --no-mangle --skip-source-maps"
   },
   "jspm": {
     "directories": {
