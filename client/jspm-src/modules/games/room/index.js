@@ -47,7 +47,7 @@ module.component('room', {
 
     update(serializedRoom) {
       Object.assign(this, serializedRoom);
-      this.gameType = gameTypes[this.gameTypeId];
+      this.gameType = gameTypes[this.gameTypeName];
 
       this.players[0].color = this.playerColors[0];
       this.players[0].idx = 0;

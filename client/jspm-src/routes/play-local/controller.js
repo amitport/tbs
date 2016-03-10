@@ -5,7 +5,7 @@ export default class Room {
   static $inject = ['$routeParams', 'gameClientRepo', 'ap.user'];
 
   constructor($routeParams, gameClientRepo, user) {
-    const gameClient = gameClientRepo.get($routeParams.gameTypeId);
+    const gameClient = gameClientRepo.get($routeParams.gameTypeName);
 
     this.session = gameClient.createLocalSession((result) => {
       this.members[0].ready = false;

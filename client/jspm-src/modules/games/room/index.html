@@ -2,7 +2,7 @@
   <md-sidenav style="box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14);"
               md-is-locked-open="true">
     <md-content layout="column" layout-padding>
-      <div>{{$ctrl.gameTypeId}}</div>
+      <div>{{$ctrl.gameTypeName}}</div>
       <div layout="row" flex="nogrow" class="md-whiteframe-2dp" layout-padding layout-fill
            layout-align="space-between center" ng-repeat="player in $ctrl.players track by $index"
            style="border-left-style: solid; margin-bottom: 8px; height: 78px;"
@@ -65,7 +65,7 @@
               layout-align="center center"
               flex>
     <md-content style="overflow: visible;" layout="column" layout-align="center center">
-      <div class="ongoing-session" ng-class="{faded: !$ctrl.game.isInProgress}" ng-include="$ctrl.gameTypeId"></div>
+      <div class="ongoing-session" ng-class="{faded: !$ctrl.game.isInProgress}" ng-include="$ctrl.gameTypeName"></div>
     </md-content>
     <div ng-if="!$ctrl.game.isInProgress" style="position:absolute; background-color: #212121; width:100%; height: 100%; top:0; left:0; opacity: .48;"></div>
   </md-content>

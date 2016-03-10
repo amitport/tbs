@@ -6,13 +6,13 @@ export default ['$scope', '$location', '$window', 'io', 'ap.user',
 
     this.gameTypes = gameTypes;
 
-    this.createRoom = function (gameTypeId) {
-      io.emit('room:create', {gameTypeId, username: user.username || '{Anonymous}'}).then(function (roomId) {
+    this.createRoom = function (gameTypeName) {
+      io.emit('room:create', {gameTypeName, username: user.username || '{Anonymous}'}).then(function (roomId) {
         $location.path(`rooms/${roomId}`);
       });
     };
 
-    this.playVsAi = function (gameTypeId) {
-      $location.path(`play-local/${gameTypeId}`);
+    this.playVsAi = function (gameTypeName) {
+      $location.path(`play-local/${gameTypeName}`);
     }
   }];

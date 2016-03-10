@@ -1,7 +1,6 @@
 import BasicAi from './ai/basic';
 
-export const id = 'TicTacToe';
-export const name = 'Tic Tac Toe';
+export const name = 'TicTacToe';
 export const color = 'beige';
 
 export const ai = {basic: BasicAi};
@@ -88,7 +87,6 @@ export const actions = {
 };
 
 export default {
-  id,
   name,
   color,
   ai,

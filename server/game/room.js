@@ -1,8 +1,8 @@
 import * as gameTypes from '../../client/jspm-src/games/index';
 
 export default class Room {
-  constructor({gameTypeId, creator}) {
-    this.gameType = gameTypes[gameTypeId];
+  constructor({gameTypeName, creator}) {
+    this.gameType = gameTypes[gameTypeName];
 
     this.gameType.initializeRoom(this);
 
@@ -114,7 +114,7 @@ export default class Room {
 
   serialize() {
     return {
-      gameTypeId: this.gameType.id,
+      gameTypeName: this.gameType.name,
       game: this.game,
       statistics: this.statistics,
       players: this.players.map((player) => {
@@ -128,15 +128,15 @@ export default class Room {
 
   static rooms = [];
 
-  static create({gameTypeId, creator}) {
-    return this.rooms.push(new Room({gameTypeId, creator})) - 1;
+  static create({gameTypeName, creator}) {
+    return this.rooms.push(new Room({gameTypeName, creator})) - 1;
   }
 
-  static get(id) {
-    if (!this.rooms.hasOwnProperty(id)) {
+  static get(roomId) {
+    if (!this.rooms.hasOwnProperty(roomId)) {
       throw 'room not found';
     }
 
-    return this.rooms[id];
+    return this.rooms[roomId];
   }
 }

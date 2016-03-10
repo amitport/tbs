@@ -1,10 +1,10 @@
 import Room from '../../game/room';
 
-export function create({gameTypeId, username}) {
+export function create({gameTypeName, username}) {
   // todo verify creator
 
   const socket = this;
-  return Room.create({gameTypeId,
+  return Room.create({gameTypeName,
     creator: {
       name: username,
       onRoomUpdate(room) {

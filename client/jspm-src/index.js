@@ -30,7 +30,7 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs
       .when('/rooms/:roomId', {
         template: '<room flex layout></room>'
       });
-      //.when('/play-local/:gameTypeId', {
+      //.when('/play-local/:gameTypeName', {
       //  templateUrl: 'routes/room/index.html',
       //  controller: playLocalController,
       //  controllerAs: '$ctrl'

@@ -1,5 +1,4 @@
-export const id = 'FourInALine';
-export const name = 'Four In a Line';
+export const name = 'FourInALine';
 export const color = '#408080';
 
 function emptyBoard() {
@@ -116,7 +115,6 @@ export const actions = {
 };
 
 export default {
-  id,
   name,
   color,
   initializeRoom,
