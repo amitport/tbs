@@ -1,4 +1,4 @@
-<md-whiteframe class="md-whiteframe-3dp ticTacToe-board" layout="column" layout-align="center center">
+<md-whiteframe style="position: relative" class="md-whiteframe-3dp ticTacToe-board" layout="column" layout-align="center center">
   <span ng-repeat="row in $ctrl.game.board track by $index" ng-init="rowIndex = $index" layout="row">
     <cell ng-repeat="col in row track by $index" x="{{rowIndex}}" y="{{$index}}"></cell>
   </span>

@@ -21,11 +21,3 @@
   height: 0;
   min-height: 0;
 }
-
-.ongoing-session {
-  -webkit-transition: opacity cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-  transition: opacity cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-}
-.faded {
-  opacity: 0.3;
-}

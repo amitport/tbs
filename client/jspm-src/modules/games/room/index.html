@@ -63,8 +63,6 @@
               layout="row"
               layout-align="center center"
               flex>
-    <md-content style="overflow: visible;" layout="column" layout-align="center center">
-      <div class="ongoing-session" ng-class="{faded: !$ctrl.game.isInProgress}" ng-include="$ctrl.gameTypeName"></div>
-    </md-content>
+    <div ng-include="$ctrl.gameTypeName"></div>
     <div ng-if="!$ctrl.game.isInProgress" style="position:absolute; background-color: #212121; width:100%; height: 100%; top:0; left:0; opacity: .48;"></div>
   </md-content>
