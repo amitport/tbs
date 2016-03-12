@@ -31,8 +31,9 @@ export function encodeAuth(auth) {
 
 export function decodeAuth(token) {
   const payload = jwt.decode(token, secret);
-  if (payload.exp < moment().unix()) {
-    throw Error('Token expired');
-  }
+  // not needed since jwt-simple 0.5.0
+  //if (payload.exp < moment().unix()) {
+  //  throw Error('Token expired');
+  //}
   return payload.auth;
 }
