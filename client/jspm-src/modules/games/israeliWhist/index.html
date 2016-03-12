@@ -1,15 +1,42 @@
 <div style="position: absolute; top:0; left: 0; height: 100%; width: 100%;">
-  <div layout-fill layout="column" layout-align="start stretch">
-    <div flex layout="row" layout-align="center center">
-      a
+  <div layout-fill layout="column" layout-align="center stretch">
+    <div layout="row" layout-align="space-around center">
+      <div flex="33" layout="row" layout-padding>
+        <card-stack cards="$ctrl.game.deck"></card-stack>
+        <div style="border: 1px solid blue">
+          <span ng-if="$ctrl.game.phase === 'bidding'">highest bid: <bid value="$ctrl.game.bid"></bid></span>
+          <span ng-if="$ctrl.game.phase === 'contract' || $ctrl.game.phase === 'rounds'">trump: <suit value="$ctrl.game.bid.trump"></suit>,
+          totalContract: {{$ctrl.game.totalContract}}</span>
+        </div>
+      </div>
+      <div flex="33" layout="row" layout-padding layout-align="center center">
+        <card-stack cards="$ctrl.own.next(2).hand"></card-stack>
+        <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.next(2).call"></call>
+        <span style="border: 1px solid red">{{$ctrl.own.next(2).tricks}} / {{$ctrl.own.next(2).contract}}</span>
+      </div>
+      <div  flex="33">a</div>
     </div>
     <div flex layout="row" layout-align="space-around center">
-      <div>b1</div>
-      <card-stack cards="$ctrl.game.deck"></card-stack>
-      <div>b2</div>
+      <div layout="row" layout-padding>
+        <card-stack cards="$ctrl.own.next(1).hand"></card-stack>
+        <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.next(1).call"></call>
+        <span style="border: 1px solid red">{{$ctrl.own.next(1).tricks}} / {{$ctrl.own.next(1).contract}}</span>
+      </div>
+      <div>
+        <bid-options bid="$ctrl.game.bid" ng-if="$ctrl.game.phase === 'bidding'"></bid-options>
+        <contract-options ng-if="$ctrl.game.phase === 'contract'"></contract-options>
+        <hand ng-if="$ctrl.game.phase === 'rounds'" cards="$ctrl.game.down"></hand>
+      </div>
+      <div layout="row" layout-padding>
+        <card-stack cards="$ctrl.own.next(3).hand"></card-stack>
+        <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.next(3).call"></call>
+        <span style="border: 1px solid red">{{$ctrl.own.next(3).tricks}} / {{$ctrl.own.next(3).contract}}</span>
+      </div>
     </div>
-    <div flex layout="row" layout-align="center center">
-      c
+    <div layout="row" layout-align="center center">
+      <hand cards="$ctrl.own.hand"></hand>
+      <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.call"></call>
+      <span style="border: 1px solid red">{{$ctrl.own.tricks}} / {{$ctrl.own.contract}}</span>
     </div>
   </div>
 </div>

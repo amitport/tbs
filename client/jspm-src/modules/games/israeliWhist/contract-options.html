@@ -1,0 +1,15 @@
+<div md-whiteframe="2">
+  <h4 class="md-padding">contract bidding</h4>
+  <div layout="row" layout-wrap>
+    <md-button class="bid-button"
+               ng-repeat="contractOption in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] track by $index"
+               style="min-width: 48px;"
+               ng-click="$ctrl.game.declare(contractOption)"
+               ng-disabled="
+            ($ctrl.game.own.idx !== $ctrl.game.game.currentPlayerIdx) ||
+            ($ctrl.game.own.idx === $ctrl.game.game.bid.bidderIdx && contractOption < $ctrl.game.game.bid.tricks) ||
+            ($ctrl.game.own.next(1).idx === $ctrl.game.game.bid.bidderIdx && (contractOption + $ctrl.game.game.totalContract) === 13)">
+      {{contractOption}}
+    </md-button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div layout="column" md-whiteframe="2">
+  <h4 class="md-padding">trump bidding</h4>
+  <div layout="row" ng-repeat="optionsByTrump in $ctrl.options" layout-wrap>
+    <md-button class="bid-button"
+               ng-repeat="option in optionsByTrump"
+               style="min-width: 48px;"
+                ng-disabled="$ctrl.isInvalidBidOption(option.tricks, option.trump)"
+                ng-click="$ctrl.game.bid({tricks: option.tricks, trump: option.trump})">
+      <bid value="option"></bid>
+    </md-button>
+  </div>
+  <md-button ng-disabled="$ctrl.game.own.idx !== $ctrl.game.game.currentPlayerIdx" class="md-block" ng-click="$ctrl.game.pass()">pass</md-button>
+</div>
+
+
