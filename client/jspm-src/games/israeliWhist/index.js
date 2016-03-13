@@ -147,6 +147,7 @@ export default class IsraeliWhist extends Game {
 
     const {game, players} = room;
 
+    delete game.bid;
     shuffle(game.deck);
 
     players[0].hand = game.deck.slice(0, 13).sort(suitThenRankComparator);
