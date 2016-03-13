@@ -1,0 +1,30 @@
+<table class="md-whiteframe-2dp down-table">
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+      <card ng-if="$ctrl.cards[($ctrl.ownDownIdx + 2) % 4]" rank="{{$ctrl.cards[($ctrl.ownDownIdx + 2) % 4].rank}}"
+            suit="{{$ctrl.cards[($ctrl.ownDownIdx + 2) % 4].suit}}"></card>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+      <card ng-if="$ctrl.cards[($ctrl.ownDownIdx + 1) % 4]" rank="{{$ctrl.cards[($ctrl.ownDownIdx + 1) % 4].rank}}"
+            suit="{{$ctrl.cards[($ctrl.ownDownIdx + 1) % 4].suit}}"></card>
+    </td>
+    <td>&nbsp;</td>
+    <td>
+      <card ng-if="$ctrl.cards[($ctrl.ownDownIdx + 3) % 4]" rank="{{$ctrl.cards[($ctrl.ownDownIdx + 3) % 4].rank}}"
+            suit="{{$ctrl.cards[($ctrl.ownDownIdx + 3) % 4].suit}}"></card>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+      <card ng-if="$ctrl.cards[$ctrl.ownDownIdx]" rank="{{$ctrl.cards[$ctrl.ownDownIdx].rank}}"
+            suit="{{$ctrl.cards[$ctrl.ownDownIdx].suit}}"></card>
+    </td>
+    &nbsp;
+    <td></td>
+  </tr>
+</table>

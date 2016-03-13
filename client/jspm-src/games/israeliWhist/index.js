@@ -28,6 +28,31 @@ function suitThenRankComparator(a, b) {
   }
 }
 
+function end({statistics, game, players}) {
+  game.isInProgress = false;
+  game.isEnded = true;
+
+  players.forEach((player, idx) => {
+    statistics.score[idx] += (player.contract === player.tricks)
+      ? // player made the contract
+      (player.contract !== 0)
+        ? // non-zero contract
+        player.contract * player.contract + 10
+        : // zero contract
+        (game.totalContract > 13)
+          ? 25// over game
+          : 50 // under game
+      : // player did not made the contract
+      (player.contract !== 0)
+        ? // non-zero contract
+        -Math.abs(player.contract - player.tricks) * 10
+        : // zero contract
+        -50 + (player.tricks - 1) * 10
+  });
+
+  statistics.totalGames++;
+}
+
 export default class IsraeliWhist extends Game {
   static color = '#e09292';
   static actions = {
@@ -55,11 +80,12 @@ export default class IsraeliWhist extends Game {
       game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
 
       if (players[game.currentPlayerIdx].contract) {
-        game.phase = 'rounds';
         game.down = [];
+        game.roundStarterIdx = game.currentPlayerIdx;
+        game.phase = 'rounds';
       }
     },
-    putDown({players, game, action}) {
+    putDown({statistics, players, game, action}) {
 
       const hand = players[game.currentPlayerIdx].hand;
       const cardIdx = hand.findIndex((card) => action.payload.suit === card.suit && action.payload.rank === card.rank);
@@ -88,8 +114,13 @@ export default class IsraeliWhist extends Game {
         }
 
         players[roundWinnerIdx].tricks++;
-        game.currentPlayerIdx = roundWinnerIdx;
+        game.currentPlayerIdx = game.roundStarterIdx = roundWinnerIdx;
         game.down = [];
+
+        if (players[0].hand.length === 0) {
+          // finished rounds -> end game
+          end({statistics, game, players});
+        }
       } else {
         game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
       }
@@ -122,8 +153,9 @@ export default class IsraeliWhist extends Game {
     players[1].hand = game.deck.slice(13, 26).sort(suitThenRankComparator);
     players[2].hand = game.deck.slice(26, 39).sort(suitThenRankComparator);
     players[3].hand = game.deck.slice(39, 52).sort(suitThenRankComparator);
-    players.forEach((player) => {player.tricks = 0;});
-    game.deck = [];
+    players.forEach((player) => {
+      player.tricks = 0;
+    });
 
     game.phase = 'bidding';
   }

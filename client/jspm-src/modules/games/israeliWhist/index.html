@@ -2,17 +2,17 @@
   <div layout-fill layout="column" layout-align="center stretch">
     <div layout="row" layout-align="space-around center">
       <div flex="33" layout="row" layout-padding>
-        <card-stack cards="$ctrl.game.deck"></card-stack>
         <div style="border: 1px solid blue">
           <span ng-if="$ctrl.game.phase === 'bidding'">highest bid: <bid value="$ctrl.game.bid"></bid></span>
           <span ng-if="$ctrl.game.phase === 'contract' || $ctrl.game.phase === 'rounds'">trump: <suit value="$ctrl.game.bid.trump"></suit>,
-          totalContract: {{$ctrl.game.totalContract}}</span>
+          totalContract: {{$ctrl.game.totalContract}} ({{$ctrl.game.totalContract > 13 ? 'over' : ($ctrl.game.totalContract <  13 ? 'under' : 'invalid')}})</span>
         </div>
       </div>
       <div flex="33" layout="row" layout-padding layout-align="center center">
         <card-stack cards="$ctrl.own.next(2).hand"></card-stack>
         <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.next(2).call"></call>
         <span style="border: 1px solid red">{{$ctrl.own.next(2).tricks}} / {{$ctrl.own.next(2).contract}}</span>
+        <span style="border: 1px solid yellow">{{$ctrl.room.statistics.score[$ctrl.own.next(2).idx]}}</span>
       </div>
       <div  flex="33">a</div>
     </div>
@@ -21,22 +21,25 @@
         <card-stack cards="$ctrl.own.next(1).hand"></card-stack>
         <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.next(1).call"></call>
         <span style="border: 1px solid red">{{$ctrl.own.next(1).tricks}} / {{$ctrl.own.next(1).contract}}</span>
+        <span style="border: 1px solid yellow">{{$ctrl.room.statistics.score[$ctrl.own.next(1).idx]}}</span>
       </div>
       <div>
         <bid-options bid="$ctrl.game.bid" ng-if="$ctrl.game.phase === 'bidding'"></bid-options>
         <contract-options ng-if="$ctrl.game.phase === 'contract'"></contract-options>
-        <hand ng-if="$ctrl.game.phase === 'rounds'" cards="$ctrl.game.down"></hand>
+        <down ng-if="$ctrl.game.phase === 'rounds'" cards="$ctrl.game.down"></down>
       </div>
       <div layout="row" layout-padding>
         <card-stack cards="$ctrl.own.next(3).hand"></card-stack>
         <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.next(3).call"></call>
         <span style="border: 1px solid red">{{$ctrl.own.next(3).tricks}} / {{$ctrl.own.next(3).contract}}</span>
+        <span style="border: 1px solid yellow">{{$ctrl.room.statistics.score[$ctrl.own.next(3).idx]}}</span>
       </div>
     </div>
     <div layout="row" layout-align="center center">
       <hand cards="$ctrl.own.hand"></hand>
       <call style="border: 1px solid blue" ng-if="$ctrl.game.phase === 'bidding'" value="$ctrl.own.call"></call>
       <span style="border: 1px solid red">{{$ctrl.own.tricks}} / {{$ctrl.own.contract}}</span>
+      <span style="border: 1px solid yellow">{{$ctrl.room.statistics.score[$ctrl.own.idx]}}</span>
     </div>
   </div>
 </div>

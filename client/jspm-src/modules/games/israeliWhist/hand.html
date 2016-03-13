@@ -1,7 +1,7 @@
 <div layout="row" layout-wrap>
   <div ng-repeat="card in $ctrl.cards">
     <md-button ng-click="$ctrl.game.putDown(card)" class="md-raised hand-card-button"
-               ng-disabled="$ctrl.game.game.currentPlayerIdx !== $ctrl.game.own.idx || $ctrl.game.game.phase !== 'rounds'">
+               ng-disabled="$ctrl.isDisabled(card)">
       <card rank="{{::card.rank}}" suit="{{::card.suit}}">
       </card>
     </md-button>

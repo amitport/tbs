@@ -46,6 +46,52 @@ module.component('hand', {
     game: '^israeliWhist'
   },
   controller: class Hand {
+    isDisabled(card) {
+      if (this.game.game.currentPlayerIdx !== this.game.own.idx
+          || this.game.game.phase !== 'rounds'
+          || !this.game.game.down) {
+        return true;
+      } else {
+        if (this.game.game.down.length === 0) {
+          return false
+        }
+        if (card.suit !== this.game.game.down[0].suit) {
+          // disable only if we have card with matching suit
+          console.log(this.cards)
+          return this.cards.some((_card, idx) => {
+            if (_card.suit === this.game.game.down[0].suit) {
+              console.log(_card)
+              console.log(idx)
+              return true;
+            }
+          });
+        }
+      }
+    }
+  }
+});
+
+import './down.css!';
+import downTpl from './down.html!text';
+module.component('down', {
+  template: downTpl,
+  bindings: {
+    cards: '<'
+  },
+  require: {
+    game: '^israeliWhist'
+  },
+  controller: class Down {
+    static $inject = ['$scope']
+    constructor($scope) {
+      $scope.$watch('$ctrl.game.game.roundStarterIdx', (newVal) => {
+        this.ownDownIdx = (newVal > this.game.own.idx)
+          ?
+          (4 - newVal) + this.game.own.idx
+          :
+          this.game.own.idx - newVal;
+      });
+    }
   }
 });
 
@@ -59,7 +105,7 @@ module.component('card', {
   controller: class Card {
     static suit2sym = ['♣', '♦', '♥', '♠', 'NT'];
     static suit2color = ['black', 'red', 'red', 'black', 'green'];
-    static rank2sym = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
+    static rank2sym = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
     $onInit() {
       this.suit = parseInt(this.suit, 10);

@@ -1,0 +1,10 @@
+table.down-table {
+  table-layout: fixed;
+}
+
+table.down-table td {
+  text-align: center;
+  vertical-align: middle;
+  height: 40px;
+  width: 40px;
+}
