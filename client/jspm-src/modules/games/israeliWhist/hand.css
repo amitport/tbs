@@ -1,6 +1,6 @@
-.hand-card-button:disabled {
+.hand-card-button.md-button:disabled {
   opacity: 0.5;
 }
-.hand-card-button {
+.hand-card-button.md-button {
   min-width: 0;
 }
