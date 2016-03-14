@@ -53,6 +53,6 @@ export default class BasicAiPlayer {
     }
     let selectedMove = moves[Math.floor(Math.random() * numOfBestMoves)].cell;
 
-    room.gameAction({type: 'markCell', payload: {x: selectedMove[0], y: selectedMove[1]}});
+    room.gameAction({type: 'markCell', payload: {x: selectedMove[0], y: selectedMove[1]}, meta: {playerIdx: ownIdx}});
   }
 }

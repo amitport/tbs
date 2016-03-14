@@ -17,7 +17,7 @@ export function create({gameTypeName, username}) {
 
 export function gameAction({roomId, type, payload}) {
   const room = Room.get(roomId);
-  room.gameAction({type, payload});
+  room.gameAction({type, payload, meta: this.meta});
 }
 
 export function joinAi({roomId}) {
@@ -35,13 +35,20 @@ export function join({roomId, username}) {
   const room = Room.get(roomId);
 
   const socket = this;
-  return room.join({
+  const roomJoinResponse = room.join({
     name: username,
     onRoomUpdate(room) {
       socket.emit('room:update', room.serialize());
     },
     _id: socket.id}
   );
+
+  socket.meta = {
+    roomId,
+    playerIdx: roomJoinResponse.ownIdx
+  };
+
+  return roomJoinResponse;
 }
 
 export function setIsReady({roomId, isReady}) {

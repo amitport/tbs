@@ -38,6 +38,10 @@ export default class Room {
     return this.players.find((player) => player._id === playerId);
   }
 
+  findPlayerIdx(playerId) {
+    return this.players.findIndex((player) => player._id === playerId);
+  }
+
   setIsReady({playerId, isReady}) {
     this.findPlayer(playerId).isReady = isReady;
 
@@ -102,7 +106,7 @@ export default class Room {
 
   gameAction(action) {
     if (this.game.isInProgress &&
-        //action.meta.playerIdx === this.game.currentPlayerIdx &&
+        action.meta.playerIdx === this.game.currentPlayerIdx &&
         this.gameType.actions.hasOwnProperty(action.type)) {
       this.gameType.actions[action.type]({...this, action});
 
