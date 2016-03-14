@@ -67,7 +67,7 @@ module.component('room', {
       this.players.forEach((player, idx) => {
         player.color = this.playerColors[idx];
         player.idx = idx;
-        player.next = (count = 1) => this.players[(idx + count) % this.players.length];
+        //player.next = this.players[(idx + 1) % this.players.length];
       });
 
       this.own = this.players[this.ownIdx];
@@ -85,7 +85,7 @@ module.component('room', {
       if (this.players.length === 2) {
         return {
           'border-bottom-color': this.players[this.ownIdx].color,
-          'border-top-color': this.players[(this.ownIdx + 1) % 4].color
+          'border-top-color': this.players[(this.ownIdx + 1) % 2].color
         };
       }
       if (this.players.length === 4) {
