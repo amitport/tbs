@@ -1,18 +1,32 @@
 import Room from '../../game/room';
+import crypto from 'crypto';
+import base58 from 'bs58';
 
 export function create({gameTypeName, username}) {
   // todo verify creator
 
   const socket = this;
-  return Room.create({gameTypeName,
+  if (!socket.hasOwnProperty('playerId')) {
+    socket.playerId = base58.encode(crypto.randomBytes(16));
+  }
+
+  const roomCreateResponse =  Room.create({gameTypeName,
     creator: {
       name: username,
       onRoomUpdate(room) {
         socket.emit('room:update', room.serialize());
       },
-      _id: socket.id
+      _id: socket.playerId
     }
   });
+  socket.broadcast.to('lobby').emit('room:lobbyUpdate', Room.list());
+  return roomCreateResponse;
+}
+export function subscribeToLobby() {
+  this.join('lobby');
+  this.isInLobby = true;
+
+  return Room.list();
 }
 
 export function gameAction({roomId, type, payload}) {
@@ -31,22 +45,29 @@ export function setIsOpen({roomId, playerIdx, isOpen}) {
   room.setIsOpen({playerIdx, isOpen});
 }
 
-export function join({roomId, username}) {
+export function join({roomId, username, playerId}) {
   const room = Room.get(roomId);
 
   const socket = this;
+  if (!socket.hasOwnProperty('playerId')) {
+    socket.playerId = playerId || base58.encode(crypto.randomBytes(16));
+  }
+
   const roomJoinResponse = room.join({
     name: username,
     onRoomUpdate(room) {
       socket.emit('room:update', room.serialize());
     },
-    _id: socket.id}
+    _id: socket.playerId}
   );
+
 
   socket.meta = {
     roomId,
     playerIdx: roomJoinResponse.ownIdx
   };
+
+  roomJoinResponse.playerId = socket.playerId;
 
   return roomJoinResponse;
 }
@@ -54,5 +75,5 @@ export function join({roomId, username}) {
 export function setIsReady({roomId, isReady}) {
   const room = Room.get(roomId);
 
-  room.setIsReady({playerId: this.id, isReady});
+  room.setIsReady({playerId: this.playerId, isReady});
 }

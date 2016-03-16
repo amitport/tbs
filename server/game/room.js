@@ -1,7 +1,8 @@
 import * as gameTypes from '../../client/jspm-src/games/index';
 
 export default class Room {
-  constructor({gameTypeName, creator}) {
+  constructor({gameTypeName, creator, id}) {
+    this.id = id;
     this.gameType = gameTypes[gameTypeName];
 
     this.gameType.initializeRoom(this);
@@ -132,8 +133,18 @@ export default class Room {
 
   static rooms = [];
 
+  static list() {
+    return this.rooms.filter((room) => room.players.some((player) => player.isOpen)).map((room) => {
+      return {
+        gameTypeName: room.gameType.name,
+        id: room.id,
+        players: room.players.map((player) => {return {isOpen: player.isOpen};})
+      };
+    })
+  }
+
   static create({gameTypeName, creator}) {
-    return this.rooms.push(new Room({gameTypeName, creator})) - 1;
+    return this.rooms.push(new Room({gameTypeName, creator, id: this.rooms.length})) - 1;
   }
 
   static get(roomId) {

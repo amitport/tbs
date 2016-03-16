@@ -104,13 +104,12 @@ module.provider('ap.user',
                         attemptImmediateSignIn() {
                             // currently this only checks for valid authTokens are on localStorage
                             if ($window.localStorage.hasOwnProperty('authTokens')) {
-                                this
-                                .signIn(JSON.parse($window.localStorage.authTokens), true)
-                                .then(() => {
-                                    if ($window.sessionStorage.hasOwnProperty('accessOverride')) {
-                                        this.override = JSON.parse($window.sessionStorage.accessOverride);
-                                    }
-                                });
+                              if ($window.sessionStorage.hasOwnProperty('accessOverride')) {
+                                tokens.set(JSON.parse($window.localStorage.authTokens));
+                                this.override = JSON.parse($window.sessionStorage.accessOverride);
+                              } else {
+                                this.signIn(JSON.parse($window.localStorage.authTokens), true)
+                              }
                             }
                         },
                         signInWithEmail(email) {

@@ -2,7 +2,12 @@ import * as gameTypes from '../../games/index';
 
 export default ['$scope', '$location', '$window', 'io', 'ap.user',
   function ($scope, $location, $window, io, user) {
-    io.connect($scope);
+    this.updateLobby = (rooms) => {
+      this.rooms = rooms;
+    };
+
+    io.connect($scope)
+      .on('room:lobbyUpdate', this.updateLobby.bind(this));
 
     this.gameTypes = gameTypes;
 
@@ -11,6 +16,8 @@ export default ['$scope', '$location', '$window', 'io', 'ap.user',
         $location.path(`rooms/${roomId}`);
       });
     };
+
+    io.emit('room:subscribeToLobby').then(this.updateLobby.bind(this));
 
     this.playVsAi = function (gameTypeName) {
       $location.path(`play-local/${gameTypeName}`);

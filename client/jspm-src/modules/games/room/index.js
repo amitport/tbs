@@ -17,7 +17,7 @@ module.component('room', {
       this.io = io;
       this.address = $location.absUrl();
       user.signInPromise.finally(() => {
-        io.emit('room:join', {roomId: this.roomId, username: user.username || '{Anonymous}'})
+        io.emit('room:join', {roomId: this.roomId, username: user.username || '{Anonymous}', playerId: sessionStorage['playerId']})
           .then((serializedRoom) => {
             this.update(serializedRoom);
 
@@ -62,6 +62,10 @@ module.component('room', {
 
     update(serializedRoom) {
       Object.assign(this, serializedRoom);
+      if (serializedRoom.hasOwnProperty('playerId')) {
+        sessionStorage['playerId'] = this.playerId;
+      }
+
       this.gameType = gameTypes[this.gameTypeName];
 
       this.players.forEach((player, idx) => {

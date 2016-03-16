@@ -1,20 +1,43 @@
-<md-content flex layout-fill layout="column" style="background: linear-gradient(to bottom, #FFFFFF 0%,#E9E9E9 47%,#D5D5D5 100%);">
-  <h1 class="md-display-4" style="margin: 40px; text-align: center; color: white; text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);">
+<md-content flex layout-fill layout="column"
+            style="background: linear-gradient(to bottom, #FFFFFF 0%,#E9E9E9 47%,#D5D5D5 100%);">
+  <h1 class="md-display-4"
+      style="margin: 40px; text-align: center; color: white; text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);">
     TBS
   </h1>
-  <div layout="row" layout-align="center start" flex="noshrink">
-    <md-card ng-repeat="gameType in $ctrl.gameTypes track by $index">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{::gameType.name}}</span>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div class="md-media-sm" style="background-color: {{::gameType.color}}; margin-left: 16px;"></div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="$ctrl.createRoom(gameType.name)" ng-disabled="gameType.disabled">Play</md-button>
-      </md-card-actions>
-    </md-card>
+  <div layout="column" layout-align="start center">
+    <div layout="row" layout-align="center start" flex="noshrink">
+      <md-card ng-repeat="gameType in $ctrl.gameTypes track by $index">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{::gameType.name}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm" style="background-color: {{::gameType.color}}; margin-left: 16px;"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="$ctrl.createRoom(gameType.name)" ng-disabled="gameType.disabled">Play</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div class="md-whiteframe-2dp" style="padding: 16px; background-color: whitesmoke">
+      <h4>Open gaming sessions</h4>
+      <md-list>
+        <md-list-item class="md-2-line" ng-repeat="room in $ctrl.rooms" style="width:400px">
+          <div class="md-list-item-text">
+            <h3> {{ room.gameTypeName }} #{{ room.id }}</h3>
+            <div layout="row" layout-align="start center">
+              <div ng-repeat="player in room.players"
+                   style="margin-right: 8px; height:10px; width: 10px; border: 1px solid dimgrey;"
+                   ng-style="{'background-color': !player.isOpen ? 'dimgrey' : false}"
+              ></div>
+            </p>
+          </div>
+          <md-button class="md-secondary md-icon-button" aria-label="join game">
+            <md-icon>play_arrow</md-icon>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </div>
   </div>
 </md-content>

@@ -15,6 +15,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "babel-register": "^6.7.2",
     "bluebird": "^3.3.4",
+    "bs58": "^3.0.0",
     "config": "^1.19.0",
     "jwt-simple": "^0.5.0",
     "moment": "^2.12.0",
