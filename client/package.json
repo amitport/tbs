@@ -10,20 +10,21 @@
       "baseURL": "jspm-src"
     },
     "dependencies": {
-      "angular": "github:angular/bower-angular@^1.5.0",
+      "angular": "github:angular/bower-angular@^1.5.1",
       "angular-auto-focus": "npm:angular-auto-focus@^1.0.4",
       "angular-material": "github:angular/bower-material@^1.0.6",
-      "angular-messages": "github:angular/bower-angular-messages@^1.5.0",
-      "angular-route": "github:angular/bower-angular-route@^1.5.0",
+      "angular-messages": "github:angular/bower-angular-messages@^1.5.1",
+      "angular-route": "github:angular/bower-angular-route@^1.5.1",
       "angular-translate": "github:angular-translate/bower-angular-translate@^2.10.0",
       "css": "github:systemjs/plugin-css@^0.1.20",
+      "master-class": "npm:master-class@^0.4.1",
       "socket.io-client": "github:socketio/socket.io-client@^1.4.5",
       "text": "github:systemjs/plugin-text@0.0.4"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.35",
       "babel-runtime": "npm:babel-runtime@^5.8.35",
-      "clean-css": "npm:clean-css@^3.4.9",
+      "clean-css": "npm:clean-css@^3.4.10",
       "core-js": "npm:core-js@^1.2.6"
     }
   },

@@ -7,25 +7,53 @@ export const ai = {basic: BasicAi};
 
 function emptyBoard() {return [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']]};
 
+import M from 'master-class';
+
+var Game = M({
+    props: {
+      board: M.Array({
+        defaultLength: 3,
+        elem: M.Array({
+          defaultLength: 3,
+          elem: M.String({initialValue: '_'})
+        })
+      }),
+      isInProgress: M.Boolean(),
+      currentPlayerIdx: M.Number({initialValue: NaN}),
+      totalMoves: M.Number(),
+      isEnded: M.Boolean(),
+      outcome: M.Object({
+        props: {
+          winner: M.Number(),
+          line: M.String()
+        }
+      }),
+      start: M.Mutator(function () {
+        this.isInProgress = true;
+        this.currentPlayerIdx = Math.floor(Math.random() + 0.5);
+        this.totalMoves = 0;
+
+        this.isEnded = false;
+        this.board = [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']];
+      }),
+      end: M.Mutator(function (outcome) {
+        this.isInProgress = false;
+        this.isEnded = true;
+        this.outcome = outcome;
+      })
+    }
+  });
+
 export function initializeRoom(room) {
-  room.game = {
-    board: emptyBoard(),
-    isInProgress: false
-  };
+  room.game = Game.createInstance();
+
   room.statistics = {totalGames: 0, wins: [0, 0]};
 
   room.players = [{mark: 'X'}, {mark: 'O'}];
 }
 
 export function startGame({game}) {
-  game.isInProgress = true;
-  game.currentPlayerIdx = Math.floor(Math.random() + 0.5);
-  game.totalMoves = 0;
-
-  delete game.isEnded;
-  delete game.outcome;
-
-  game.board = emptyBoard();
+  game.start();
 }
 
 function searchForOutcome({board, totalMoves, currentPlayerIdx}) {
@@ -60,9 +88,7 @@ function searchForOutcome({board, totalMoves, currentPlayerIdx}) {
 }
 
 function end({statistics, game, outcome}) {
-  game.isInProgress = false;
-  game.isEnded = true;
-  game.outcome = outcome;
+  game.end(outcome);
 
   statistics.totalGames++;
   if (outcome.hasOwnProperty('winner')) {
