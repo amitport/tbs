@@ -17,7 +17,7 @@
       "angular-route": "github:angular/bower-angular-route@^1.5.2",
       "angular-translate": "github:angular-translate/bower-angular-translate@^2.11.0",
       "css": "github:systemjs/plugin-css@^0.1.20",
-      "master-class": "npm:master-class@^0.5.3",
+      "master-class": "npm:master-class@^0.5.8",
       "socket.io-client": "github:socketio/socket.io-client@^1.4.5",
       "text": "github:systemjs/plugin-text@0.0.4"
     },

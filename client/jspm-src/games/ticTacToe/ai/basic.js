@@ -27,8 +27,8 @@ export default class BasicAiPlayer {
 
   static onRoomUpdate(room, ownIdx) {
     if (ownIdx != room.game.currentPlayerIdx || !room.game.isInProgress) return;
-    const {game, players} = room;
-    const own = players[ownIdx];
+    const game = room.game;
+    const own = game.players[ownIdx];
 
     const moves = getEmptyCells(game.board).map((cell) => {
       const board = game.board.map(function (row) {

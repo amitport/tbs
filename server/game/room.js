@@ -120,7 +120,7 @@ export default class Room {
   serialize() {
     return {
       gameTypeName: this.gameType.name,
-      game: this.game,
+      game: this.game.hasOwnProperty('snapshot') ? this.game.snapshot() : this.game,
       statistics: this.statistics,
       players: this.players.map((player) => {
         const serializedPlayer = Object.assign({}, player);

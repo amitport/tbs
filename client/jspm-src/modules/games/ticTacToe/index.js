@@ -1,3 +1,5 @@
+import Control from 'master-class/lib/utils/control';
+
 import boardTpl from './board.html!text';
 import winnerLineTpl from './winner-line.html!text';
 import cellTpl from './cell.html!text';
@@ -5,23 +7,36 @@ import cellTpl from './cell.html!text';
 import './index.css!';
 
 import module from '../base';
-import Game from '../game';
 
 module.run(['$templateCache', function ($templateCache) {
-  $templateCache.put('TicTacToe', '<tic-tac-toe game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></tic-tac-toe>');
+  $templateCache.put('TicTacToe', '<tic-tac-toe game="$ctrl.game" own="$ctrl.own"></tic-tac-toe>');
 }]);
 
 module.component('ticTacToe', {
   template: boardTpl,
   bindings: {
-    game: '<',
-    players: '<',
+    gameOld: '<game',
     own: '<'
   },
   require: {
     room: '^room'
   },
-  controller: class extends Game {}
+  controller: class {
+    static $inject = ['$scope'];
+    constructor($scope) {
+      const self = this;
+      const control = new Control({
+        onMutatorCall: function (keyPath, args, mutator) {
+          mutator.apply(this, args);
+
+          self.room.gameAction({type: keyPath[keyPath.length - 1], payload: args[0]});
+        }
+      });
+      $scope.$watch('$ctrl.gameOld', (game) => {
+        this.game = this.room.gameType.Game.createInstance(game, control);
+      })
+    }
+  }
 });
 
 module.component('winnerLine', {

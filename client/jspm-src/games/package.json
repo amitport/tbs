@@ -7,6 +7,6 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "master-class": "^0.5.3"
+    "master-class": "^0.5.8"
   }
 }

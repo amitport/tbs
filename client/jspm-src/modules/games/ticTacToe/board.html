@@ -4,6 +4,6 @@
   </span>
   <winner-line ng-if="$ctrl.game.isEnded && $ctrl.game.outcome !== 'tie'"
                line="{{::$ctrl.game.outcome.line}}"
-               color="{{::$ctrl.players[$ctrl.game.currentPlayerIdx].color}}">
+               color="{{::$ctrl.game.currentPlayer.color}}">
   </winner-line>
 </md-whiteframe>
