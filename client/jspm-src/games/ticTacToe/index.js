@@ -5,44 +5,42 @@ export const color = 'beige';
 
 export const ai = {basic: BasicAi};
 
-function emptyBoard() {return [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']]};
+function emptyBoard() {
+  return [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']];
+}
 
 import M from 'master-class';
 
 var Game = M({
-    props: {
-      board: M.Array({
-        defaultLength: 3,
-        elem: M.Array({
-          defaultLength: 3,
-          elem: M.String({initialValue: '_'})
-        })
-      }),
-      isInProgress: M.Boolean(),
-      currentPlayerIdx: M.Number({initialValue: NaN}),
-      totalMoves: M.Number(),
-      isEnded: M.Boolean(),
-      outcome: M.Object({
-        props: {
-          winner: M.Number(),
-          line: M.String()
-        }
-      }),
-      start: M.Mutator(function () {
-        this.isInProgress = true;
-        this.currentPlayerIdx = Math.floor(Math.random() + 0.5);
-        this.totalMoves = 0;
+  board: M.Array({
+    defaultLength: 3,
+    elem: M.Array({
+      defaultLength: 3,
+      elem: M('_')
+    })
+  }),
+  isInProgress: false,
+  currentPlayerIdx: NaN,
+  totalMoves: 0,
+  isEnded: false,
+  outcome: {
+    winner: Number,
+    line: String
+  },
+  start() {
+    this.isInProgress = true;
+    this.currentPlayerIdx = Math.floor(Math.random() + 0.5);
+    this.totalMoves = 0;
 
-        this.isEnded = false;
-        this.board = [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']];
-      }),
-      end: M.Mutator(function (outcome) {
-        this.isInProgress = false;
-        this.isEnded = true;
-        this.outcome = outcome;
-      })
-    }
-  });
+    this.isEnded = false;
+    this.board = emptyBoard();
+  },
+  end(outcome) {
+    this.isInProgress = false;
+    this.isEnded = true;
+    this.outcome = outcome;
+  }
+});
 
 export function initializeRoom(room) {
   room.game = Game.createInstance();
@@ -97,7 +95,7 @@ function end({statistics, game, outcome}) {
 }
 
 export const actions = {
-  markCell: function({statistics, game, players, action}) {
+  markCell: function ({statistics, game, players, action}) {
     const {x, y} = action.payload;
     game.board[x][y] = players[game.currentPlayerIdx].mark;
     game.totalMoves++;
