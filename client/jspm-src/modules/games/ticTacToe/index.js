@@ -27,9 +27,13 @@ module.component('ticTacToe', {
       const self = this;
       const control = new Control({
         onMutatorCall: function (keyPath, args, mutator) {
-          mutator.apply(this, args);
+          if (this === this.game.currentPlayer) {
+            // assume all mutation actions start on the currentPlayer
+            self.room.gameAction({type: keyPath[keyPath.length - 1], payload: args[0]});
+          }
 
-          self.room.gameAction({type: keyPath[keyPath.length - 1], payload: args[0]});
+          // perform an optimistic update
+          mutator.call(this, args[0], self.room.statistics);
         }
       });
       $scope.$watch('$ctrl.gameOld', (game) => {
