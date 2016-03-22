@@ -62,6 +62,11 @@ export function join({roomId, username, playerId}) {
   );
 
 
+  if (this.isInLobby) {
+    this.leave('lobby');
+    this.isInLobby = false;
+  }
+
   socket.meta = {
     roomId,
     playerIdx: roomJoinResponse.ownIdx
