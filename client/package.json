@@ -3,6 +3,7 @@
   "private": true,
   "license": "AGPL",
   "scripts": {
+    "postinstall": "cd jspm-src/games && npm i",
     "sfx": "jspm bundle-sfx index jspm-sfx/main.min.js --skip-source-maps"
   },
   "jspm": {
