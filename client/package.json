@@ -11,11 +11,11 @@
       "baseURL": "jspm-src"
     },
     "dependencies": {
-      "angular": "github:angular/bower-angular@^1.5.2",
+      "angular": "github:angular/bower-angular@^1.5.3",
       "angular-auto-focus": "npm:angular-auto-focus@^1.0.4",
       "angular-material": "github:angular/bower-material@^1.0.6",
-      "angular-messages": "github:angular/bower-angular-messages@^1.5.2",
-      "angular-route": "github:angular/bower-angular-route@^1.5.2",
+      "angular-messages": "github:angular/bower-angular-messages@^1.5.3",
+      "angular-route": "github:angular/bower-angular-route@^1.5.3",
       "angular-translate": "github:angular-translate/bower-angular-translate@^2.11.0",
       "css": "github:systemjs/plugin-css@^0.1.20",
       "master-class": "npm:master-class@^0.5.8",
