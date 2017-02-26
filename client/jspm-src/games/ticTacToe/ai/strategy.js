@@ -1,12 +1,12 @@
 
-import Cell from '../cell';
+const Cell = require('../cell');
 
 /**
  * count potentially winning lines
  * @returns [<count of EMPTY lines>, <count of 1 in the same line>, <count of 2 in the same line>,
  *                      <count of 3 in the same line (win)>]
  */
-export function calcPotentialLines(board) {
+function calcPotentialLines(board) {
   const markCounts = {
     rows:
       [{[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}, {[Cell.EMPTY.key]: 0, [Cell.X.key]: 0, [Cell.O.key]: 0}],
@@ -46,7 +46,7 @@ export function calcPotentialLines(board) {
   return potentialLines;
 }
 
-export function calcScores(board, mark) {
+function calcScores(board, mark) {
   const potentialLines = calcPotentialLines(board);
   const opposite = (mark === 'X') ? 'O' : 'X';
   /**
@@ -55,3 +55,7 @@ export function calcScores(board, mark) {
   return [potentialLines[mark][3], -potentialLines[opposite][2],  potentialLines[mark][2], -potentialLines[opposite][1]];
 }
 
+module.exports = {
+  calcPotentialLines,
+  calcScores
+}

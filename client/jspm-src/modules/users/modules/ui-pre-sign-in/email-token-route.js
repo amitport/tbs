@@ -1,6 +1,6 @@
-import module from './base';
+import uiPreSignInModule from './base';
 
-module.config(['$routeProvider', ($routeProvider) => {
+uiPreSignInModule.config(['$routeProvider', ($routeProvider) => {
     $routeProvider.when('/et/:et', {
         template: '',
         controller: ['$rootScope', '$location', '$timeout', 'ap.flash', 'ap.eventualUser',

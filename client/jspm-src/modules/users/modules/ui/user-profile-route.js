@@ -1,9 +1,9 @@
-import module from './base';
-import template from './user-profile-route.html!text';
+import usersUiModule from './base';
+import templateUrl from './user-profile-route.html';
 
-module.config(['$routeProvider', ($routeProvider) => {
+usersUiModule.config(['$routeProvider', ($routeProvider) => {
     $routeProvider.when('/users/me', {
-        template,
+        templateUrl,
         controllerAs: '$ctrl',
         controller: ['ap.eventualUser', '$scope', '$location',
             function (eventualUser, $scope, $location) {

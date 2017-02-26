@@ -2,7 +2,7 @@ import angular from 'angular';
 import 'angular-route';
 
 import 'angular-material';
-import 'angular-material/angular-material.css!';
+import 'angular-material/angular-material.min.css';
 
 import 'angular-translate';
 

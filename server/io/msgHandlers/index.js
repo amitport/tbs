@@ -1,17 +1,17 @@
-import Promise from 'bluebird';
+const Promise = require('bluebird');
 
 // wrap a function with support for always calling callback even when returning a value or throwing exception
 function asPromised(fn) {
   const promiseWrappedHandler = Promise.method(fn);
   return function (msg, cb) {
     return promiseWrappedHandler.call(this, msg).catch(function (err) {
-      console.error('io call error for msg=' + msg + ':\n\t' + (err.stack ? err.stack : err));
+      console.error('io call error for msg=', msg, ':\n\t', (err.stack ? err.stack : err));
       return Promise.reject(err instanceof Error ? err.message : err);
     }).asCallback(cb);
   };
 }
 
-import requireDir from 'require-dir';
+const requireDir = require('require-dir');
 
 const msgHandlers = {};
 
@@ -42,4 +42,4 @@ for (let msgSetId in msgSets) {
   }
 }
 
-export default msgHandlers;
+module.exports = msgHandlers;

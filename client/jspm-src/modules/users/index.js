@@ -6,10 +6,10 @@ import uiModule from './modules/ui/index';
 
 import 'angular-translate';
 
-const module = angular.module('amitport.users',
+const usersModule = angular.module('amitport.users',
   [authModule, uiPreSignInModule, uiModule, 'pascalprecht.translate']);
 
-module.config(['$translateProvider', function ($translateProvider) {
+usersModule.config(['$translateProvider', function ($translateProvider) {
   $translateProvider
     .translations('en', {
       EMAIL: 'Email',
@@ -68,4 +68,4 @@ module.config(['$translateProvider', function ($translateProvider) {
     .useSanitizeValueStrategy(null);
 }]);
 
-export default module.name;
+export default usersModule.name;

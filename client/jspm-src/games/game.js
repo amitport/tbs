@@ -1,4 +1,4 @@
-export default class Game {
+module.exports = class Game {
   static initializeRoom(room, numOfPlayers) {
     room.game = {
       isInProgress: false,

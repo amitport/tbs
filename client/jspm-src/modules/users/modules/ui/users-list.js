@@ -1,11 +1,10 @@
-import module from './base';
-import template from './users-list.html!text';
+import usersUiModule from './base';
+import templateUrl from './users-list.html';
 
-
-module.component('usersList',
+usersUiModule.component('usersList',
     {
         bindings: {user: '='},
-        template,
+        templateUrl,
         controller: ['$http', function($http) {
             $http.get('/api/users', {requireAuth: true}).then(({data}) => {
                 this.users = data;

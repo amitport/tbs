@@ -1,8 +1,8 @@
-import module from './base';
+import usersModule from './base';
 
 const USER_FIELDS = ['username', 'role'];
 
-module.provider('ap.user',
+usersModule.provider('ap.user',
     ['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push(['$q', 'ap.user', function ($q, user) {
             return {
@@ -158,7 +158,7 @@ top=${($window.screenY + (($window.outerHeight - height) / 2.5))}`);
         }
     }]);
 
-module.run(['ap.user', function (user) {
+usersModule.run(['ap.user', function (user) {
     // try and sign in immediately
     user.attemptImmediateSignIn();
 }]);

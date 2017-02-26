@@ -1,13 +1,12 @@
-import config from 'config';
+const config = require('config');
 const appName = config.get('appName');
 
-import Bluebird from 'bluebird';
-import SparkPost from 'sparkpost';
-const sparkPost = new SparkPost();
-const sendEmail = Bluebird.promisify(sparkPost.transmissions.send);
+const Bluebird = require('bluebird');
+const SparkPost = require('sparkpost');
+const sparkPost = {};//new SparkPost();
+const sendEmail = {};//Bluebird.promisify(sparkPost.transmissions.send);
 
-
-export default async function sendEmailConfirmation(email, cbUrl) {
+module.exports = async function sendEmailConfirmation(email, cbUrl) {
   await sendEmail({
     transmissionBody: {
       content: {

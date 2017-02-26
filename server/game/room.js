@@ -1,6 +1,6 @@
-import * as gameTypes from '../../client/jspm-src/games/index';
+const gameTypes = require('../../client/jspm-src/games');
 
-export default class Room {
+class Room {
   constructor({gameTypeName, creator, id}) {
     this.id = id;
     this.gameType = gameTypes[gameTypeName];
@@ -80,7 +80,7 @@ export default class Room {
 
       this.onChange();
 
-      return {...this.serialize(), ownIdx: joinAtIdx};
+      return Object.assign(this.serialize(), {ownIdx: joinAtIdx});
     } else {
       throw Error('all player slots are occupied')
     }
@@ -109,7 +109,7 @@ export default class Room {
     if (this.game.isInProgress &&
         action.meta.playerIdx === this.game.currentPlayerIdx &&
         this.gameType.actions.hasOwnProperty(action.type)) {
-      this.gameType.actions[action.type]({...this, action});
+      this.gameType.actions[action.type](Object.assign({action}, this));
 
       this.onChange(this.game.isEnded);
     } else {
@@ -130,8 +130,6 @@ export default class Room {
       })
     }
   }
-
-  static rooms = [];
 
   static list() {
     return this.rooms.filter((room) => room.players.some((player) => player.isOpen)).map((room) => {
@@ -155,3 +153,7 @@ export default class Room {
     return this.rooms[roomId];
   }
 }
+
+Room.rooms = [];
+
+module.exports = Room;

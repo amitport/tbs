@@ -1,6 +1,6 @@
-import module from './base';
+import uiPreSignInModule from './base';
 
-module.factory('ap.eventualUser', ['ap.user', 'ap.signInDialog', 'ap.registerDialog',
+uiPreSignInModule.factory('ap.eventualUser', ['ap.user', 'ap.signInDialog', 'ap.registerDialog',
     function (user, signInDialog, registerDialog) {
 
         let registrationDialogPromise = false;

@@ -1,10 +1,8 @@
-import Router from 'koa-router';
-import BodyParser from 'koa-bodyparser';
-const bodyParser = BodyParser();
+const Router = require('koa-router');
 
-import ensure from '../ensure';
-import User from '../../models/user'
-import {encodeUser} from '../../tokens';
+const ensure = require('../http/ensure');
+const User = require('../models/user');
+const {encodeUser} = require('../tokens');
 
 const users = Router();
 
@@ -20,7 +18,7 @@ users.get('/api/users', ensure.admin, async (ctx) => {
   ctx.body = await User.find({}, 'username role avatarImageUrl', {lean: true}).exec();
 });
 
-users.post('/api/users', ensure.auth, bodyParser, async (ctx) => {
+users.post('/api/users', ensure.auth, async (ctx) => {
   const user = new User();
   user.username = ctx.request.body.username;
   const auth = ctx.state.auth;
@@ -40,4 +38,4 @@ users.post('/api/users', ensure.auth, bodyParser, async (ctx) => {
   }
 });
 
-export default users.routes();
+module.exports = users.routes();

@@ -1,6 +1,6 @@
-import module from './base';
+import authModule from './base';
 
-module.provider('ap.tokens',
+authModule.provider('ap.tokens',
     ['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push(['ap.tokens', function (tokens) {
             return {

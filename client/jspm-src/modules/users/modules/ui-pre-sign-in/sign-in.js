@@ -1,9 +1,9 @@
-import module from './base';
-import template from './sign-in.html!text';
+import uiPreSignInModule from './base';
+import templateUrl from './sign-in.html';
 
-module.component('signIn',
+uiPreSignInModule.component('signIn',
     {
-        template,
+        templateUrl,
         controller: ['$scope', 'ap.user', function ($scope, user) {
             this.state = 'selection';
 

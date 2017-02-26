@@ -1,17 +1,17 @@
-import BasicAi from './ai/basic';
+const BasicAi = require('./ai/basic');
 
-export const name = 'TicTacToe';
-export const color = 'beige';
+const name = 'TicTacToe';
+const color = 'beige';
 
-export const ai = {basic: BasicAi};
+const ai = {basic: BasicAi};
 
 function emptyBoard() {
   return [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']];
 }
 
-import M from 'master-class';
+const M = require('master-class');
 
-export const Game = M({
+const Game = M({
   $rootPropertyName: 'game',
   board: M.Array({
     defaultLength: 3,
@@ -121,7 +121,7 @@ export const Game = M({
   }
 });
 
-export function initializeRoom(room) {
+function initializeRoom(room) {
   room.game = Game.createInstance();
 
   room.statistics = {totalGames: 0, wins: [0, 0]};
@@ -129,17 +129,17 @@ export function initializeRoom(room) {
   room.players = [{}, {}];
 }
 
-export function startGame({game}) {
+function startGame({game}) {
   game.start();
 }
 
-export const actions = {
+const actions = {
   markCell: function ({game, action, statistics}) {
     game.currentPlayer.markCell(action.payload, statistics);
   }
 };
 
-export default {
+module.exports = {
   Game,
   name,
   color,

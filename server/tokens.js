@@ -1,11 +1,11 @@
-import jwt from 'jwt-simple';
-import moment from 'moment';
+const jwt = require('jwt-simple');
+const moment = require('moment');
 
-import config from 'config';
+const config = require('config');
 
 const secret = config.get('auth.tokens.secret');
 
-export function encodeUser(user) {
+function encodeUser(user) {
   return jwt.encode({
       sub: user._id,
       role: user.role
@@ -13,7 +13,7 @@ export function encodeUser(user) {
     secret);
 }
 
-export function decodeUser(token) {
+function decodeUser(token) {
   var payload = jwt.decode(token, secret);
 
   return {
@@ -21,7 +21,7 @@ export function decodeUser(token) {
     role: payload.role
   };
 }
-export function encodeAuth(auth) {
+function encodeAuth(auth) {
   return jwt.encode({
       auth,
       exp: moment().add(1, 'hours').unix()
@@ -29,7 +29,7 @@ export function encodeAuth(auth) {
     secret);
 }
 
-export function decodeAuth(token) {
+function decodeAuth(token) {
   const payload = jwt.decode(token, secret);
   // not needed since jwt-simple 0.5.0
   //if (payload.exp < moment().unix()) {
@@ -37,3 +37,10 @@ export function decodeAuth(token) {
   //}
   return payload.auth;
 }
+
+module.exports = {
+  encodeUser,
+  decodeUser,
+  encodeAuth,
+  decodeAuth
+};

@@ -1,19 +1,15 @@
-import request from 'request';
-import Bluebird from 'bluebird';
-import config from 'config';
-import b64url from 'base64-url';
+const request = require('request-promise-native');
+const config = require('config');
+const b64url = require('base64-url');
 
-import renderView from '../../render-view';
-import User from '../../../models/user';
-import {encodeUser, encodeAuth} from '../../../tokens';
-
-const post = Bluebird.promisify(request.post);
+const User = require('../../models/user');
+const {encodeUser, encodeAuth} = require('../../tokens');
 
 const log = config.get('log');
 
-export async function googleCb(ctx) {
+module.exports.googleCb = async function googleCb(ctx) {
   // Exchange authorization code for access token.
-  const googleTokensResponse = (await post({
+  const googleTokensResponse = (await request.post({
     url: 'https://www.googleapis.com/oauth2/v4/token',
     form: {
       code: ctx.query.code,
@@ -26,13 +22,13 @@ export async function googleCb(ctx) {
   }));
 
   if (googleTokensResponse.statusCode != 200) {
-    log.error('unexpected return statusCode from google ' + googleTokensResponse.statusCode)
+    log.error('unexpected return statusCode = require(google ' + googleTokensResponse.statusCode)
     log.error(googleTokensResponse.body);
     ctx.throw(500);
   }
 
   const googleTokens = googleTokensResponse.body;
-  // decode the id (no need to verify since we just got this directly from google via https)
+  // decode the id (no need to verify since we just got this directly = require(google via https)
   const decodedIdToken = JSON.parse(b64url.decode(googleTokens.id_token.split('.', 2)[1]));
 
   const user = await User.findOne({google: decodedIdToken.sub}).select('role').lean().exec();
@@ -43,5 +39,6 @@ export async function googleCb(ctx) {
     auth: encodeAuth({method: 'google', google: decodedIdToken.sub})
   };
 
-  await renderView('provider-cb.html.ejs', {__flash: JSON.stringify({tokens})})(ctx);
+  ctx.state.__flase = JSON.stringify({tokens})
+  ctx.render('provider-cb')
 };

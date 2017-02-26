@@ -3,6 +3,6 @@ import './user-profile-route';
 import './users-list';
 import './toast';
 
-import module from './base';
+import usersUiModule from './base';
 
-export default module.name;
+export default usersUiModule.name;

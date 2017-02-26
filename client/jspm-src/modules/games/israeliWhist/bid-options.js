@@ -1,8 +1,8 @@
-import module from '../base';
+import gamesModule from '../base';
 import './bid';
-import './bid-options.css!';
+import './bid-options.css';
 
-import template from './bid-options.html!text';
+import templateUrl from './bid-options.html';
 const bidOptions = [];
 for (let trump = 0; trump <= 4; trump++){
   const trumpOptions = [];
@@ -12,8 +12,8 @@ for (let trump = 0; trump <= 4; trump++){
   bidOptions.push(trumpOptions);
 }
 
-module.component('bidOptions', {
-  template: template,
+gamesModule.component('bidOptions', {
+  templateUrl,
   bindings: {
     bid: '<'
   },
@@ -21,9 +21,11 @@ module.component('bidOptions', {
     game: '^israeliWhist'
   },
   controller: class BidOptions {
-    options = bidOptions;
-    suit2sym = ['♣', '♦', '♥', '♠', 'NT'];
-    suit2color = ['black', 'red', 'red', 'black', 'green'];
+    constructor() {
+      this.options = bidOptions;
+      this.suit2sym = ['♣', '♦', '♥', '♠', 'NT'];
+      this.suit2color = ['black', 'red', 'red', 'black', 'green'];
+    }
 
     isInvalidBidOption(tricks, trump) {
       return this.game.own.idx !== this.game.game.currentPlayerIdx ||

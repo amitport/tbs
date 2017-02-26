@@ -2,38 +2,33 @@
   "name": "tbs-client",
   "private": true,
   "license": "AGPL",
-  "scripts": {
-    "postinstall": "cd jspm-src/games && npm i",
-    "sfx": "jspm bundle-sfx index jspm-sfx/main.min.js --skip-source-maps"
-  },
-  "jspm": {
-    "directories": {
-      "baseURL": "jspm-src"
-    },
-    "dependencies": {
-      "angular": "github:angular/bower-angular@^1.5.2",
-      "angular-auto-focus": "npm:angular-auto-focus@^1.0.4",
-      "angular-material": "github:angular/bower-material@^1.0.6",
-      "angular-messages": "github:angular/bower-angular-messages@^1.5.2",
-      "angular-route": "github:angular/bower-angular-route@^1.5.2",
-      "angular-translate": "github:angular-translate/bower-angular-translate@^2.11.0",
-      "css": "github:systemjs/plugin-css@^0.1.20",
-      "master-class": "npm:master-class@^0.5.8",
-      "socket.io-client": "github:socketio/socket.io-client@^1.4.5",
-      "text": "github:systemjs/plugin-text@0.0.4"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.35",
-      "babel-runtime": "npm:babel-runtime@^5.8.35",
-      "clean-css": "npm:clean-css@^3.4.10",
-      "core-js": "npm:core-js@^1.2.6"
-    }
+  "dependencies": {
+    "angular": "^1.5.11",
+    "angular-auto-focus": "^1.0.4",
+    "angular-material": "^1.1.3",
+    "angular-messages": "^1.5.11",
+    "angular-route": "^1.5.11",
+    "angular-translate": "^2.14.0",
+    "angular-animate": "^1.5.11",
+    "angular-aria": "^1.5.11",
+    "master-class": "^0.5.9",
+    "socket.io-client": "^1.7.3",
   },
   "devDependencies": {
-    "jspm": "^0.16.31"
+    "clean-webpack-plugin": "^0.1.15",
+    "css-loader": "^0.26.2",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "file-loader": "^0.10.1",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.28.0",
+    "ngtemplate-loader": "^1.3.1",
+    "script-ext-html-webpack-plugin": "^1.7.1",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   },
-  "dependencies": {
-    "babel-plugin-transform-class-properties": "^6.6.0",
-    "babel-preset-es2015": "^6.6.0"
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
   }
 }

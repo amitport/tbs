@@ -1,4 +1,5 @@
-
-export {default as FourInALine} from './fourInALine/index';
-export {default as IsraeliWhist} from './israeliWhist/index';
-export {default as TicTacToe} from './ticTacToe/index';
+module.exports = {
+  FourInALine: require('./fourInALine'),
+  IsraeliWhist: require('./israeliWhist'),
+  TicTacToe: require('./ticTacToe')
+}

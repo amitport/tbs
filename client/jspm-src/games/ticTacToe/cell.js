@@ -1,4 +1,4 @@
-export default class Cell {
+class Cell {
   constructor(key) {
     this.key = key;
   }
@@ -27,3 +27,5 @@ Cell.O = new Cell('O');
 
 Cell.X.opposite = Cell.O;
 Cell.O.opposite = Cell.X;
+
+module.exports = Cell;

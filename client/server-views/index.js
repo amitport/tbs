@@ -1,3 +1,5 @@
+module.exports = function (context) {
+  return `\
 <!doctype html>
 <html>
 <head>
@@ -22,13 +24,11 @@
 </div>
 <ng-view flex layout="column"></ng-view>
 
-<% if (typeof __flash !== 'undefined') { %>
-<script>__flash = <%- __flash %>;</script>
-<% } %>
+${(context.state.__flash) ? `<script>__flash = ${context.state.__flash};</script>` : ''}
 
-<% if (env === 'production') { %>
-<script src="main.min.js"></script>
-<% }  else { %>
+${(context.app.env === 'production') ? 
+'<script src="main.min.js"></script>' :
+`\
 <!--<md-whiteframe draggable class="md-whiteframe-z3" style="position: absolute; bottom: 15px; left: 15px;" layout="column" layout-padding>-->
 <!--<io-monitor></io-monitor>-->
 <!--</md-whiteframe>-->
@@ -37,6 +37,7 @@
 <script>
   System.import('index');
 </script>
-<% } %>
+`}
 </body>
-</html>
+</html>\
+`}

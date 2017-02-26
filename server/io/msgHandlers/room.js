@@ -1,8 +1,8 @@
-import Room from '../../game/room';
-import crypto from 'crypto';
-import base58 from 'bs58';
+const Room = require('../../game/room');
+const crypto = require('crypto');
+const base58 = require('bs58');
 
-export function create({gameTypeName, username}) {
+function create({gameTypeName, username}) {
   // todo verify creator
 
   const socket = this;
@@ -22,30 +22,31 @@ export function create({gameTypeName, username}) {
   socket.broadcast.to('lobby').emit('room:lobbyUpdate', Room.list());
   return roomCreateResponse;
 }
-export function subscribeToLobby() {
+
+function subscribeToLobby() {
   this.join('lobby');
   this.isInLobby = true;
 
   return Room.list();
 }
 
-export function gameAction({roomId, type, payload}) {
+function gameAction({roomId, type, payload}) {
   const room = Room.get(roomId);
   room.gameAction({type, payload, meta: this.meta});
 }
 
-export function joinAi({roomId}) {
+function joinAi({roomId}) {
   const room = Room.get(roomId);
 
   room.joinAi({joinAtIdx: 1, aiTypeId: 'basic'});
 }
 
-export function setIsOpen({roomId, playerIdx, isOpen}) {
+function setIsOpen({roomId, playerIdx, isOpen}) {
   const room = Room.get(roomId);
   room.setIsOpen({playerIdx, isOpen});
 }
 
-export function join({roomId, username, playerId}) {
+function join({roomId, username, playerId}) {
   const room = Room.get(roomId);
 
   const socket = this;
@@ -77,8 +78,10 @@ export function join({roomId, username, playerId}) {
   return roomJoinResponse;
 }
 
-export function setIsReady({roomId, isReady}) {
+function setIsReady({roomId, isReady}) {
   const room = Room.get(roomId);
 
   room.setIsReady({playerId: this.playerId, isReady});
 }
+
+module.exports = {create, subscribeToLobby, gameAction, joinAi, setIsOpen, join, setIsReady};

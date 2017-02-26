@@ -5,6 +5,6 @@ import './email-token-route';
 import './eventual-user';
 import './auth-popup-close-handler';
 
-import module from './base';
+import uiPreSignInModule from './base';
 
-export default module.name;
+export default uiPreSignInModule.name;

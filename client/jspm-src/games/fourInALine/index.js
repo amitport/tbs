@@ -1,5 +1,5 @@
-export const name = 'FourInALine';
-export const color = '#408080';
+const name = 'FourInALine';
+const color = '#408080';
 
 function emptyBoard() {
   return [
@@ -12,7 +12,7 @@ function emptyBoard() {
   ];
 }
 
-export function initializeRoom(room) {
+function initializeRoom(room) {
   room.game = {
     board: emptyBoard(),
     isInProgress: false
@@ -22,7 +22,7 @@ export function initializeRoom(room) {
   room.players = [{mark: 'b'}, {mark: 'r', type: 'human', isOpen: true}];
 }
 
-export function startGame({game}) {
+function startGame({game}) {
   game.isInProgress = true;
   game.currentPlayerIdx = Math.floor(Math.random() + 0.5);
   game.totalMoves = 0;
@@ -92,7 +92,7 @@ function end({statistics, game, outcome}) {
   }
 }
 
-export const actions = {
+const actions = {
   markCol: function ({statistics, game, players, action}) {
     const {c} = action.payload;
     for (var r = 5; r >= 0; r--) {
@@ -114,10 +114,10 @@ export const actions = {
   }
 };
 
-export default {
+module.exports = {
   name,
   color,
   initializeRoom,
   startGame,
   actions
-};
+}

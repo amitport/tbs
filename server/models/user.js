@@ -1,8 +1,8 @@
-import './init';
+require('./init');
 
-import mongoose from 'mongoose';
-import validators from 'mongoose-validators';
-import uniqueValidator from 'mongoose-beautiful-unique-validation';
+const mongoose = require('mongoose');
+const validators = require('mongoose-validators');
+const uniqueValidator = require('mongoose-beautiful-unique-validation');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -32,4 +32,4 @@ const UserSchema = new mongoose.Schema({
 });
 UserSchema.plugin(uniqueValidator);
 
-export default mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

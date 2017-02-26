@@ -1,10 +1,10 @@
 import './bid';
 
-import module from '../base';
-import template from './call.html!text';
+import gamesModule from '../base';
+import templateUrl from './call.html';
 
-module.component('call', {
-  template: template,
+gamesModule.component('call', {
+  templateUrl,
   bindings: {
     value: '<'
   },

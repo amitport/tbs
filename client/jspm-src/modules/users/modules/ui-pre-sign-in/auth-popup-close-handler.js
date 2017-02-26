@@ -1,6 +1,6 @@
-import module from './base';
+import uiPreSignInModule from './base';
 
-module.run(['$window', 'ap.eventualUser',
+uiPreSignInModule.run(['$window', 'ap.eventualUser',
     function ($window, eventualUser) {
         // listen to response from auth provider pop-up
         $window.addEventListener('message', (event) => {

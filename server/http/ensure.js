@@ -1,4 +1,4 @@
-import {decodeUser, decodeAuth} from '../tokens';
+const {decodeUser, decodeAuth} = require('../tokens');
 
 const ensure = {
   async auth(ctx, next) {
@@ -48,4 +48,4 @@ const ensure = {
 
 ensure.admin = ensure.role('admin');
 
-export default ensure;
+module.exports = ensure;

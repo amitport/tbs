@@ -1,5 +1,4 @@
-// make sure angular material loads first
-import 'angular-material/angular-material.css!';
+import './index.css'
 
 import angular from 'angular';
 import 'angular-material';
@@ -38,5 +37,5 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs
   }]);
 
 angular.element(document).ready(function () {
-  angular.bootstrap(document, ['tbs'], {strictDi: true});
+  angular.bootstrap(document, [app.name], {strictDi: true});
 });

@@ -1,12 +1,12 @@
-import module from './base';
-import template from './register-dialog.html!text';
+import uiPreSignInModule from './base';
+import templateUrl from './register-dialog.html';
 
-module.factory('ap.registerDialog', ['$mdDialog', function ($mdDialog) {
+uiPreSignInModule.factory('ap.registerDialog', ['$mdDialog', function ($mdDialog) {
     return {
         open(registrationToken) {
             return $mdDialog.show(
                 {
-                    template,
+                    templateUrl,
                     controllerAs: '$ctrl',
                     controller: ['$scope', '$mdDialog', 'ap.user',
                         function ($scope, $mdDialog, user) {

@@ -1,10 +1,10 @@
-import module from './base';
-import template from './user-menu.html!text';
+import usersUiModule from './base';
+import templateUrl from './user-menu.html';
 
 
-module.component('userMenu',
+usersUiModule.component('userMenu',
     {
-    template,
+    templateUrl,
     controller: ['$location', 'ap.signInDialog', 'ap.user', function($location, signInDialog, user) {
         return {
             user,

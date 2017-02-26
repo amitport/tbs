@@ -1,8 +1,8 @@
-import ioFactory from 'socket.io';
+const ioFactory = require('socket.io');
 
-import msgHandlers from './msgHandlers';
+const msgHandlers = require('./msgHandlers');
 
-export default function realtime(http) {
+module.exports = function realtime(http) {
   ioFactory(http)
     .on('connection', function (socket) {
       msgHandlers.room(socket);

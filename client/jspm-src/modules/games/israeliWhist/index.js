@@ -1,14 +1,14 @@
-import indexTpl from './index.html!text';
+import indexTpl from './index.html';
 
-import module from '../base';
+import gamesModule from '../base';
 import Game from '../game';
 
-module.run(['$templateCache', function ($templateCache) {
+gamesModule.run(['$templateCache', function ($templateCache) {
   $templateCache.put('IsraeliWhist', '<israeli-whist game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></israeli-whist>');
 }]);
 
-module.component('israeliWhist', {
-  template: indexTpl,
+gamesModule.component('israeliWhist', {
+  templateUrl: indexTpl,
   bindings: {
     game: '<',
     players: '<',
@@ -25,9 +25,9 @@ module.component('israeliWhist', {
 });
 
 
-import cardStackTpl from './card-stack.html!text';
-module.component('cardStack', {
-  template: cardStackTpl,
+import cardStackTpl from './card-stack.html';
+gamesModule.component('cardStack', {
+  templateUrl: cardStackTpl,
   bindings: {
     cards: '<'
   },
@@ -35,10 +35,10 @@ module.component('cardStack', {
   }
 });
 
-import './hand.css!';
-import handTpl from './hand.html!text';
-module.component('hand', {
-  template: handTpl,
+import './hand.css';
+import handTpl from './hand.html';
+gamesModule.component('hand', {
+  templateUrl: handTpl,
   bindings: {
     cards: '<'
   },
@@ -71,10 +71,10 @@ module.component('hand', {
   }
 });
 
-import './down.css!';
-import downTpl from './down.html!text';
-module.component('down', {
-  template: downTpl,
+import './down.css';
+import downTpl from './down.html';
+gamesModule.component('down', {
+  templateUrl: downTpl,
   bindings: {
     cards: '<'
   },
@@ -82,7 +82,7 @@ module.component('down', {
     game: '^israeliWhist'
   },
   controller: class Down {
-    static $inject = ['$scope']
+    static get $inject() {return ['$scope']}
     constructor($scope) {
       $scope.$watch('$ctrl.game.game.roundStarterIdx', (newVal) => {
         this.ownDownIdx = (newVal > this.game.own.idx)
@@ -95,17 +95,17 @@ module.component('down', {
   }
 });
 
-import cardTpl from './card.html!text';
-module.component('card', {
-  template: cardTpl,
+import cardTpl from './card.html';
+gamesModule.component('card', {
+  templateUrl: cardTpl,
   bindings: {
     rank: '@',
     suit: '@'
   },
   controller: class Card {
-    static suit2sym = ['♣', '♦', '♥', '♠', 'NT'];
-    static suit2color = ['black', 'red', 'red', 'black', 'green'];
-    static rank2sym = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+    static get suit2sym() {return ['♣', '♦', '♥', '♠', 'NT']}
+    static get suit2color() {return ['black', 'red', 'red', 'black', 'green']}
+    static get rank2sym() {return ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']}
 
     $onInit() {
       this.suit = parseInt(this.suit, 10);
@@ -118,9 +118,9 @@ module.component('card', {
   }
 });
 
-import contractOptionsTpl from './contract-options.html!text';
-module.component('contractOptions', {
-  template: contractOptionsTpl,
+import contractOptionsTpl from './contract-options.html';
+gamesModule.component('contractOptions', {
+  templateUrl: contractOptionsTpl,
   require: {
     game: '^israeliWhist'
   },
@@ -128,14 +128,14 @@ module.component('contractOptions', {
   }
 });
 
-module.component('suit', {
+gamesModule.component('suit', {
   template: '<span style="color: {{$ctrl.color}}">{{$ctrl.sym}}</span>',
   bindings: {
     value: '<'
   },
   controller: class Suit {
-    static suit2sym = ['♣', '♦', '♥', '♠', 'NT'];
-    static suit2color = ['black', 'red', 'red', 'black', 'green'];
+    static get suit2sym() {return ['♣', '♦', '♥', '♠', 'NT']}
+    static get suit2color() {return ['black', 'red', 'red', 'black', 'green']}
 
     $onInit() {
       this.color = Suit.suit2color[this.value];

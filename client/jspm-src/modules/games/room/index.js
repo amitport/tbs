@@ -1,13 +1,13 @@
-import module from '../base';
-import roomTpl from './index.html!text';
-import './index.css!';
+import gamesModule from '../base';
+import templateUrl from './index.html';
+import './index.css';
 
 import * as gameTypes from '../../../games/index';
 
-module.component('room', {
-  template: roomTpl,
+gamesModule.component('room', {
+  templateUrl,
   controller: class Room {
-    static $inject = ['$scope', '$routeParams', '$location', '$log', 'io', 'ap.user', 'playerColors'];
+    static get $inject() {return ['$scope', '$routeParams', '$location', '$log', 'io', 'ap.user', 'playerColors']}
 
     constructor($scope, $routeParams, $location, $log, io, user, playerColors) {
       this.playerColors = playerColors;

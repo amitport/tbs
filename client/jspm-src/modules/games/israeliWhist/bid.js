@@ -1,13 +1,15 @@
-import module from '../base';
-import template from './bid.html!text';
+import base from '../base';
+import templateUrl from './bid.html';
 
-module.component('bid', {
-  template: template,
+base.component('bid', {
+  templateUrl,
   bindings: {
     value: '<'
   },
   controller: class Bid {
-    suit2sym = ['♣', '♦', '♥', '♠', 'NT'];
-    suit2color = ['black', 'red', 'red', 'black', 'green'];
+    constructor() {
+      this.suit2sym = ['♣', '♦', '♥', '♠', 'NT']
+      this.suit2color = ['black', 'red', 'red', 'black', 'green']
+    }
   }
 });

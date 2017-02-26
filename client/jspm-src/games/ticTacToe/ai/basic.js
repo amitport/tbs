@@ -1,4 +1,4 @@
-import {calcScores} from './strategy';
+const {calcScores} = require('./strategy');
 
 function scoreComparator(a, b) {
   for (let priority = 0; priority < 4; priority++) {
@@ -20,7 +20,7 @@ function getEmptyCells(board) {
   return res;
 }
 
-export default class BasicAiPlayer {
+module.exports = class BasicAiPlayer {
   static onGameEnd(room, ownIdx) {
     room.players[ownIdx].isReady = true;
   }

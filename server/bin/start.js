@@ -1,2 +1,2 @@
-require("babel-register");
-require('..');
+#!/usr/bin/env node --harmony
+require("useful-http/bin/start");

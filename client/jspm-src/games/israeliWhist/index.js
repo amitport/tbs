@@ -1,5 +1,4 @@
-import Game from '../game';
-
+const Game = require('../game');
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -53,79 +52,7 @@ function end({statistics, game, players}) {
   statistics.totalGames++;
 }
 
-export default class IsraeliWhist extends Game {
-  static color = '#e09292';
-  static actions = {
-    bid({players, game, action}) {
-      //todo check legality
-      players[game.currentPlayerIdx].call = game.bid = action.payload;
-      game.bid.bidderIdx = game.currentPlayerIdx; //(highest bidder)
-
-      game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
-    },
-    pass({players, game}) {
-      //todo check legality
-      players[game.currentPlayerIdx].call = 'pass';
-
-      game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
-
-      if (game.bid && game.bid.bidderIdx === game.currentPlayerIdx) {
-        game.phase = 'contract';
-        game.totalContract = 0;
-      }
-    },
-    declare({players, game, action}) {
-      game.totalContract += players[game.currentPlayerIdx].contract = action.payload;
-
-      game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
-
-      if (players[game.currentPlayerIdx].contract) {
-        game.down = [];
-        game.roundStarterIdx = game.currentPlayerIdx;
-        game.phase = 'rounds';
-      }
-    },
-    putDown({statistics, players, game, action}) {
-
-      const hand = players[game.currentPlayerIdx].hand;
-      const cardIdx = hand.findIndex((card) => action.payload.suit === card.suit && action.payload.rank === card.rank);
-      hand.splice(cardIdx, 1);
-
-      game.down.push(action.payload);
-
-      if (game.down.length === 4) {
-        let roundWinnerIdx = (game.currentPlayerIdx + 1) % 4;
-        for (let i = 1,
-               highestCard = game.down[0],
-               leadingSuit = highestCard.suit;
-             i < 4; i++) {
-          const currentCard = game.down[i];
-          if (currentCard.suit === leadingSuit) {
-            if (currentCard.rank > highestCard.rank) {
-              highestCard = currentCard;
-              roundWinnerIdx = (game.currentPlayerIdx + 1 + i) % 4;
-            }
-          } else if (currentCard.suit === game.bid.trump) {
-            // we know this is the first time we're seeing a trump -> otherwise the other clause would apply
-            leadingSuit = game.bid.trump;
-            highestCard = currentCard;
-            roundWinnerIdx = (game.currentPlayerIdx + 1 + i) % 4;
-          }
-        }
-
-        players[roundWinnerIdx].tricks++;
-        game.currentPlayerIdx = game.roundStarterIdx = roundWinnerIdx;
-        game.down = [];
-
-        if (players[0].hand.length === 0) {
-          // finished rounds -> end game
-          end({statistics, game, players});
-        }
-      } else {
-        game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
-      }
-    }
-  };
+class IsraeliWhist extends Game {
   //static disabled = true;
 
   static initializeRoom(room) {
@@ -160,6 +87,79 @@ export default class IsraeliWhist extends Game {
 
     game.phase = 'bidding';
   }
-
-
 }
+
+IsraeliWhist.color = '#e09292';
+IsraeliWhist.actions = {
+  bid({players, game, action}) {
+    //todo check legality
+    players[game.currentPlayerIdx].call = game.bid = action.payload;
+    game.bid.bidderIdx = game.currentPlayerIdx; //(highest bidder)
+
+    game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
+  },
+  pass({players, game}) {
+    //todo check legality
+    players[game.currentPlayerIdx].call = 'pass';
+
+    game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
+
+    if (game.bid && game.bid.bidderIdx === game.currentPlayerIdx) {
+      game.phase = 'contract';
+      game.totalContract = 0;
+    }
+  },
+  declare({players, game, action}) {
+    game.totalContract += players[game.currentPlayerIdx].contract = action.payload;
+
+    game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
+
+    if (players[game.currentPlayerIdx].contract) {
+      game.down = [];
+      game.roundStarterIdx = game.currentPlayerIdx;
+      game.phase = 'rounds';
+    }
+  },
+  putDown({statistics, players, game, action}) {
+
+    const hand = players[game.currentPlayerIdx].hand;
+    const cardIdx = hand.findIndex((card) => action.payload.suit === card.suit && action.payload.rank === card.rank);
+    hand.splice(cardIdx, 1);
+
+    game.down.push(action.payload);
+
+    if (game.down.length === 4) {
+      let roundWinnerIdx = (game.currentPlayerIdx + 1) % 4;
+      for (let i = 1,
+             highestCard = game.down[0],
+             leadingSuit = highestCard.suit;
+           i < 4; i++) {
+        const currentCard = game.down[i];
+        if (currentCard.suit === leadingSuit) {
+          if (currentCard.rank > highestCard.rank) {
+            highestCard = currentCard;
+            roundWinnerIdx = (game.currentPlayerIdx + 1 + i) % 4;
+          }
+        } else if (currentCard.suit === game.bid.trump) {
+          // we know this is the first time we're seeing a trump -> otherwise the other clause would apply
+          leadingSuit = game.bid.trump;
+          highestCard = currentCard;
+          roundWinnerIdx = (game.currentPlayerIdx + 1 + i) % 4;
+        }
+      }
+
+      players[roundWinnerIdx].tricks++;
+      game.currentPlayerIdx = game.roundStarterIdx = roundWinnerIdx;
+      game.down = [];
+
+      if (players[0].hand.length === 0) {
+        // finished rounds -> end game
+        end({statistics, game, players});
+      }
+    } else {
+      game.currentPlayerIdx = (game.currentPlayerIdx + 1) % 4;
+    }
+  }
+};
+
+module.exports = IsraeliWhist;

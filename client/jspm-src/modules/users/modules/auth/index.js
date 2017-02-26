@@ -1,6 +1,6 @@
-import module from './base';
+import authModule from './base';
 
 import './tokens';
 import './user';
 
-export default module.name;
+export default authModule.name;
