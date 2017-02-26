@@ -14,6 +14,8 @@ import lobbyController from './routes/lobby/controller';
 //import roomController from './routes/room/controller';
 //import playLocalController from './routes/play-local/controller';
 
+import lobbyTemplateUrl from './routes/lobby/index.html'
+
 const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs.io', gamesModule, usersModule])
   .config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
     function ($routeProvider, $locationProvider, $mdThemingProvider) {
@@ -22,7 +24,7 @@ const app = angular.module('tbs', ['ngMaterial', 'ngRoute', 'mp.autoFocus', 'tbs
     $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider
       .when('/', {
-        templateUrl: 'routes/lobby/index.html',
+        templateUrl: lobbyTemplateUrl,
         controllerAs: '$ctrl',
         controller: lobbyController
       })

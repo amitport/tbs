@@ -1,4 +1,4 @@
-const gameTypes = require('../../client/jspm-src/games');
+const gameTypes = require('../../client/src/games');
 
 class Room {
   constructor({gameTypeName, creator, id}) {
