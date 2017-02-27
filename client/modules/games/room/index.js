@@ -2,7 +2,7 @@ import gamesModule from '../base';
 import templateUrl from './index.html';
 import './index.css';
 
-import * as gameTypes from '../../../games/index';
+import * as gameTypes from '../../../../shared/games';
 
 gamesModule.component('room', {
   templateUrl,

@@ -1,4 +1,4 @@
-import * as gameTypes from '../../games/index';
+import * as gameTypes from '../../../shared/games';
 
 export default ['$scope', '$location', '$window', 'io', 'ap.user',
   function ($scope, $location, $window, io, user) {

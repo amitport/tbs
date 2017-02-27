@@ -1,22 +1,19 @@
 const config = require('config');
-const sioMessageSets = require('./io/msgHandlers/room');
+const wsMessageSets = require('./ws-message-sets/room');
 
 const log = config.get('log');
 const port = config.get('port');
 
-const usersApiRoutes = require('./api-routes/users-api');
-const authApiRoutes = require('./api-routes/auth-api');
+const usersApiRouter = require('./api-routers/users-api');
+const authApiRouter = require('./api-routers/auth-api');
 
 module.exports = {
   log, port,
-  apiRoutes: [usersApiRoutes, authApiRoutes],
+  apiRouters: [usersApiRouter, authApiRouter],
   runningBehindReverseProxy: true,
   spaRoutes: ['/', '/index.html', '/rooms/:roomId', '/play-local/:gameId', '/users/me'],
   dynamicTemplatesRoot: '../client/server-views',
   serveStatic: ['../client/build'],
-  sioMessageSets: {room: sioMessageSets}
+  wsMessageSets: {room: wsMessageSets}
 }
 
-// if (process.env.NODE_ENV === 'production') {
-//   module.exports.serveStatic.push('../client/jspm-sfx')
-// }

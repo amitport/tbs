@@ -1,12 +1,12 @@
 const Router = require('koa-router');
 
-const ensure = require('../http/ensure');
+const ensure = require('../ensure');
 const User = require('../models/user');
 const {encodeUser} = require('../tokens');
 
-const users = Router();
+const users = Router({prefix: '/users'});
 
-users.get('/api/users/me', ensure.user, async (ctx) => {
+users.get('/me', ensure.user, async (ctx) => {
   const user = await User.findById(ctx.state.user._id, '-_id username role avatarImageUrl', {lean: true}).exec();
   if (user == null) {
     ctx.throw(404);
@@ -14,11 +14,11 @@ users.get('/api/users/me', ensure.user, async (ctx) => {
   ctx.body = user;
 });
 
-users.get('/api/users', ensure.admin, async (ctx) => {
+users.get('/', ensure.admin, async (ctx) => {
   ctx.body = await User.find({}, 'username role avatarImageUrl', {lean: true}).exec();
 });
 
-users.post('/api/users', ensure.auth, async (ctx) => {
+users.post('/', ensure.auth, async (ctx) => {
   const user = new User();
   user.username = ctx.request.body.username;
   const auth = ctx.state.auth;
@@ -38,4 +38,4 @@ users.post('/api/users', ensure.auth, async (ctx) => {
   }
 });
 
-module.exports = users.routes();
+module.exports = users;

@@ -1,4 +1,4 @@
-const gameTypes = require('../../client/src/games');
+const gameTypes = require('../../shared/games');
 
 class Room {
   constructor({gameTypeName, creator, id}) {

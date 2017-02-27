@@ -1,4 +1,4 @@
-const {decodeUser, decodeAuth} = require('../tokens');
+const {decodeUser, decodeAuth} = require('./tokens');
 
 const ensure = {
   async auth(ctx, next) {

@@ -1,16 +1,15 @@
-const Room = require('../../game/room');
+const Room = require('../game/room');
 const crypto = require('crypto');
 const base58 = require('bs58');
 
 function create({gameTypeName, username}) {
   // todo verify creator
-
   const socket = this;
   if (!socket.hasOwnProperty('playerId')) {
     socket.playerId = base58.encode(crypto.randomBytes(16));
   }
 
-  const roomCreateResponse =  Room.create({gameTypeName,
+  const roomCreateResponse = Room.create({gameTypeName,
     creator: {
       name: username,
       onRoomUpdate(room) {

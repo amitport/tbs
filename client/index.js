@@ -6,9 +6,9 @@ import 'angular-route';
 
 import 'angular-auto-focus';
 
-import './modules/io/index';
-import gamesModule from './modules/games/index';
-import usersModule from './modules/users/index';
+import './modules/io';
+import gamesModule from './modules/games';
+import usersModule from './modules/users';
 
 import lobbyController from './routes/lobby/controller';
 //import roomController from './routes/room/controller';

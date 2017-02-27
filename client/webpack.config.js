@@ -18,7 +18,7 @@ module.exports = function(env) {
         },
         {
           test: /\.html$/,
-          loader: `ngtemplate-loader?relativeTo=${path.resolve(__dirname, './src')}/!html-loader`
+          loader: `ngtemplate-loader?relativeTo=${__dirname}/!html-loader`
         },
         {
           test: /\.(png|svg)$/,
@@ -27,7 +27,7 @@ module.exports = function(env) {
       ]
     },
     entry: {
-      main: './src/index.js'
+      main: './index.js'
     },
     output: {
       publicPath: '/',
@@ -37,7 +37,7 @@ module.exports = function(env) {
     plugins: [
       new CleanWebpackPlugin(['build']),
       new HtmlWebpackPlugin({
-        template: './src/index.ejs'
+        template: './index.ejs'
       }),
       new ScriptExtHtmlWebpackPlugin({
         inline: 'manifest'
@@ -54,7 +54,6 @@ module.exports = function(env) {
       })
     ],
     devServer: {
-      contentBase: path.join(__dirname, 'src'),
       compress: true,
       port: 5000
     }

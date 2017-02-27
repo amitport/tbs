@@ -6,8 +6,8 @@ import 'angular-material/angular-material.min.css';
 
 import 'angular-translate';
 
-import authModule from '../auth/index';
-import uiPreSignInModule from '../ui-pre-sign-in/index';
+import authModule from '../auth';
+import uiPreSignInModule from '../ui-pre-sign-in';
 
 export default angular.module('ui',
     ['ngRoute',
