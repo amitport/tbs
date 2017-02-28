@@ -3,7 +3,7 @@ const config = require('config');
 const b64url = require('base64-url');
 
 const User = require('../../models/user');
-const {encodeUser, encodeAuth} = require('../../tokens');
+const {encodeUser, encodeAuth} = require('../../utils/tokens');
 
 const log = config.get('log');
 

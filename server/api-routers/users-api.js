@@ -1,8 +1,8 @@
 const Router = require('koa-router');
 
-const ensure = require('../ensure');
+const ensure = require('../utils/ensure');
 const User = require('../models/user');
-const {encodeUser} = require('../tokens');
+const {encodeUser} = require('../utils/tokens');
 
 const users = Router({prefix: '/users'});
 

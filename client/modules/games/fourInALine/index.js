@@ -4,11 +4,13 @@ import './index.css';
 import gamesModule from '../base';
 import Game from '../game';
 
+import circleSvgUrl from './circle.svg';
+import circleFillSvgUrl from './circle-fill.svg';
+import circleFillRedSvgUrl from './circle-fill-red.svg';
+import circleFillBlueSvgUrl from './circle-fill-blue.svg';
 gamesModule.run(['$templateCache', function ($templateCache) {
   $templateCache.put('FourInALine', '<four-in-a-line game="$ctrl.game" players="$ctrl.players" own="$ctrl.own"></four-in-a-line>');
 }]);
-
-const clientPath = 'modules/games/fourInALine/'; // todo use __moduleName when moving to jspm 0.17
 
 gamesModule.component('fourInALine', {
   templateUrl: boardTpl,
@@ -24,13 +26,17 @@ gamesModule.component('fourInALine', {
     static get $inject() {return ['playerColors']}
     static get mark2Fill() {
       return {
-        '_': `${clientPath}circle-fill.svg`,
-        'r': `${clientPath}circle-fill-red.svg`,
-        'b': `${clientPath}circle-fill-blue.svg`
+        '_': circleFillSvgUrl,
+        'r': circleFillRedSvgUrl,
+        'b': circleFillBlueSvgUrl
       }
     }
 
-    constructor(playerColors) {super(); this.playerColors = playerColors;}
+    constructor(playerColors) {
+      super();
+      this.playerColors = playerColors;
+      this.circleSvgUrl = circleSvgUrl;
+    }
 
     outcomeColor() {
       return this.game.outcome.color === 'b' ?

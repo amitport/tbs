@@ -4,7 +4,7 @@ const base58 = require('bs58');
 const NodeCache = require('node-cache');
 
 const User = require('../../models/user');
-const {encodeUser, encodeAuth} = require('../../tokens');
+const {encodeUser, encodeAuth} = require('../../utils/tokens');
 
 const sendEmailConfirmation = require('./send-email-confirmation');
 
