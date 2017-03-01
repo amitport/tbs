@@ -6,7 +6,7 @@ import 'angular-route';
 
 import 'angular-auto-focus';
 
-import {registerHelperModule} from '../server/node_modules/useful-http/angular-helper-module/io';
+import {registerHelperModule} from 'useful-http/angular-helper-module/io';
 registerHelperModule(angular);
 
 import gamesModule from './modules/games';

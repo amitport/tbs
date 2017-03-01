@@ -18,7 +18,7 @@ module.exports = function(env) {
         },
         {
           test: /\.html$/,
-          loader: `ngtemplate-loader?relativeTo=${__dirname}/!html-loader`
+          loader: `ngtemplate-loader?relativeTo=${path.resolve(__dirname, 'client')}/!html-loader`
         },
         {
           test: /\.(png|svg)$/,
@@ -27,17 +27,17 @@ module.exports = function(env) {
       ]
     },
     entry: {
-      main: './index.js'
+      main: './client/index.js'
     },
     output: {
       publicPath: '/',
       filename: '[chunkhash].[name].js',
-      path: path.resolve(__dirname, 'build')
+      path: path.resolve(__dirname, 'client/build')
     },
     plugins: [
-      new CleanWebpackPlugin(['build']),
+      new CleanWebpackPlugin(['client/build']),
       new HtmlWebpackPlugin({
-        template: './index.ejs'
+        template: './client/index.ejs'
       }),
       new ScriptExtHtmlWebpackPlugin({
         inline: 'manifest'

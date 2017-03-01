@@ -1,8 +1,0 @@
-{
-  "name": "tbs-shared",
-  "private": true,
-  "license": "AGPL",
-  "dependencies": {
-    "master-class": "^0.5.9"
-  }
-}
