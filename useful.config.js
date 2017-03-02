@@ -13,7 +13,6 @@ module.exports = {
   runningBehindReverseProxy: true,
   spaRoutes: ['/', '/index.html', '/rooms/:roomId', '/play-local/:gameId', '/users/me'],
   dynamicTemplatesRoot: './client/server-views',
-  serveStatic: ['./client/build'],
   wsMessageSets: {room: wsMessageSets}
 }
 
