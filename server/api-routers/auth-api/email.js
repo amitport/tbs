@@ -6,8 +6,6 @@ const NodeCache = require('node-cache');
 const User = require('../../models/user');
 const {encodeUser, encodeAuth} = require('../../utils/tokens');
 
-const sendEmailConfirmation = require('./send-email-confirmation');
-
 // use in-memory cache for random tokens (TODO move to DB when moving to cluster)
 // keep email tokens for an hour check every 10 minutes for deleting expired tokens
 const emailTokenStore = new NodeCache({stdTTL: 3600, checkperiod: 600});
@@ -26,7 +24,7 @@ module.exports.signInWithEmail = async function signInWithEmail(ctx) {
 
   const cbUrl = `${ctx.origin}/et/${emailToken}`;
 
-  await sendEmailConfirmation(email, cbUrl)
+  await ctx.mailer.sendSignInToken(email, cbUrl)
   // next if anyone calls /et/<emailToken> before exp it will be redirected to originalPath
 
   ctx.status = 202; //(Accepted)
